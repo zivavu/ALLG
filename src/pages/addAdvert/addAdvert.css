@@ -68,8 +68,7 @@
 .photo-custom-input:hover,
 #advert-form-container #city-search:hover,
 #advert-form-container #city-search:focus,
-#advert-form-container #advert-price-input-box:hover,
-input[type='submit']:hover {
+#advert-form-container #advert-price-input-box:hover {
     box-shadow: 0 0 3px 1px black;
 }
 
@@ -154,6 +153,10 @@ input[type='submit']:hover {
     height: 18px;
     border: 2px solid black;
 }
+.advert-condition-radio:hover {
+    background-color: var(--orange-light);
+    cursor: pointer;
+}
 .advert-condition-radio:checked {
     background-color: var(--orange);
 }
@@ -198,6 +201,7 @@ input[type='submit']:hover {
     background-color: var(--orange);
 }
 #add-advert-form-submit:hover {
+    box-shadow: 0 0 3px 1px black, inset 0 0 10px 3px rgb(160, 104, 0);
     cursor: pointer;
 }
 

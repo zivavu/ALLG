@@ -25,15 +25,23 @@ function AdvertForm() {
         resetForm,
     } = useFormik({
         initialValues: {
-            userId: 1,
-            userName: 'Tomasz',
             title: '',
             description: '',
-            city: '',
+            city: {
+                id: '',
+                name: '',
+                voivodeship: '',
+                country: 'Polska',
+            },
             category: {},
+            user: {
+                id: 1,
+                name: 'Tomasz',
+            },
             price: '',
             imagePath: '',
             condition: '',
+            views: 0,
         },
         validationSchema: addAdvertSchema,
         onSubmit,

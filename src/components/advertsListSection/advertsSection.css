@@ -6,7 +6,7 @@
     background-color: var(--gray);
     margin: 15px auto;
     border: 2px solid black;
-    border-radius: 5px;
+    border-radius: 4px;
     width: 80%;
     box-sizing: border-box;
     padding: 5px;
@@ -63,7 +63,7 @@
 .home-advert-info .advert-condition {
     width: 90px;
     margin-top: 15px;
-    background-color: var(--orange);
+    background-color: var(--orange-light);
     text-align: center;
     border: 1px solid black;
 }

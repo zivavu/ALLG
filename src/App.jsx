@@ -22,7 +22,7 @@ function App() {
                 <Route path="/advert/:id" element={<AdvertView />}></Route>
                 <Route path="/profile" element={<Profile />}></Route>
                 <Route path="/new-advert" element={<AdvertForm />}></Route>
-                <Route path="/" element={<NewCities />}></Route>
+                <Route path="/" element={<HomePage />}></Route>
             </Routes>
         </>
     );

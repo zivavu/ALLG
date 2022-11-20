@@ -11,6 +11,7 @@ import {
 } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from '../../config/firebase-config';
+import { useDebounce } from '../../hooks/useDebounce';
 import './searchArea.css';
 import CityOption from './SearchedCityOptions.jsx';
 
@@ -23,28 +24,30 @@ function CitySearch({
 }) {
     const [searchTerm, setSearchTerm] = useState('');
     const [citiesResponse, setCitiesResponse] = useState([]);
+    const debouncedValue = useDebounce(searchTerm, 500);
 
-    let q;
     const getCities = async () => {
         const querySnapshot = await getDocs(q);
         setCitiesResponse(querySnapshot.docs.map((doc) => doc.data()));
     };
 
+    let q;
     useEffect(() => {
         const cityToSearch = searchTerm[0]
             ? searchTerm.split('')[0].toUpperCase() +
               searchTerm.split('').slice(1).join('')
             : '';
-
         if (fieldValue === cityToSearch) return;
+
         q = query(
             collection(db, 'cities'),
             where('caseSearch', 'array-contains', cityToSearch),
             orderBy('population', 'desc'),
             limit(10)
         );
+
         getCities();
-    }, [searchTerm]);
+    }, [debouncedValue]);
 
     const handleChange = (e) => {
         setCitiesResponse([]);
