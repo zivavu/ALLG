@@ -1,0 +1,122 @@
+#advert-view-page-container {
+    width: 100%;
+    height: 100vh;
+    background-color: var(--gray);
+}
+#advert-view-main *::selection {
+    background-color: rgb(204, 203, 255);
+}
+#advert-view-main {
+    width: 60%;
+    height: 100%;
+    margin: 15px auto;
+    border-radius: 4px;
+}
+#advert-view-page-container hr {
+    width: 100%;
+    height: 8px;
+    border: none;
+    background-color: var(--orange-light);
+    box-shadow: 0 0 1px 2px rgb(100, 100, 100);
+}
+#advert-view-main .advert-info-container,
+#advert-picture-section {
+    font-family: 'Secular One', sans-serif;
+    background-color: white;
+    box-sizing: border-box;
+    width: 100%;
+}
+#advert-view-main #advert-picture-section {
+    padding: 20px;
+    width: 100%;
+}
+#advert-picture-section img {
+    display: block;
+    height: auto;
+    width: 90%;
+    object-fit: cover;
+    height: 540px;
+    margin: auto;
+    padding: 20px;
+    background-color: var(--gray);
+    border-radius: 5px;
+    box-shadow: inset 0 0 3px 2px black;
+}
+#advert-basic-info-container {
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    padding: 15px 5%;
+    margin: 10px auto;
+}
+.category-separator {
+    margin: 0 3px;
+}
+#advert-view-main #advert-title {
+    display: block;
+    font-size: 30px;
+}
+#advert-view-main #advert-price {
+    font-size: 35px;
+    margin-top: 5px;
+}
+#advert-view-main #advert-condition {
+    display: block;
+    border: 1px solid black;
+    background-color: var(--orange-light);
+    width: 150px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    margin: 1% 0;
+}
+#advert-view-main #advert-description-container {
+    padding: 15px 5%;
+}
+#advert-view-main #advert-description {
+    font-size: 18px;
+    padding-left: 10px;
+}
+#advert-view-main #advert-description-heading {
+    font-size: 28px;
+    margin: 0;
+}
+#advert-owner-profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+#advert-owner-profile-container #profile {
+    background-color: var(--orange-light);
+    margin-right: 10%;
+    padding: 7px 15px;
+    width: min-content;
+    border: 2px solid black;
+    border-radius: 4px;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+}
+#profile svg {
+    padding-right: 10px;
+    width: 30px;
+    height: 30px;
+}
+#advert-owner-profile-container #profile:hover {
+    cursor: pointer;
+    user-select: none;
+    background-color: var(--orange);
+    box-shadow: inset 0 0 2px 1px black;
+}
+
+@media only screen and (max-device-width: 1000px) {
+    #advert-view-main {
+        width: 75%;
+    }
+}
+@media only screen and (max-device-width: 600px) {
+    #advert-view-main {
+        width: 95%;
+    }
+}

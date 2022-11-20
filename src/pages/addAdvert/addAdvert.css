@@ -1,0 +1,238 @@
+#add-advert-container * {
+    font-family: 'Secular One', sans-serif;
+}
+#add-advert-container *::selection {
+    background-color: rgb(204, 203, 255);
+}
+#add-advert-container {
+    background-color: var(--gray);
+    margin-bottom: 10px;
+}
+#advert-form-container {
+    width: min(900px, 65%);
+    margin: auto;
+    background-color: white;
+    border: 4px solid black;
+    border-top: none;
+}
+
+#heading-container {
+    border-radius: 0;
+}
+#add-advert-main {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    padding-bottom: 10px;
+}
+#add-advert-main > * {
+    margin-bottom: 3px;
+}
+.form-validation-error-message {
+    color: rgb(163, 0, 0);
+    margin-bottom: 10px;
+}
+#advert-form-container label {
+    margin-top: 10px;
+    margin-bottom: 0;
+    font-size: 18px;
+    display: block;
+}
+
+#advert-title-input,
+.photo-custom-input,
+#advert-description-input,
+#add-advert-main #city-search-container,
+#advert-price-input-box {
+    border-radius: 3px;
+    margin-left: min(10px, 2%);
+}
+
+#advert-title-input {
+    background-color: white;
+    outline: none;
+    border: var(--default-border);
+    height: 40px;
+    width: min(300px, 80%);
+    padding: 5px;
+    padding-left: 10px;
+    line-height: 40px;
+    font-size: 18px;
+}
+#advert-title-input:hover,
+#advert-title-input:focus,
+#advert-description-input:hover,
+#advert-description-input:focus,
+.photo-custom-input:hover,
+#advert-form-container #city-search:hover,
+#advert-form-container #city-search:focus,
+#advert-form-container #advert-price-input-box:hover,
+input[type='submit']:hover {
+    box-shadow: 0 0 3px 1px black;
+}
+
+#add-advert-categories-container {
+    width: min(700px, 100%);
+    margin-right: auto;
+}
+#add-advert-categories-container #categories-flexbox {
+    padding: 0;
+}
+#photo-input {
+    display: none;
+}
+#add-advert-main .photo-custom-input {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    margin-bottom: 10px;
+    background-color: var(--color2);
+    text-align: center;
+    line-height: 100px;
+    background-size: cover;
+    border: var(--default-border);
+    border-radius: 5px;
+    user-select: none;
+    cursor: pointer;
+}
+.photo-custom-input > span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40%;
+    height: 50px;
+    background-color: white;
+    padding: 1px 5px;
+    border-radius: 5px;
+    font-size: 18px;
+    line-height: 50px;
+    border: 2px solid black;
+}
+.photo-custom-input:hover > span {
+    background-color: black;
+    color: white;
+    box-shadow: 0 0 3px 1px black;
+}
+.hidden {
+    visibility: hidden;
+}
+#advert-description-input {
+    background-color: white;
+    outline: none;
+    border: var(--default-border);
+    padding: 10px;
+    padding-top: 15px;
+    resize: none;
+    height: 100px;
+    width: min(700px, 80%);
+    line-height: 20px;
+    font-size: 20px;
+}
+#advert-item-contidion-container {
+    padding: 0 15px;
+}
+#advert-item-contidion-container label {
+    display: block;
+    font-size: 17px;
+    line-height: 30px;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+}
+.advert-condition-radio {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #fff;
+    border-radius: 3px;
+    margin: 4px;
+    font: inherit;
+    color: black;
+    width: 18px;
+    height: 18px;
+    border: 2px solid black;
+}
+.advert-condition-radio:checked {
+    background-color: var(--orange);
+}
+
+#advert-form-container #city-search-container {
+    width: min(500px, 70%);
+    height: 55px;
+}
+#advert-form-container #city-search {
+    font-size: 20px;
+    box-sizing: border-box;
+    padding-left: 10px;
+    border: var(--default-border);
+    outline: none;
+    background-color: white;
+}
+#advert-form-container #advert-price-input-box {
+    width: min(140px, 60%);
+    font-size: 20px;
+    padding: 10px;
+    border: var(--default-border);
+    height: 30px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+}
+#advert-price-input-box #advert-price-input {
+    font-size: 20px;
+    letter-spacing: 2px;
+    border: none;
+    outline: none;
+}
+
+#add-advert-form-submit {
+    align-self: flex-end;
+    margin-right: 50px;
+    width: 200px;
+    height: 70px;
+    font-size: 17px;
+    border: 3px solid black;
+    border-radius: 3px;
+    background-color: var(--orange);
+}
+#add-advert-form-submit:hover {
+    cursor: pointer;
+}
+
+@media only screen and (max-device-width: 1000px) {
+    #advert-form-container {
+        width: 80%;
+    }
+}
+@media only screen and (max-device-width: 600px) {
+    #advert-form-container {
+        width: 90%;
+    }
+    #add-advert-main {
+        padding: 5px;
+        padding-top: 15px;
+        align-items: center;
+    }
+    #advert-form-container label {
+        margin-top: 0;
+    }
+    input[type='submit'] {
+        margin-top: 20px;
+        align-self: auto;
+        margin-right: 0;
+    }
+    #advert-title-input {
+        height: 30px;
+    }
+    #advert-description-input {
+        height: 60px;
+    }
+    #add-advert-main #city-search-container {
+        height: 40px;
+    }
+    #add-advert-main #advert-price-input-box {
+        height: 20px;
+    }
+}

@@ -1,0 +1,17 @@
+:root {
+    --gray: rgb(234, 238, 240);
+    --color2: rgb(27, 86, 104);
+    --orange: rgb(255, 179, 64);
+    --orange-light: rgb(255, 205, 111);
+    --orange-lighter: rgb(255, 236, 199);
+    --default-border: 2px solid black;
+}
+
+button {
+    cursor: pointer;
+}
+body {
+    background-color: var(--gray);
+    margin: 0;
+    padding: 0;
+}

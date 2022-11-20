@@ -1,0 +1,69 @@
+#home-adverts-section {
+    background-color: var(--gray);
+    width: 100%;
+}
+#adverts-list-container {
+    background-color: var(--gray);
+    margin: 15px auto;
+    border: 2px solid black;
+    border-radius: 5px;
+    width: 80%;
+    box-sizing: border-box;
+    padding: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.advert-element-container {
+    width: 49%;
+    height: 200px;
+    margin: 0.2%;
+    border-radius: 3px;
+    background-color: white;
+    border: 2px solid black;
+    display: grid;
+    grid-template-columns: 43% 57%;
+}
+.advert-element-container:hover {
+    background-color: var(--orange-lighter);
+}
+.advert-element-container img {
+    z-index: 1;
+    display: block;
+    object-fit: contain;
+    height: 100%;
+    background-color: var(--gray);
+}
+.home-advert-info {
+    display: flex;
+    text-align: right;
+    color: black;
+    padding: 10px;
+    font-family: 'Secular One', sans-serif;
+}
+.home-advert-title {
+    width: 70%;
+    text-align: left;
+    font-size: 22px;
+}
+.home-advert-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: 30%;
+}
+.home-advert-info .advert-price {
+    font-size: 24px;
+    letter-spacing: 1px;
+}
+.home-advert-info .advert-location {
+    margin-top: 10px;
+}
+.home-advert-info .advert-condition {
+    width: 90px;
+    margin-top: 15px;
+    background-color: var(--orange);
+    text-align: center;
+    border: 1px solid black;
+}
