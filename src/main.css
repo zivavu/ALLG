@@ -4,6 +4,8 @@
     --orange: rgb(255, 179, 64);
     --orange-light: rgb(255, 205, 111);
     --orange-lighter: rgb(255, 236, 199);
+    --light-user-select: rgb(203, 202, 255);
+    --dark-user-select: rgb(38, 36, 150);
     --default-border: 2px solid black;
 }
 

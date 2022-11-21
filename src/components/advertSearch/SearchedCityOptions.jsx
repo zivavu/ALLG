@@ -7,7 +7,7 @@ const CityOption = ({
     setSearchTerm,
     setFieldValue,
 }) => {
-    const citySelectHandler = () => {
+    const citySelectHandler = (e) => {
         setFieldValue('city', {
             id: id,
             name: name,
@@ -18,7 +18,7 @@ const CityOption = ({
         setSearchTerm(name);
     };
     return (
-        <div className="cities-list-item" onClick={citySelectHandler}>
+        <div className="cities-list-item" onMouseDown={citySelectHandler}>
             <section className="city-name">{name}</section>
             <section className="country-name">{country}</section>
         </div>

@@ -54,7 +54,6 @@ function CitySearch({
         setSearchTerm(e.target.value);
         setFieldValue('city', '');
     };
-
     return (
         <div id="city-search-container">
             <input
@@ -63,15 +62,12 @@ function CitySearch({
                 type="text"
                 name="city"
                 autoComplete="off"
-                onBlur={handleBlur}
                 onChange={(e) => {
                     handleChange(e);
                 }}
-                onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
-                        e.preventDefault();
-                        searchCityAPICall();
-                    }
+                onBlur={(e) => {
+                    setCitiesResponse([]);
+                    handleBlur(e);
                 }}
                 value={searchTerm}></input>
 

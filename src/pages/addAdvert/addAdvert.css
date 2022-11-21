@@ -2,7 +2,7 @@
     font-family: 'Secular One', sans-serif;
 }
 #add-advert-container *::selection {
-    background-color: rgb(204, 203, 255);
+    background-color: var(--light-user-select)
 }
 #add-advert-container {
     background-color: var(--gray);

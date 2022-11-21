@@ -36,6 +36,9 @@
     line-height: 22px;
     font-weight: 600;
 }
+#search-container *::selection {
+    background-color: var(--light-user-select);
+}
 #city-search-container {
     position: relative;
     min-width: 25%;
