@@ -2,6 +2,7 @@ import {
     createUserWithEmailAndPassword,
     GoogleAuthProvider,
     linkWithPopup,
+    signInWithPopup,
 } from 'firebase/auth';
 import { useState } from 'react';
 import { auth } from '../../../config/firebase-config';
@@ -24,9 +25,10 @@ function AuthSection() {
     const logout = async () => {};
 
     const loginWithGoogle = () => {
-        linkWithPopup(auth.currentUser, provider)
+        signInWithPopup(auth, googleProvider)
             .then((result) => {
                 const credential = GoogleAuthProvider.credentialFromResult(result);
+                const token = credential.accessToken;
                 user = result.user;
             })
             .catch((error) => {
@@ -65,12 +67,14 @@ function AuthSection() {
             {visibleAuthContainer === 'login' ? (
                 <div id="auth-login-container" className="auth-login-screen">
                     <AuthForm type="login" />
+                    <button onClick={loginWithGoogle}>Zaloguj</button>
                 </div>
             ) : null}
 
             {visibleAuthContainer === 'register' ? (
                 <div id="auth-register-container" className="auth-login-screen">
                     <AuthForm type="register" />
+                    <button onClick={loginWithGoogle}>Zaloguj</button>
                 </div>
             ) : null}
         </div>

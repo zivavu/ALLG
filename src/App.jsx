@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Routes, useParams } from 'react-router-dom';
-import NewCities from './API/NewCities.jsx';
 import SiteHeader from './components/header/SiteHeader.jsx';
 import './main.css';
 import AdvertForm from './pages/addAdvert/AdvertForm.jsx';
