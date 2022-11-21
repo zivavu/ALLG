@@ -1,0 +1,60 @@
+body {
+    background-color: var(--orange-lighter);
+}
+#auth-container * {
+    font-family: 'Secular One', sans-serif;
+}
+#auth-container {
+    width: 500px;
+    height: 60%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    background-color: var(--orange);
+    transform: translate(-50%, -50%);
+    border-radius: 4px;
+    box-shadow: 0 0 5px 2px black;
+}
+#auth-option-chose {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.auth-option-button {
+    box-sizing: border-box;
+    width: 50%;
+    border: none;
+    background-color: black;
+    color: white;
+    font-size: 25px;
+    box-shadow: 0 0 2px 1px black;
+}
+.auth-option-button:hover,
+.auth-option-button.selected {
+    z-index: 2;
+    background-color: white;
+    box-shadow: inset 0 0 4px 3px black, 0 0 2px 1px black;
+    color: black;
+}
+
+.auth-login-screen {
+    box-sizing: border-box;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+}
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    height: 60%;
+    align-items: center;
+}
+.auth-form > * {
+    font-size: 16px;
+    margin: 5px 0;
+    height: 17%;
+    width: 70%;
+    box-sizing: border-box;
+}

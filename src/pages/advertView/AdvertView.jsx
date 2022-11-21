@@ -47,26 +47,28 @@ function AdvertView() {
                 <div className="advert-info-container" id="advert-basic-info-container">
                     <div className="advert-info-container" id="advert-category-container">
                         <span id="advert-category">
-                            {advertData.category && advertData.category.category}
+                            {advertData.category ? advertData.category.category : null}
                         </span>
                         <span className="category-separator">&#8250;</span>
                         <span id="adver-sub-category">
-                            {advertData.category && advertData.category.subCategory}
+                            {advertData.category ? advertData.category.subCategory : null}
                         </span>
                     </div>
-                    <span id="advert-title">{advertData.title && advertData.title}</span>
+                    <span id="advert-title">
+                        {advertData.title ? advertData.title : null}
+                    </span>
                     <span id="advert-price">
-                        {advertData.price && advertData.price}zł
+                        {advertData.price ? advertData.price : null}zł
                     </span>
                     <span id="advert-condition">
-                        Stan: {advertData.condition && advertData.condition}
+                        Stan: {advertData.condition ? advertData.condition : null}
                     </span>
                 </div>
 
                 <div className="advert-info-container" id="advert-description-container">
                     <h4 id="advert-description-heading">OPIS</h4>
                     <div id="advert-description">
-                        {advertData.description && advertData.description}
+                        {advertData.description ? advertData.description : null}
                     </div>
                 </div>
                 <div

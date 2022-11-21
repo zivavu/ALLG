@@ -1,6 +1,6 @@
 import './home.css';
-import '/src/components/categories/categories.css';
-import CategoriesFlexbox from '/src/components/categories/CategoriesFlexbox';
+import '/src/components/categoryInput/categories.css';
+import CategoriesFlexbox from '/src/components/categoryInput/CategoriesFlexbox';
 
 const CategoriesSection = () => {
     return (

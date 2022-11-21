@@ -4,10 +4,10 @@ import { ref, uploadBytes } from 'firebase/storage';
 import { useFormik } from 'formik';
 import { useEffect, useState } from 'react';
 import CitySearch from '../../components/advertSearch/CitySearch';
-import '../../components/categories/categories.css';
-import CategoriesFlexbox from '../../components/categories/CategoriesFlexbox';
+import '../../components/categoryInput/categories.css';
+import CategoriesFlexbox from '../../components/categoryInput/CategoriesFlexbox';
 import { db, FirebaseStorage } from '../../config/firebase-config';
-import addAdvertSchema from '../../schemas/advertFormSchema';
+import addAdvertSchema from '../../schemas/addDdvertFormSchema';
 import './addAdvert.css';
 import FormValidationErrorMessage from './FormValidationErrorMessage';
 
@@ -46,25 +46,6 @@ function AdvertForm() {
         validationSchema: addAdvertSchema,
         onSubmit,
     });
-    const advertsCollectionRef = collection(db, 'adverts');
-
-    async function onSubmit(values) {
-        resetForm();
-        //upload form to Firebase
-        await addDoc(advertsCollectionRef, values)
-            .then(() => {
-                console.log('ogłoszenie dodane');
-            })
-            .catch('Dane były niepoprawne');
-
-        //upload image to Firebase Storage
-        const advertImagesRef = ref(FirebaseStorage, `${values.imagePath}`);
-        uploadBytes(advertImagesRef, uploadedImage)
-            .then(() => {
-                console.log('uploaded file');
-            })
-            .catch('Nie udało się wysłać zdjęcia');
-    }
 
     const [uploadedImage, setUploadedImage] = useState(null);
     const [inputBoxImage, setInputBoxImage] = useState('');
@@ -73,7 +54,31 @@ function AdvertForm() {
         const randomImagePath = `images/${uuidv4()}`;
         setFieldValue('imagePath', randomImagePath);
         setUploadedImage(e.target.files[0]);
+        //display image on the image input element
         setInputBoxImage(`${URL.createObjectURL(e.target.files[0])}`);
+    };
+
+    async function onSubmit(values) {
+        resetForm();
+        uploadAdvert(values);
+        uploadImage(values);
+    }
+
+    const advertsCollectionRef = collection(db, 'adverts');
+    const uploadAdvert = async (values) => {
+        await addDoc(advertsCollectionRef, values)
+            .then(() => {
+                console.log('ogłoszenie dodane');
+            })
+            .catch('Dane były niepoprawne');
+    };
+    const uploadImage = async (values) => {
+        const advertImagesRef = ref(FirebaseStorage, `${values.imagePath}`);
+        uploadBytes(advertImagesRef, uploadedImage)
+            .then(() => {
+                console.log('uploaded file');
+            })
+            .catch('Nie udało się wysłać zdjęcia');
     };
 
     return (
