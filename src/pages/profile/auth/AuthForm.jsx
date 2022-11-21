@@ -1,21 +1,37 @@
-const AuthForm = ({ submitValue }) => {
+import { useFormik } from 'formik';
+import userDataSchema from '../../../schemas/userAuthFormSchema';
+
+const AuthForm = ({ type }) => {
     return (
         <form className="auth-form">
             <input
-                className="auth-input"
                 type="text"
-                name="login-email"
                 id="email-input"
+                className="auth-input"
+                name="login-email"
                 placeholder="Podaj Email"
             />
             <input
-                className="auth-input"
                 type="password"
-                name="login-password"
                 id="password-input"
+                className="auth-input"
+                name="login-password"
                 placeholder="Podaj Hasło"
             />
-            <input type="submit" className="auth-submit" value={submitValue} />
+            {type === 'register' ? (
+                <input
+                    type="password"
+                    id="password-input"
+                    className="auth-input"
+                    name="confirm-password"
+                    placeholder="Powtórz Hasło"
+                />
+            ) : null}
+            <input
+                type="submit"
+                className="auth-submit"
+                value={type === 'login' ? 'Zaloguj się' : 'Zarejestruj się'}
+            />
         </form>
     );
 };

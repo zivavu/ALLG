@@ -3,10 +3,8 @@ import {
     GoogleAuthProvider,
     linkWithPopup,
 } from 'firebase/auth';
-import { useFormik } from 'formik';
 import { useState } from 'react';
 import { auth } from '../../../config/firebase-config';
-import userDataSchema from '../../../schemas/userAuthFormSchema';
 import AuthForm from './AuthForm';
 import './AuthSection.css';
 
@@ -39,7 +37,7 @@ function AuthSection() {
     const [visibleAuthContainer, setVisibleAuthContainer] = useState('login');
     return (
         <div id="auth-container">
-            <div id="auth-option-chose">
+            <div id="auth-option-chose-container">
                 <button
                     className={
                         visibleAuthContainer === 'login'
@@ -66,13 +64,13 @@ function AuthSection() {
 
             {visibleAuthContainer === 'login' ? (
                 <div id="auth-login-container" className="auth-login-screen">
-                    <AuthForm submitValue={'Zaloguj się'} />
+                    <AuthForm type="login" />
                 </div>
             ) : null}
 
             {visibleAuthContainer === 'register' ? (
                 <div id="auth-register-container" className="auth-login-screen">
-                    <AuthForm submitValue={'Zarejestruj się'} />
+                    <AuthForm type="register" />
                 </div>
             ) : null}
         </div>

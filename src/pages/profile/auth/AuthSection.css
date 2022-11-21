@@ -5,8 +5,8 @@ body {
     font-family: 'Secular One', sans-serif;
 }
 #auth-container {
-    width: 500px;
-    height: 60%;
+    width: min(500px, 90%);
+    height: 70%;
     position: absolute;
     left: 50%;
     top: 50%;
@@ -15,11 +15,13 @@ body {
     border-radius: 4px;
     box-shadow: 0 0 60px 23px black, 0 0 8px 10px black, inset 0 0 5px 3px black;
 }
-#auth-option-chose {
-    height: 80px;
+#auth-option-chose-container {
+    height: min(20%, 87px);
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    border-bottom: 3px solid black;
+    box-shadow: 0 0 3px 1px black;
 }
 .auth-option-button {
     box-sizing: border-box;
@@ -43,7 +45,7 @@ body {
     box-sizing: border-box;
     padding: 20px;
     width: 100%;
-    height: 100%;
+    height: 80%;
 }
 .auth-form {
     display: flex;
@@ -52,8 +54,8 @@ body {
     align-items: center;
 }
 .auth-form > * {
-    height: 17%;
-    width: 70%;
+    height: 20%;
+    width: 85%;
     font-size: 20px;
     margin: 5px 0;
     padding: 0 10px;
