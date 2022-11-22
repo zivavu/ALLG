@@ -19,6 +19,7 @@ firestore.*
 firebase.json
 .firebase*
 **/config
+**/API
 **/NewCities.jsx
 
 # Editor directories and files

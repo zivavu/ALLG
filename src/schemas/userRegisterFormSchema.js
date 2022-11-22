@@ -1,6 +1,11 @@
 import * as yup from 'yup';
 
 const userRegisterSchema = yup.object().shape({
+    displayName: yup
+        .string()
+        .min(2, 'Podane imie jest za krótkie')
+        .max(15, 'Podane imie jest za długie')
+        .required('Musisz podać imię'),
     email: yup
         .string()
         .email('To nie wygląda na poprawny email')

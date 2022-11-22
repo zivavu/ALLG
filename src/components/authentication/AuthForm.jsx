@@ -16,6 +16,7 @@ const AuthForm = ({ type, onSubmit, schema }) => {
         resetForm,
     } = useFormik({
         initialValues: {
+            displayName: '',
             email: '',
             password: '',
             confirmPassword: '',
@@ -26,6 +27,25 @@ const AuthForm = ({ type, onSubmit, schema }) => {
 
     return (
         <form className="auth-form" onSubmit={handleSubmit}>
+            {type === 'register' ? (
+                <>
+                    <input
+                        type="text"
+                        id="display-name-input"
+                        className="auth-input"
+                        name="displayName"
+                        value={values.displayName}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        autoComplete="off"
+                        autoCorrect="off"
+                        placeholder="Podaj Imię"
+                    />
+                    {errors.confirmPassword && touched.confirmPassword ? (
+                        <FormValidationErrorMessage error={errors.confirmPassword} />
+                    ) : null}
+                </>
+            ) : null}
             <input
                 type="text"
                 id="email-input"

@@ -1,24 +1,35 @@
 import {
     createUserWithEmailAndPassword,
-    GoogleAuthProvider,
     signInWithEmailAndPassword,
+    signOut,
+    updateProfile,
 } from 'firebase/auth';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { auth } from '../../config/firebase-config';
 import userLoginSchema from '../../schemas/userLoginFormSchema';
 import userRegisterSchema from '../../schemas/userRegisterFormSchema';
 import AuthForm from './AuthForm';
 import './AuthSection.css';
 import LogInWithGoogleBtn from './LogInWithGoogle';
+import { UserContext } from './UserContext';
 
 function AuthSection() {
-    const [user, setUser] = useState();
+    const [user, setUser] = useContext(UserContext);
 
-    const registerUser = async (email, password) => {
+    const registerUser = async (email, password, displayName) => {
         try {
             await createUserWithEmailAndPassword(auth, email, password).then(
                 (userCredential) => {
-                    setUser(userCredential.user);
+                    setUser(userCredential);
+                    updateProfile(auth.currentUser, {
+                        displayName: displayName,
+                    })
+                        .then(() => {
+                            console.log('name has been set');
+                        })
+                        .catch((error) => {
+                            console.log('couldnt set the name');
+                        });
                 }
             );
         } catch (error) {
@@ -26,26 +37,34 @@ function AuthSection() {
         }
     };
 
-    const login = async (email, password) => {
+    async function loginUser(email, password) {
         try {
             await signInWithEmailAndPassword(auth, email, password).then(
                 (userCredential) => {
-                    setUser(userCredential.user);
+                    setUser(userCredential);
                 }
             );
         } catch (error) {
             console.log(error.message);
         }
+    }
+
+    const logoutUser = async () => {
+        try {
+            await signOut(auth).then(console.log('You got logged out'));
+        } catch (error) {
+            console.log(error.message);
+        }
     };
 
-    const logout = async () => {};
-
     const submitUserRegistration = (e) => {
-        registerUser(e.email, e.password);
+        registerUser(e.email, e.password, e.displayName);
+        console.log(user);
     };
 
     const submitUserLogIn = (e) => {
-        login(e.email, e.password);
+        loginUser(e.email, e.password);
+        console.log(user);
     };
 
     const [visibleAuthContainer, setVisibleAuthContainer] = useState('login');
@@ -83,7 +102,7 @@ function AuthSection() {
                         onSubmit={submitUserLogIn}
                         schema={userLoginSchema}
                     />
-                    <LogInWithGoogleBtn setUser={setUser} />
+                    <LogInWithGoogleBtn />
                 </div>
             ) : null}
 
@@ -94,7 +113,7 @@ function AuthSection() {
                         onSubmit={submitUserRegistration}
                         schema={userRegisterSchema}
                     />
-                    <LogInWithGoogleBtn setUser={setUser} />
+                    <LogInWithGoogleBtn />
                 </div>
             ) : null}
         </div>
