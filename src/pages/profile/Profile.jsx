@@ -1,4 +1,4 @@
-import AuthSection from './auth/AuthSection';
+import AuthSection from '../../components/authentication/AuthSection';
 function Profile() {
     return <AuthSection />;
 }

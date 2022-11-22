@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
-import FormValidationErrorMessage from '../../../components/FormValidationErrorMessage';
-import userRegisterSchema from '../../../schemas/userRegisterFormSchema';
+import userRegisterSchema from '../../schemas/userRegisterFormSchema';
+import FormValidationErrorMessage from '../FormValidationErrorMessage';
 
 const AuthForm = ({ type, onSubmit, schema }) => {
     const {

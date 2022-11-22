@@ -1,8 +1,12 @@
-import { createUserWithEmailAndPassword, GoogleAuthProvider } from 'firebase/auth';
+import {
+    createUserWithEmailAndPassword,
+    GoogleAuthProvider,
+    signInWithEmailAndPassword,
+} from 'firebase/auth';
 import { useState } from 'react';
-import { auth } from '../../../config/firebase-config';
-import userLoginSchema from '../../../schemas/userLoginFormSchema';
-import userRegisterSchema from '../../../schemas/userRegisterFormSchema';
+import { auth } from '../../config/firebase-config';
+import userLoginSchema from '../../schemas/userLoginFormSchema';
+import userRegisterSchema from '../../schemas/userRegisterFormSchema';
 import AuthForm from './AuthForm';
 import './AuthSection.css';
 import LogInWithGoogleBtn from './LogInWithGoogle';
@@ -22,7 +26,17 @@ function AuthSection() {
         }
     };
 
-    const login = async () => {};
+    const login = async (email, password) => {
+        try {
+            await signInWithEmailAndPassword(auth, email, password).then(
+                (userCredential) => {
+                    setUser(userCredential.user);
+                }
+            );
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
 
     const logout = async () => {};
 
@@ -31,7 +45,7 @@ function AuthSection() {
     };
 
     const submitUserLogIn = (e) => {
-        login();
+        login(e.email, e.password);
     };
 
     const [visibleAuthContainer, setVisibleAuthContainer] = useState('login');

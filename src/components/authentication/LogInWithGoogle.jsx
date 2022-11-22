@@ -5,7 +5,7 @@ import {
     signInWithPopup,
 } from 'firebase/auth';
 import React from 'react';
-import { auth } from '../../../config/firebase-config';
+import { auth } from '../../config/firebase-config';
 function LoginWithGoogleBtn({ setUser }) {
     const googleProvider = new GoogleAuthProvider();
 
