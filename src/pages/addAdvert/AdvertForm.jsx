@@ -4,12 +4,12 @@ import { ref, uploadBytes } from 'firebase/storage';
 import { useFormik } from 'formik';
 import { useContext, useEffect, useState } from 'react';
 import CitySearch from '../../components/advertSearch/CitySearch';
-import { UserContext } from '../../components/authentication/UserContext';
 import '../../components/categoryInput/categories.css';
 import CategoriesFlexbox from '../../components/categoryInput/CategoriesFlexbox';
 import FormValidationErrorMessage from '../../components/FormValidationErrorMessage';
 import { auth, db, FirebaseStorage } from '../../config/firebase-config';
 import addAdvertSchema from '../../schemas/addDdvertFormSchema';
+import { UserContext } from '../authentication/UserContext';
 import './addAdvert.css';
 
 function AdvertForm() {

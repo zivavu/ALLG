@@ -15,9 +15,11 @@ import { UserContext } from './UserContext';
 
 function AuthSection() {
     const [user, setUser] = useContext(UserContext);
+    const [isLoading, setLoading] = useState(false);
 
     const registerUser = async (email, password, displayName) => {
         try {
+            setLoading(true);
             await createUserWithEmailAndPassword(auth, email, password).then(
                 (userCredential) => {
                     setUser(userCredential.user);
@@ -35,11 +37,13 @@ function AuthSection() {
         } catch (error) {
             console.log(error.message);
         }
+        setLoading(false);
     };
 
     async function loginUser(email, password) {
+        setLoading(true);
         try {
-            await signInWithEmailAndPassword(auth, email, password).then(
+            return await signInWithEmailAndPassword(auth, email, password).then(
                 (userCredential) => {
                     setUser(userCredential.user);
                 }
@@ -47,11 +51,12 @@ function AuthSection() {
         } catch (error) {
             console.log(error.message);
         }
+        setLoading(false);
     }
 
     const logoutUser = async () => {
         try {
-            await signOut(auth).then(console.log('You got logged out'));
+            await signOut(auth).then(setUser({ uid: '', displayName: '' }));
         } catch (error) {
             console.log(error.message);
         }
@@ -59,12 +64,10 @@ function AuthSection() {
 
     const submitUserRegistration = (e) => {
         registerUser(e.email, e.password, e.displayName);
-        console.log(user);
     };
 
     const submitUserLogIn = (e) => {
         loginUser(e.email, e.password);
-        console.log(user);
     };
 
     const [visibleAuthContainer, setVisibleAuthContainer] = useState('login');
@@ -99,6 +102,7 @@ function AuthSection() {
                 <div id="auth-login-container" className="auth-login-screen">
                     <AuthForm
                         type="login"
+                        isDisabled={isLoading}
                         onSubmit={submitUserLogIn}
                         schema={userLoginSchema}
                     />
@@ -110,12 +114,14 @@ function AuthSection() {
                 <div id="auth-register-container" className="auth-login-screen">
                     <AuthForm
                         type="register"
+                        isDisabled={isLoading}
                         onSubmit={submitUserRegistration}
                         schema={userRegisterSchema}
                     />
                     <LogInWithGoogleBtn />
                 </div>
             ) : null}
+            <button onClick={logoutUser}>Wyloguj</button>
         </div>
     );
 }

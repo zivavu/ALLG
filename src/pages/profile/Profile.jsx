@@ -1,5 +1,5 @@
-import AuthSection from '../../components/authentication/AuthSection';
+import AuthSection from '../authentication/AuthPage';
 function Profile() {
-    return <AuthSection />;
+    return <div id="profile-container">Profile</div>;
 }
 export default Profile;

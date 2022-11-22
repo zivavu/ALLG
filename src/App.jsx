@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Routes, UNSAFE_RouteContext, useParams } from 'react-router-dom';
-import { UserContext } from './components/authentication/UserContext.jsx';
 import SiteHeader from './components/header/SiteHeader.jsx';
 import { auth } from './config/firebase-config.js';
 import './main.css';
 import AdvertForm from './pages/addAdvert/AdvertForm.jsx';
 import AdvertView from './pages/advertView/AdvertView.jsx';
+import AuthPage from './pages/authentication/AuthPage.jsx';
+import { UserContext } from './pages/authentication/UserContext.jsx';
 import HomePage from './pages/homePage/Home.jsx';
 import Profile from './pages/profile/Profile.jsx';
 import Steared from './pages/profile/Steared.jsx';
@@ -17,9 +18,13 @@ import Steared from './pages/profile/Steared.jsx';
 
 function App() {
     const [user, setUser] = useState({ uid: '', displayName: '' });
+
     useEffect(() => {
-        setUser(auth.currentUser);
-    }, [auth.currentUser]);
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            setUser(user);
+        });
+        return unsubscribe;
+    }, []);
 
     return (
         <>
@@ -27,8 +32,16 @@ function App() {
                 <SiteHeader />
                 <Routes>
                     <Route path="/advert/:id" element={<AdvertView />}></Route>
-                    <Route path="/profile" element={<Profile />}></Route>
-                    <Route path="/new-advert" element={<AdvertForm />}></Route>
+                    <Route
+                        path="/profile"
+                        element={
+                            !user || user.uid == '' ? <AuthPage /> : <Profile />
+                        }></Route>
+                    <Route
+                        path="/new-advert"
+                        element={
+                            !user || user.uid == '' ? <AuthPage /> : <AdvertForm />
+                        }></Route>
                     <Route path="/" element={<HomePage />}></Route>
                 </Routes>
             </UserContext.Provider>
