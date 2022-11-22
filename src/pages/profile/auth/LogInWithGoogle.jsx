@@ -6,7 +6,7 @@ import {
 } from 'firebase/auth';
 import React from 'react';
 import { auth } from '../../../config/firebase-config';
-function LoginWithGoogleBtn() {
+function LoginWithGoogleBtn({ setUser }) {
     const googleProvider = new GoogleAuthProvider();
 
     const loginWithGoogle = () => {
@@ -14,7 +14,7 @@ function LoginWithGoogleBtn() {
             .then((result) => {
                 const credential = GoogleAuthProvider.credentialFromResult(result);
                 const token = credential.accessToken;
-                const user = result.user;
+                setUser(result.user);
             })
             .catch((error) => {
                 console.log(error);
@@ -23,7 +23,6 @@ function LoginWithGoogleBtn() {
 
     return (
         <>
-            <span>Zaloguj się z Google</span>
             <button className="login-with-google-btn" onClick={loginWithGoogle}></button>
         </>
     );

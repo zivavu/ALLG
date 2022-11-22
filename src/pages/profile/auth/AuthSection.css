@@ -9,7 +9,7 @@ body {
     height: 70%;
     position: absolute;
     left: 50%;
-    top: 52%;
+    top: 53%;
     background-color: var(--orange);
     transform: translate(-50%, -50%);
     border-radius: 4px;
@@ -53,8 +53,8 @@ body {
     height: 70%;
     align-items: center;
 }
-.auth-form > * {
-    height: 20%;
+.auth-form > input {
+    height: min(25%, 70px);
     width: 85%;
     font-size: 20px;
     margin: 5px 0;
@@ -80,8 +80,23 @@ body {
     background-color: white;
     color: black;
 }
+
 .login-with-google-btn {
+    position: absolute;
+    bottom: 7%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 280px;
+    height: 70px;
+    border: none;
+    border-radius: 7px;
+    background: url('src/assets/btn_google_signin_light_normal_web@2x.png');
+    background-repeat: no-repeat;
+    background-clip: border-box;
+    background-size: 280px;
+    background-position: center;
 }
 .login-with-google-btn:hover {
-    background-image: url('src/assets/btn_google_signin_dark_pressed_web.png');
+    background-color: white;
+    border: 4px solid rgb(63, 74, 112);
 }

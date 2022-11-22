@@ -6,10 +6,10 @@ import { useEffect, useState } from 'react';
 import CitySearch from '../../components/advertSearch/CitySearch';
 import '../../components/categoryInput/categories.css';
 import CategoriesFlexbox from '../../components/categoryInput/CategoriesFlexbox';
+import FormValidationErrorMessage from '../../components/FormValidationErrorMessage';
 import { db, FirebaseStorage } from '../../config/firebase-config';
 import addAdvertSchema from '../../schemas/addDdvertFormSchema';
 import './addAdvert.css';
-import FormValidationErrorMessage from './FormValidationErrorMessage';
 
 function AdvertForm() {
     const {
@@ -100,9 +100,9 @@ function AdvertForm() {
                             autoComplete="off"
                             autoCorrect="off"
                             placeholder="Dodaj Tytuł"></input>
-                        {errors.title && touched.title && (
+                        {errors.title && touched.title ? (
                             <FormValidationErrorMessage error={errors.title} />
-                        )}
+                        ) : null}
 
                         <label htmlFor="advert-description-input">Opis</label>
                         <textarea
@@ -115,9 +115,9 @@ function AdvertForm() {
                             onChange={handleChange}
                             onBlur={handleBlur}
                             placeholder="Dodaj Opis"></textarea>
-                        {errors.description && touched.description && (
+                        {errors.description && touched.description ? (
                             <FormValidationErrorMessage error={errors.description} />
-                        )}
+                        ) : null}
 
                         <label htmlFor="advert-item-condition-container">Stan</label>
                         <div id="advert-item-contidion-container">
@@ -144,9 +144,9 @@ function AdvertForm() {
                                 Używane
                             </label>
                         </div>
-                        {errors.condition && touched.condition && (
+                        {errors.condition && touched.condition ? (
                             <FormValidationErrorMessage error={errors.condition} />
-                        )}
+                        ) : null}
 
                         <label htmlFor="city-search">Miejscowość</label>
                         <CitySearch
@@ -156,19 +156,19 @@ function AdvertForm() {
                             setFieldError={setFieldError}
                             setFieldTouched={setFieldTouched}
                         />
-                        {errors.city && touched.city && (
+                        {errors.city && touched.city ? (
                             <FormValidationErrorMessage error={errors.city} />
-                        )}
+                        ) : null}
 
                         <label htmlFor="category-input">Kategoria</label>
                         <div id="add-advert-categories-container">
                             <CategoriesFlexbox setFieldValue={setFieldValue} />
                         </div>
-                        {errors.category && touched.category && (
+                        {errors.category && touched.category ? (
                             <FormValidationErrorMessage
                                 error={errors.category.category}
                             />
-                        )}
+                        ) : null}
                         <label htmlFor="photo-custom-input">Zdjęcia</label>
                         <label
                             htmlFor="photo-input"
@@ -200,9 +200,9 @@ function AdvertForm() {
                                 size="7"></input>
                             <span id="advert-price-prefix">zł</span>
                         </div>
-                        {errors.price && touched.price && (
+                        {errors.price && touched.price ? (
                             <FormValidationErrorMessage error={errors.price} />
-                        )}
+                        ) : null}
 
                         <input
                             id="add-advert-form-submit"
