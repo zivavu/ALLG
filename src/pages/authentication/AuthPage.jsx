@@ -9,11 +9,11 @@ import { auth } from '../../config/firebase-config';
 import userLoginSchema from '../../schemas/userLoginFormSchema';
 import userRegisterSchema from '../../schemas/userRegisterFormSchema';
 import AuthForm from './AuthForm';
-import './AuthSection.css';
+import './AuthPage.css';
 import LogInWithGoogleBtn from './LogInWithGoogle';
 import { UserContext } from './UserContext';
 
-function AuthSection() {
+function AuthPage() {
     const [user, setUser] = useContext(UserContext);
     const [isLoading, setLoading] = useState(false);
 
@@ -72,57 +72,59 @@ function AuthSection() {
 
     const [visibleAuthContainer, setVisibleAuthContainer] = useState('login');
     return (
-        <div id="auth-container">
-            <div id="auth-option-chose-container">
-                <button
-                    className={
-                        visibleAuthContainer === 'login'
-                            ? `auth-option-button selected`
-                            : `auth-option-button`
-                    }
-                    onClick={(e) => {
-                        setVisibleAuthContainer('login');
-                    }}>
-                    Logowanie
-                </button>
-                <button
-                    className={
-                        visibleAuthContainer === 'register'
-                            ? `auth-option-button selected`
-                            : `auth-option-button`
-                    }
-                    onClick={() => {
-                        setVisibleAuthContainer('register');
-                    }}>
-                    Rejestracja
-                </button>
+        <div id="auth-page-container">
+            <div id="auth-container">
+                <div id="auth-option-chose-container">
+                    <button
+                        className={
+                            visibleAuthContainer === 'login'
+                                ? `auth-option-button selected`
+                                : `auth-option-button`
+                        }
+                        onClick={(e) => {
+                            setVisibleAuthContainer('login');
+                        }}>
+                        Logowanie
+                    </button>
+                    <button
+                        className={
+                            visibleAuthContainer === 'register'
+                                ? `auth-option-button selected`
+                                : `auth-option-button`
+                        }
+                        onClick={() => {
+                            setVisibleAuthContainer('register');
+                        }}>
+                        Rejestracja
+                    </button>
+                </div>
+
+                {visibleAuthContainer === 'login' ? (
+                    <div id="auth-login-container" className="auth-login-screen">
+                        <AuthForm
+                            type="login"
+                            isDisabled={isLoading}
+                            onSubmit={submitUserLogIn}
+                            schema={userLoginSchema}
+                        />
+                        <LogInWithGoogleBtn />
+                    </div>
+                ) : null}
+
+                {visibleAuthContainer === 'register' ? (
+                    <div id="auth-register-container" className="auth-login-screen">
+                        <AuthForm
+                            type="register"
+                            isDisabled={isLoading}
+                            onSubmit={submitUserRegistration}
+                            schema={userRegisterSchema}
+                        />
+                        <LogInWithGoogleBtn />
+                    </div>
+                ) : null}
+                <button onClick={logoutUser}>Wyloguj</button>
             </div>
-
-            {visibleAuthContainer === 'login' ? (
-                <div id="auth-login-container" className="auth-login-screen">
-                    <AuthForm
-                        type="login"
-                        isDisabled={isLoading}
-                        onSubmit={submitUserLogIn}
-                        schema={userLoginSchema}
-                    />
-                    <LogInWithGoogleBtn />
-                </div>
-            ) : null}
-
-            {visibleAuthContainer === 'register' ? (
-                <div id="auth-register-container" className="auth-login-screen">
-                    <AuthForm
-                        type="register"
-                        isDisabled={isLoading}
-                        onSubmit={submitUserRegistration}
-                        schema={userRegisterSchema}
-                    />
-                    <LogInWithGoogleBtn />
-                </div>
-            ) : null}
-            <button onClick={logoutUser}>Wyloguj</button>
         </div>
     );
 }
-export default AuthSection;
+export default AuthPage;

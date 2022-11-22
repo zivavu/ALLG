@@ -19,6 +19,7 @@ import Steared from './pages/profile/Steared.jsx';
 function App() {
     const [user, setUser] = useState({ uid: '', displayName: '' });
 
+    //handle user auth persistance
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
             setUser(user);
@@ -42,7 +43,7 @@ function App() {
                         element={
                             !user || user.uid == '' ? <AuthPage /> : <AdvertForm />
                         }></Route>
-                    <Route path="/" element={<HomePage />}></Route>
+                    <Route path="/" element={<AuthPage />}></Route>
                 </Routes>
             </UserContext.Provider>
         </>

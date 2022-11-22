@@ -1,4 +1,4 @@
-import AuthSection from '../authentication/AuthPage';
+import AuthPage from '../authentication/AuthPage';
 function Profile() {
     return <div id="profile-container">Profile</div>;
 }

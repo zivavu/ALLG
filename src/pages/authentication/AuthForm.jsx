@@ -40,8 +40,8 @@ const AuthForm = ({ type, onSubmit, schema, isDisabled }) => {
                         autoCorrect="off"
                         placeholder="Podaj Imię"
                     />
-                    {errors.confirmPassword && touched.confirmPassword ? (
-                        <FormValidationErrorMessage error={errors.confirmPassword} />
+                    {errors.displayName && touched.displayName ? (
+                        <FormValidationErrorMessage error={errors.displayName} />
                     ) : null}
                 </>
             ) : null}
