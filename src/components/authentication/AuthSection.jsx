@@ -20,7 +20,7 @@ function AuthSection() {
         try {
             await createUserWithEmailAndPassword(auth, email, password).then(
                 (userCredential) => {
-                    setUser(userCredential);
+                    setUser(userCredential.user);
                     updateProfile(auth.currentUser, {
                         displayName: displayName,
                     })
@@ -41,7 +41,7 @@ function AuthSection() {
         try {
             await signInWithEmailAndPassword(auth, email, password).then(
                 (userCredential) => {
-                    setUser(userCredential);
+                    setUser(userCredential.user);
                 }
             );
         } catch (error) {

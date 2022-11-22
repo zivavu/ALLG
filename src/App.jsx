@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, Routes, UNSAFE_RouteContext, useParams } from 'react-router-dom';
 import { UserContext } from './components/authentication/UserContext.jsx';
 import SiteHeader from './components/header/SiteHeader.jsx';
+import { auth } from './config/firebase-config.js';
 import './main.css';
 import AdvertForm from './pages/addAdvert/AdvertForm.jsx';
 import AdvertView from './pages/advertView/AdvertView.jsx';
@@ -15,7 +16,11 @@ import Steared from './pages/profile/Steared.jsx';
 </style>;
 
 function App() {
-    const [user, setUser] = useState({});
+    const [user, setUser] = useState({ uid: '', displayName: '' });
+    useEffect(() => {
+        setUser(auth.currentUser);
+    }, [auth.currentUser]);
+
     return (
         <>
             <UserContext.Provider value={[user, setUser]}>

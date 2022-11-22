@@ -2,16 +2,18 @@ import { uuidv4 } from '@firebase/util';
 import { addDoc, collection } from 'firebase/firestore';
 import { ref, uploadBytes } from 'firebase/storage';
 import { useFormik } from 'formik';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import CitySearch from '../../components/advertSearch/CitySearch';
+import { UserContext } from '../../components/authentication/UserContext';
 import '../../components/categoryInput/categories.css';
 import CategoriesFlexbox from '../../components/categoryInput/CategoriesFlexbox';
 import FormValidationErrorMessage from '../../components/FormValidationErrorMessage';
-import { db, FirebaseStorage } from '../../config/firebase-config';
+import { auth, db, FirebaseStorage } from '../../config/firebase-config';
 import addAdvertSchema from '../../schemas/addDdvertFormSchema';
 import './addAdvert.css';
 
 function AdvertForm() {
+    const [user, setUser] = useContext(UserContext);
     const {
         values,
         errors,
@@ -25,6 +27,10 @@ function AdvertForm() {
         resetForm,
     } = useFormik({
         initialValues: {
+            user: {
+                uid: 1,
+                displayName: 'Tomasz',
+            },
             title: '',
             description: '',
             city: {
@@ -34,10 +40,6 @@ function AdvertForm() {
                 country: 'Polska',
             },
             category: {},
-            user: {
-                id: 1,
-                name: 'Tomasz',
-            },
             price: '',
             imagePath: '',
             condition: '',
@@ -46,6 +48,10 @@ function AdvertForm() {
         validationSchema: addAdvertSchema,
         onSubmit,
     });
+
+    useEffect(() => {
+        setFieldValue('user', { uid: user.uid, displayName: user.displayName });
+    }, [user]);
 
     const [uploadedImage, setUploadedImage] = useState(null);
     const [inputBoxImage, setInputBoxImage] = useState('');
@@ -59,9 +65,9 @@ function AdvertForm() {
     };
 
     async function onSubmit(values) {
-        resetForm();
         uploadAdvert(values);
         uploadImage(values);
+        resetForm();
     }
 
     const advertsCollectionRef = collection(db, 'adverts');
@@ -80,7 +86,6 @@ function AdvertForm() {
             })
             .catch('Nie udało się wysłać zdjęcia');
     };
-
     return (
         <div id="add-advert-container">
             <div id="advert-form-container">
@@ -209,6 +214,12 @@ function AdvertForm() {
                             type="submit"
                             value="Opublikuj ogłoszenie"
                         />
+                        {errors.user ? (
+                            <FormValidationErrorMessage
+                                id="add-advert-user-error"
+                                error={errors.user.uid}
+                            />
+                        ) : null}
                     </main>
                 </form>
             </div>
