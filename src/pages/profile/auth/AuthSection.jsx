@@ -10,7 +10,7 @@ import LogInWithGoogleBtn from './LogInWithGoogle';
 function AuthSection() {
     const [user, setUser] = useState();
 
-    const registerUser = async () => {
+    const registerUser = async (email, password) => {
         try {
             await createUserWithEmailAndPassword(auth, email, password).then(
                 (userCredential) => {
@@ -27,12 +27,10 @@ function AuthSection() {
     const logout = async () => {};
 
     const submitUserRegistration = (e) => {
-        e.preventDefault();
-        registerUser();
+        registerUser(e.email, e.password);
     };
 
     const submitUserLogIn = (e) => {
-        e.preventDefault();
         login();
     };
 
