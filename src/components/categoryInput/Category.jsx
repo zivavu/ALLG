@@ -23,8 +23,7 @@ const Category = ({
                 ${isSelected ? 'categories-selected' : ''} 
                 `}
                 onMouseEnter={() => setShowSubCategories(true)}
-                onMouseLeave={() => setShowSubCategories(false)}
-                onTouchStart={() => setShowSubCategories(true)}>
+                onMouseLeave={() => setShowSubCategories(false)}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path d={svgPath} />
                 </svg>

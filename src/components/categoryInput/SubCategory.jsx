@@ -15,10 +15,6 @@ const SubCategory = ({
     const categorySelectHandler = () => {
         setSelectedCategory({ category: category, subCategory: subCategory });
         setFieldValue('category', { category: category, subCategory: subCategory });
-        //God have mercy :) // Prevents category container blink on selection
-        setTimeout(() => {
-            setShowSubCategories(false);
-        }, 5);
     };
 
     return (
