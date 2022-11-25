@@ -1,13 +1,6 @@
 import * as yup from 'yup';
 
 const addAdvertSchema = yup.object().shape({
-    user: yup
-        .object()
-        .required('Wystąpił problem z kontem')
-        .shape({
-            uid: yup.string().min(28, 'Wystąpił problem z kontem').required(),
-            displayName: yup.string(),
-        }),
     title: yup
         .string()
         .min(8, 'Tytuł jest za krótki(min 8 znaków)')

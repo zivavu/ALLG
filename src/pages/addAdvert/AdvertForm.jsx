@@ -15,7 +15,7 @@ import '../../components/categoryInput/categories.css';
 import CategoriesFlexbox from '../../components/categoryInput/CategoriesFlexbox';
 import FormValidationErrorMessage from '../../components/FormValidationErrorMessage';
 import { auth, db, FirebaseStorage } from '../../config/firebase-config';
-import addAdvertSchema from '../../schemas/addDdvertFormSchema';
+import addAdvertSchema from '../../schemas/addAdvertFormSchema';
 import { UserContext } from '../authentication/UserContext';
 import './addAdvert.css';
 function AdvertForm() {
@@ -33,11 +33,7 @@ function AdvertForm() {
         resetForm,
     } = useFormik({
         initialValues: {
-            uid: '',
-            user: {
-                uid: 0,
-                displayName: '',
-            },
+            id: '',
             title: '',
             description: '',
             city: {
@@ -58,7 +54,8 @@ function AdvertForm() {
 
     useEffect(() => {
         setFieldValue('user', { uid: user.uid, displayName: user.displayName });
-        setFieldValue('uid', uuidv4());
+        setFieldValue('id', uuidv4());
+        console.log(values.user);
     }, [user]);
 
     const [uploadedImage, setUploadedImage] = useState(null);
@@ -78,9 +75,8 @@ function AdvertForm() {
         uploadImage(values);
         resetForm();
     }
-
     const uploadAdvert = async (values) => {
-        const advertsCollectionRef = doc(db, 'adverts', values.uid);
+        const advertsCollectionRef = doc(db, 'adverts', values.id);
         await setDoc(advertsCollectionRef, values)
             .then(() => {
                 console.log('ogłoszenie dodane');
@@ -90,7 +86,8 @@ function AdvertForm() {
     const addAdvertToUserDoc = async (values) => {
         const userDocRef = doc(db, 'users', values.user.uid);
         await setDoc(userDocRef, {
-            adverts: arrayUnion(values.uid),
+            displayName: values.user.displayName,
+            adverts: arrayUnion(values.id),
         })
             .then(() => {
                 console.log('ogłosenie dodane do użytkownika');
@@ -234,12 +231,6 @@ function AdvertForm() {
                             type="submit"
                             value="Opublikuj ogłoszenie"
                         />
-                        {errors.user ? (
-                            <FormValidationErrorMessage
-                                id="add-advert-user-error"
-                                error={errors.user.uid}
-                            />
-                        ) : null}
                     </main>
                 </form>
             </div>

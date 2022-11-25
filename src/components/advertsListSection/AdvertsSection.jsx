@@ -8,12 +8,13 @@ function AdvertsSection({ getAdvertsHandler }) {
     useEffect(() => {
         getAdvertsHandler(setAdvertsData);
     }, []);
+    console.log(advertsData);
 
     return (
         <section id="home-adverts-section">
             <div id="adverts-list-container">
                 {advertsData.map((advert) => (
-                    <AdvertElement key={advert.id} advert={advert} />
+                    <AdvertElement key={advert.uid} advert={advert} />
                 ))}
             </div>
         </section>

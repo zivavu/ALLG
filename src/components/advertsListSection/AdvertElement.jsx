@@ -35,7 +35,7 @@ const AdvertElement = ({ advert }) => {
                 <div className="home-advert-title">{advert.title}</div>
                 <div className="home-advert-details">
                     <div className="advert-price">{advert.price}zł</div>
-                    <div className="advert-location">{advert.city}</div>
+                    <div className="advert-location">{advert.city.name}</div>
                     <div className="advert-condition">{advert.condition}</div>
                 </div>
             </div>
