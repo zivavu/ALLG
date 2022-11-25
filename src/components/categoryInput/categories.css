@@ -51,7 +51,7 @@ h3 {
     box-sizing: border-box;
 }
 #categories-flexbox .categories-focus,
-#categories-flexbox .sub-categories-container li:hover {
+#categories-flexbox .sub-category:hover:not(.categories-selected) {
     fill: white;
     color: white;
     background-color: black;

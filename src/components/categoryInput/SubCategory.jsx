@@ -19,7 +19,9 @@ const SubCategory = ({
 
     return (
         <li
-            className={`${isSelected ? 'categories-selected' : ''}`}
+            className={`${
+                isSelected ? 'sub-category categories-selected' : 'sub-category'
+            }`}
             onClick={categorySelectHandler}>
             {subCategory}
         </li>
