@@ -15,6 +15,7 @@ import '../../components/categoryInput/categories.css';
 import CategoriesFlexbox from '../../components/categoryInput/CategoriesFlexbox';
 import FormValidationErrorMessage from '../../components/FormValidationErrorMessage';
 import { auth, db, FirebaseStorage } from '../../config/firebase-config';
+import { ScrollToFieldError } from '../../hooks&utils/scrollToFieldError';
 import addAdvertSchema from '../../schemas/addAdvertFormSchema';
 import { UserContext } from '../authentication/UserContext';
 import './addAdvert.css';
@@ -31,6 +32,9 @@ function AdvertForm() {
         setFieldError,
         setFieldTouched,
         resetForm,
+        getFieldErrorNames,
+        isValid,
+        submitCount,
     } = useFormik({
         initialValues: {
             id: '',
@@ -85,7 +89,7 @@ function AdvertForm() {
     };
     const addAdvertToUserDoc = async (values) => {
         const userDocRef = doc(db, 'users', values.user.uid);
-        await setDoc(userDocRef, {
+        await updateDoc(userDocRef, {
             displayName: values.user.displayName,
             adverts: arrayUnion(values.id),
         })
@@ -102,13 +106,18 @@ function AdvertForm() {
             })
             .catch('Nie udało się wysłać zdjęcia');
     };
-
     return (
         <div id="add-advert-container">
             <div id="advert-form-container">
                 <div id="heading-container">
                     <h3 id="add-advert-heading">Dodaj ogłoszenie</h3>
                 </div>
+                {console.log(errors)}
+                <ScrollToFieldError
+                    isValid={isValid}
+                    submitCount={submitCount}
+                    errors={errors}
+                />
                 <form id="add-advert-form" onSubmit={handleSubmit}>
                     <main id="add-advert-main">
                         <label htmlFor="title">Tytuł ogłoszenia</label>
