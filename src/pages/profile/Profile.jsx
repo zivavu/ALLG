@@ -1,10 +1,10 @@
 import AdvertsSection from '../../components/advertsListSection/AdvertsSection';
-import getAllAdverts from '../../hooks&utils/getAllAdverts';
 import AuthPage from '../authentication/AuthPage';
+import getUserAdverts from '../../hooks&utils/getUserAdverts';
 function Profile() {
     return (
         <div id="profile-page">
-            <AdvertsSection getAdvertsHandler={getAllAdverts} />
+            <AdvertsSection getAdvertsHandler={getUserAdverts} />
         </div>
     );
 }

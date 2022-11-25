@@ -1,14 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { UserContext } from '../../pages/authentication/UserContext';
 import AdvertElement from './AdvertElement';
 import './advertsSection.css';
 
 function AdvertsSection({ getAdvertsHandler }) {
     const [advertsData, setAdvertsData] = useState([]);
+    const [user, setUser] = useContext(UserContext);
 
     useEffect(() => {
-        getAdvertsHandler(setAdvertsData);
+        getAdvertsHandler(setAdvertsData, user);
     }, []);
-    console.log(advertsData);
 
     return (
         <section id="home-adverts-section">
