@@ -26,12 +26,6 @@ function CitySearch({
     const [citiesResponse, setCitiesResponse] = useState([]);
     const debouncedValue = useDebounce(searchTerm, 500);
 
-    const getCities = async () => {
-        const querySnapshot = await getDocs(q);
-        setCitiesResponse(querySnapshot.docs.map((doc) => doc.data()));
-    };
-
-    let q;
     useEffect(() => {
         const cityToSearch = searchTerm[0]
             ? searchTerm.split('')[0].toUpperCase() +
@@ -39,12 +33,16 @@ function CitySearch({
             : '';
         if (fieldValue === cityToSearch) return;
 
-        q = query(
+        let q = query(
             collection(db, 'cities'),
             where('caseSearch', 'array-contains', cityToSearch),
             orderBy('population', 'desc'),
             limit(10)
         );
+        const getCities = async () => {
+            const querySnapshot = await getDocs(q);
+            setCitiesResponse(querySnapshot.docs.map((doc) => doc.data()));
+        };
 
         getCities();
     }, [debouncedValue]);

@@ -15,7 +15,7 @@ function AdvertsSection({ getAdvertsHandler }) {
         <section id="home-adverts-section">
             <div id="adverts-list-container">
                 {advertsData.map((advert) => (
-                    <AdvertElement key={advert.uid} advert={advert} />
+                    <AdvertElement key={advert.id} advert={advert} />
                 ))}
             </div>
         </section>
