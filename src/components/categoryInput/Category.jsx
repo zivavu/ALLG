@@ -7,6 +7,8 @@ const Category = ({
     selectedCategory,
     setSelectedCategory,
     setFieldValue,
+    expandedCategory,
+    setExpandedCategory,
 }) => {
     const [showSubCategories, setShowSubCategories] = useState(false);
     const [isSelected, setIsSelected] = useState(false);
@@ -15,6 +17,21 @@ const Category = ({
         setIsSelected(name === selectedCategory.category);
     }, [selectedCategory]);
 
+    //Adds mobile support by allowing only one selected category
+    //and prevents flashing when setting selected category
+    const handleTouch = (e) => {
+        e.preventDefault();
+        if (e.target.className != 'sub-category') {
+            setExpandedCategory(isSelected ? null : name);
+        }
+    };
+    useEffect(() => {
+        expandedCategory === name
+            ? setShowSubCategories(true)
+            : setShowSubCategories(false);
+    }, [expandedCategory]);
+    ///////////////////////////////////////////////////////////////////////
+
     return (
         <>
             <div
@@ -22,8 +39,12 @@ const Category = ({
                 ${showSubCategories ? 'categories-focus' : ''}
                 ${isSelected ? 'categories-selected' : ''} 
                 `}
-                onMouseEnter={() => setShowSubCategories(true)}
-                onMouseLeave={() => setShowSubCategories(false)}>
+                onMouseEnter={() => setExpandedCategory(name)}
+                onMouseLeave={() => {
+                    setShowSubCategories(false);
+                    setExpandedCategory(null);
+                }}
+                onTouchStart={handleTouch}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path d={svgPath} />
                 </svg>

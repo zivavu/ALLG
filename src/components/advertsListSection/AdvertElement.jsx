@@ -1,6 +1,6 @@
 import { getDownloadURL, ref } from 'firebase/storage';
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { FirebaseStorage } from '../../config/firebase-config';
 
 const AdvertElement = ({ advert }) => {

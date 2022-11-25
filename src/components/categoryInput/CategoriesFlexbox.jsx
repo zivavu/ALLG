@@ -5,6 +5,7 @@ import Category from './Category.jsx';
 
 const CategoriesFlexbox = ({ setFieldValue }) => {
     const [selectedCategory, setSelectedCategory] = useState({});
+    const [expandedCategory, setExpandedCategory] = useState('');
 
     return (
         <div id="categories-flexbox">
@@ -16,6 +17,8 @@ const CategoriesFlexbox = ({ setFieldValue }) => {
                         name={name}
                         subcategories={subcategories}
                         svgPath={svgPath}
+                        expandedCategory={expandedCategory}
+                        setExpandedCategory={setExpandedCategory}
                         selectedCategory={selectedCategory}
                         setSelectedCategory={setSelectedCategory}
                         setFieldValue={setFieldValue}

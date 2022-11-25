@@ -58,7 +58,6 @@ function AdvertForm() {
     useEffect(() => {
         setFieldValue('user', { uid: user.uid, displayName: user.displayName });
         setFieldValue('id', uuidv4());
-        console.log(values.user);
     }, [user]);
 
     const [uploadedImage, setUploadedImage] = useState(null);
@@ -111,7 +110,6 @@ function AdvertForm() {
                 <div id="heading-container">
                     <h3 id="add-advert-heading">Dodaj ogłoszenie</h3>
                 </div>
-                {console.log(errors)}
                 <ScrollToFieldError
                     isValid={isValid}
                     submitCount={submitCount}

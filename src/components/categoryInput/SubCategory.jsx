@@ -4,7 +4,6 @@ const SubCategory = ({
     subCategory,
     selectedCategory,
     setSelectedCategory,
-    setShowSubCategories,
     setFieldValue,
 }) => {
     const [isSelected, setIsSelected] = useState(false);
