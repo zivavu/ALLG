@@ -4,11 +4,11 @@ import CategoriesSection from './CategoriesSection.jsx';
 
 const HomePage = () => {
     return (
-        <>
+        <div id="home-page">
             <SearchSection />
             <CategoriesSection />
             <AdvertsSection />
-        </>
+        </div>
     );
 };
 export default HomePage;
