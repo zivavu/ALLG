@@ -8,7 +8,10 @@ const HomePage = () => {
         <div id="home-page">
             <SearchSection />
             <CategoriesSection />
-            <AdvertsSection getAdvertsHandler={getAllAdverts} />
+            <AdvertsSection
+                header="To udało się nam znaleźć"
+                getAdvertsHandler={getAllAdverts}
+            />
         </div>
     );
 };

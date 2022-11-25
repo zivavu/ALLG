@@ -9,6 +9,12 @@
     border-radius: 4px;
     width: 80%;
     box-sizing: border-box;
+}
+.adverts-list-header {
+    font-family: 'Secular One', sans-serif;
+    background-color: black;
+}
+#adverts-list {
     padding: 5px;
     display: flex;
     flex-direction: row;
@@ -16,9 +22,11 @@
     flex-wrap: wrap;
 }
 .advert-element-container {
-    width: 49%;
+    width: 49.5%;
     height: 200px;
     margin: 0.2%;
+    padding: 0.4%;
+    box-sizing: border-box;
     border-radius: 3px;
     background-color: white;
     border: 2px solid black;

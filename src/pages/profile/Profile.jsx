@@ -4,7 +4,10 @@ import getUserAdverts from '../../hooks&utils/getUserAdverts';
 function Profile() {
     return (
         <div id="profile-page">
-            <AdvertsSection getAdvertsHandler={getUserAdverts} />
+            <AdvertsSection
+                header="Twoje ogłoszenia"
+                getAdvertsHandler={getUserAdverts}
+            />
         </div>
     );
 }

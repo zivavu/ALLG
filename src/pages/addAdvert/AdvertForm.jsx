@@ -32,7 +32,6 @@ function AdvertForm() {
         setFieldError,
         setFieldTouched,
         resetForm,
-        getFieldErrorNames,
         isValid,
         submitCount,
     } = useFormik({
