@@ -27,7 +27,7 @@ const AdvertElement = ({ advert }) => {
     return (
         <Link className="advert-element-container" to={`/advert/${advert.id}`}>
             {imageLoading ? (
-                <div class="lds-hourglass"></div>
+                <div className="lds-hourglass"></div>
             ) : (
                 <img src={imageURL} alt="Przedmiot ogłoszenia" />
             )}

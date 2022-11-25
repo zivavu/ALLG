@@ -1,5 +1,12 @@
 import { uuidv4 } from '@firebase/util';
-import { addDoc, collection } from 'firebase/firestore';
+import {
+    addDoc,
+    arrayUnion,
+    collection,
+    doc,
+    setDoc,
+    updateDoc,
+} from 'firebase/firestore';
 import { ref, uploadBytes } from 'firebase/storage';
 import { useFormik } from 'formik';
 import { useContext, useEffect, useState } from 'react';
@@ -11,7 +18,6 @@ import { auth, db, FirebaseStorage } from '../../config/firebase-config';
 import addAdvertSchema from '../../schemas/addDdvertFormSchema';
 import { UserContext } from '../authentication/UserContext';
 import './addAdvert.css';
-
 function AdvertForm() {
     const [user, setUser] = useContext(UserContext);
     const {
@@ -27,9 +33,10 @@ function AdvertForm() {
         resetForm,
     } = useFormik({
         initialValues: {
+            uid: '',
             user: {
-                uid: 1,
-                displayName: 'Tomasz',
+                uid: 0,
+                displayName: '',
             },
             title: '',
             description: '',
@@ -51,6 +58,7 @@ function AdvertForm() {
 
     useEffect(() => {
         setFieldValue('user', { uid: user.uid, displayName: user.displayName });
+        setFieldValue('uid', uuidv4());
     }, [user]);
 
     const [uploadedImage, setUploadedImage] = useState(null);
@@ -66,17 +74,28 @@ function AdvertForm() {
 
     async function onSubmit(values) {
         uploadAdvert(values);
+        addAdvertToUserDoc(values);
         uploadImage(values);
         resetForm();
     }
 
-    const advertsCollectionRef = collection(db, 'adverts');
     const uploadAdvert = async (values) => {
-        await addDoc(advertsCollectionRef, values)
+        const advertsCollectionRef = doc(db, 'adverts', values.uid);
+        await setDoc(advertsCollectionRef, values)
             .then(() => {
                 console.log('ogłoszenie dodane');
             })
             .catch('Dane były niepoprawne');
+    };
+    const addAdvertToUserDoc = async (values) => {
+        const userDocRef = doc(db, 'users', values.user.uid);
+        await setDoc(userDocRef, {
+            adverts: arrayUnion(values.uid),
+        })
+            .then(() => {
+                console.log('ogłosenie dodane do użytkownika');
+            })
+            .catch('Nie udało się podpiąć do użytkownika');
     };
     const uploadImage = async (values) => {
         const advertImagesRef = ref(FirebaseStorage, `${values.imagePath}`);
@@ -86,6 +105,7 @@ function AdvertForm() {
             })
             .catch('Nie udało się wysłać zdjęcia');
     };
+
     return (
         <div id="add-advert-container">
             <div id="advert-form-container">

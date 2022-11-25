@@ -1,17 +1,12 @@
-import { collection, getDoc, getDocs, getDocsFromServer } from 'firebase/firestore';
-import { getDownloadURL, getStorage, ref } from 'firebase/storage';
 import { useEffect, useState } from 'react';
-import { useFetcher } from 'react-router-dom';
-import { db, FirebaseStorage } from '../../config/firebase-config';
-import getAllAdverts from '../../hooks/useGetAdverts';
 import AdvertElement from './AdvertElement';
 import './advertsSection.css';
 
-function AdvertsSection() {
+function AdvertsSection({ getAdvertsHandler }) {
     const [advertsData, setAdvertsData] = useState([]);
 
     useEffect(() => {
-        getAllAdverts(setAdvertsData);
+        getAdvertsHandler(setAdvertsData);
     }, []);
 
     return (

@@ -43,7 +43,7 @@ function App() {
                         element={
                             !user || user.uid == '' ? <AuthPage /> : <AdvertForm />
                         }></Route>
-                    <Route path="/" element={<HomePage />}></Route>
+                    <Route path="/" element={<AuthPage />}></Route>
                 </Routes>
             </UserContext.Provider>
         </>

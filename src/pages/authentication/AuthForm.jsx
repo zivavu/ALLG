@@ -8,11 +8,8 @@ const AuthForm = ({ type, onSubmit, schema, isDisabled }) => {
         handleBlur,
         handleChange,
         handleSubmit,
-        setFieldValue,
         touched,
-        setFieldError,
         setFieldTouched,
-        resetForm,
     } = useFormik({
         initialValues: {
             displayName: '',

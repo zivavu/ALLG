@@ -11,7 +11,7 @@ import {
 } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from '../../config/firebase-config';
-import { useDebounce } from '../../hooks/useDebounce';
+import { useDebounce } from '../../hooks&utils/useDebounce';
 import './searchArea.css';
 import CityOption from './SearchedCityOptions.jsx';
 
