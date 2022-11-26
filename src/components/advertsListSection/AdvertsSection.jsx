@@ -12,10 +12,13 @@ function AdvertsSection({ getAdvertsHandler, header }) {
 
     useEffect(() => {
         getAdvertsHandler(setAdvertsData, user);
-        getWatchedAdverts();
     }, []);
+    useEffect(() => {
+        getUsersWatchedAdverts();
+    }, [user, setUser]);
 
-    const getWatchedAdverts = async () => {
+    const getUsersWatchedAdverts = async () => {
+        if (user.uid === '') return;
         const usersRef = doc(db, 'users', user.uid);
         try {
             const docSnap = await getDoc(usersRef);
@@ -38,7 +41,7 @@ function AdvertsSection({ getAdvertsHandler, header }) {
                             advert={advert}
                             showControlPanel={advert.user.uid === user.uid}
                             user={user}
-                            isWatchedInit={watchedAdverts.some(
+                            isWatchedServerResponse={watchedAdverts.some(
                                 (watchedID) => watchedID === advert.id
                             )}
                         />

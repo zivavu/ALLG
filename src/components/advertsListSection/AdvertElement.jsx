@@ -6,10 +6,14 @@ import { db, FirebaseStorage } from '../../config/firebase-config';
 import AdvertControlPanel from './AdvertControlPanel';
 import WatchAdvertButton from './WatchAdvertButton';
 
-const AdvertElement = ({ advert, showControlPanel, user, isWatchedInit }) => {
+const AdvertElement = ({ advert, showControlPanel, user, isWatchedServerResponse }) => {
     const [imageURL, setImageURL] = useState('');
     const [imageLoading, setImageLoading] = useState(true);
-    const [isWatched, setIsWatched] = useState(isWatchedInit);
+    const [isWatched, setIsWatched] = useState(false);
+
+    useEffect(() => {
+        setIsWatched(isWatchedServerResponse);
+    }, [isWatchedServerResponse]);
 
     const downloadImage = () => {
         setImageLoading(true);
