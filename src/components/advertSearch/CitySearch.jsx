@@ -1,17 +1,7 @@
-import { async } from '@firebase/util';
-import axios from 'axios';
-import {
-    collection,
-    getDocs,
-    limit,
-    orderBy,
-    query,
-    startAt,
-    where,
-} from 'firebase/firestore';
+import { collection, getDocs, limit, orderBy, query, where } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 import { db } from '../../config/firebase-config';
-import { useDebounce } from '../../hooks&utils/useDebounce';
+import { useDebounce } from '../../utils/useDebounce';
 import './searchArea.css';
 import CityOption from './SearchedCityOptions.jsx';
 

@@ -15,10 +15,11 @@ import '../../components/categoryInput/categories.css';
 import CategoriesFlexbox from '../../components/categoryInput/CategoriesFlexbox';
 import FormValidationErrorMessage from '../../components/FormValidationErrorMessage';
 import { auth, db, FirebaseStorage } from '../../config/firebase-config';
-import { ScrollToFieldError } from '../../hooks&utils/scrollToFieldError';
 import addAdvertSchema from '../../schemas/addAdvertFormSchema';
+import { ScrollToFieldError } from '../../utils/scrollToFieldError';
 import { UserContext } from '../authentication/UserContext';
 import './addAdvert.css';
+
 function AdvertForm() {
     const [user, setUser] = useContext(UserContext);
     const {

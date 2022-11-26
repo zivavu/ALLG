@@ -1,6 +1,6 @@
 import AdvertsSection from '../../components/advertsListSection/AdvertsSection';
+import getUserAdverts from '../../utils/getUserAdverts';
 import AuthPage from '../authentication/AuthPage';
-import getUserAdverts from '../../hooks&utils/getUserAdverts';
 function Profile() {
     return (
         <div id="profile-page">
