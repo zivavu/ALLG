@@ -3,7 +3,7 @@ import { getDownloadURL, ref } from 'firebase/storage';
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import SearchSection from '../../components/advertSearch/SearchSection';
-import { db, FirebaseStorage } from '../../config/firebase-config';
+import { db, storage } from '../../config/firebase-config';
 import './advertView.css';
 
 function AdvertView() {
@@ -28,7 +28,7 @@ function AdvertView() {
     };
 
     const downloadImage = (imagePath) => {
-        const imagePathRef = ref(FirebaseStorage, `${imagePath}`);
+        const imagePathRef = ref(storage, `${imagePath}`);
         getDownloadURL(imagePathRef)
             .then((url) => {
                 setImageURL(url);

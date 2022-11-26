@@ -2,7 +2,7 @@ import { arrayRemove, arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import { getDownloadURL, ref } from 'firebase/storage';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { db, FirebaseStorage } from '../../config/firebase-config';
+import { db, storage } from '../../config/firebase-config';
 import AdvertControlPanel from './AdvertControlPanel';
 import WatchAdvertButton from './WatchAdvertButton';
 
@@ -24,7 +24,7 @@ const AdvertElement = ({
 
     const downloadImage = () => {
         setImageLoading(true);
-        const imagePathRef = ref(FirebaseStorage, `${advert.imagePath}`);
+        const imagePathRef = ref(storage, `${advert.imagePath}`);
         getDownloadURL(imagePathRef)
             .then((url) => {
                 setImageURL(url);
@@ -80,7 +80,11 @@ const AdvertElement = ({
                     <div className="advert-li-views">Wyświetlono {advert.views} razy</div>
                 </div>
                 {showControlPanel && type != 'half-length' ? (
-                    <AdvertControlPanel advert={advert} setIsDeleted={setIsDeleted} />
+                    <AdvertControlPanel
+                        advert={advert}
+                        setIsDeleted={setIsDeleted}
+                        user={user}
+                    />
                 ) : null}
                 <div className="advert-li-details">
                     <span className="advert-price">{advert.price}zł</span>

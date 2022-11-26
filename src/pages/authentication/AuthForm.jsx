@@ -1,24 +1,18 @@
 import { useFormik } from 'formik';
 import FormValidationErrorMessage from '../../components/FormValidationErrorMessage';
 const AuthForm = ({ type, onSubmit, schema, isDisabled }) => {
-    const {
-        values,
-        errors,
-        handleBlur,
-        handleChange,
-        handleSubmit,
-        touched,
-        setFieldTouched,
-    } = useFormik({
-        initialValues: {
-            displayName: '',
-            email: '',
-            password: '',
-            confirmPassword: '',
-        },
-        validationSchema: schema,
-        onSubmit,
-    });
+    const { values, errors, handleBlur, handleChange, handleSubmit, touched } = useFormik(
+        {
+            initialValues: {
+                displayName: '',
+                email: '',
+                password: '',
+                confirmPassword: '',
+            },
+            validationSchema: schema,
+            onSubmit,
+        }
+    );
 
     return (
         <form className="auth-form" onSubmit={handleSubmit}>

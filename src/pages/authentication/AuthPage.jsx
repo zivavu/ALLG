@@ -4,8 +4,9 @@ import {
     signOut,
     updateProfile,
 } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
 import { useContext, useState } from 'react';
-import { auth } from '../../config/firebase-config';
+import { auth, db } from '../../config/firebase-config';
 import userLoginSchema from '../../schemas/userLoginFormSchema';
 import userRegisterSchema from '../../schemas/userRegisterFormSchema';
 import AuthForm from './AuthForm';
@@ -20,31 +21,36 @@ function AuthPage() {
     const registerUser = async (email, password, displayName) => {
         try {
             setLoading(true);
-            await createUserWithEmailAndPassword(auth, email, password).then(
-                (userCredential) => {
-                    setUser(userCredential.user);
-                    updateProfile(auth.currentUser, {
-                        displayName: displayName,
-                    })
-                        .then(() => {
-                            console.log('name has been set');
-                        })
-                        .catch((error) => {
-                            console.log('couldnt set the name');
-                        });
-                }
+            const userCredential = await createUserWithEmailAndPassword(
+                auth,
+                email,
+                password
             );
+            setUser(userCredential.user);
+            await updateProfile(auth.currentUser, {
+                displayName: displayName,
+            });
+
+            await setDoc(doc(db, 'users', userCredential.user.uid), {
+                watched: [],
+                adverts: [],
+            });
         } catch (error) {
             console.log(error.message);
+        } finally {
+            setLoading(false);
         }
-        setLoading(false);
     };
 
     async function loginUser(email, password) {
         setLoading(true);
         try {
             return await signInWithEmailAndPassword(auth, email, password).then(
-                (userCredential) => {
+                async (userCredential) => {
+                    await setDoc(doc(db, 'users', userCredential.user.uid), {
+                        watched: [],
+                        adverts: [],
+                    });
                     setUser(userCredential.user);
                 }
             );

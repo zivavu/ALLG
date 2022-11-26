@@ -10,6 +10,7 @@ const HomePage = () => {
             <CategoriesSection />
             <AdvertsSection
                 header="To udało się nam znaleźć"
+                noAdvertsMessage="Nie znaleźliśmy takich ogłoszeń"
                 getAdvertsHandler={getAllAdverts}
                 type="half-length"
             />

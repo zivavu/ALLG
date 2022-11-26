@@ -14,7 +14,7 @@ import CitySearch from '../../components/advertSearch/CitySearch';
 import '../../components/categoryInput/categories.css';
 import CategoriesFlexbox from '../../components/categoryInput/CategoriesFlexbox';
 import FormValidationErrorMessage from '../../components/FormValidationErrorMessage';
-import { db, FirebaseStorage } from '../../config/firebase-config';
+import { db, storage } from '../../config/firebase-config';
 import addAdvertSchema from '../../schemas/addAdvertFormSchema';
 import { ScrollToFieldError } from '../../utils/scrollToFieldError';
 import { UserContext } from '../authentication/UserContext';
@@ -98,7 +98,7 @@ function AdvertForm() {
             .catch('Nie udało się podpiąć do użytkownika');
     };
     const uploadImage = async (values) => {
-        const advertImagesRef = ref(FirebaseStorage, `${values.imagePath}`);
+        const advertImagesRef = ref(storage, `${values.imagePath}`);
         uploadBytes(advertImagesRef, uploadedImage)
             .then(() => {
                 console.log('uploaded file');

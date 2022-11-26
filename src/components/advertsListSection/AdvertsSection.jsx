@@ -5,7 +5,7 @@ import { UserContext } from '../../pages/authentication/UserContext';
 import AdvertElement from './AdvertElement';
 import './advertsSection.css';
 
-function AdvertsSection({ getAdvertsHandler, header, type }) {
+function AdvertsSection({ getAdvertsHandler, header, type, noAdvertsMessage }) {
     const [advertsData, setAdvertsData] = useState([]);
     const [watchedAdverts, setWatchedAdverts] = useState([]);
     const [isDeleted, setIsDeleted] = useState(false);
@@ -33,7 +33,7 @@ function AdvertsSection({ getAdvertsHandler, header, type }) {
         <section id="adverts-section">
             <div id="adverts-list-container">
                 <div className="adverts-list-header">
-                    <h3>{advertsData[0] ? header : null}</h3>
+                    <h3>{advertsData[0] ? header : noAdvertsMessage}</h3>
                 </div>
                 <div className={type}>
                     {advertsData.map((advert) => (
