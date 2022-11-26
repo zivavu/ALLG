@@ -1,4 +1,5 @@
 #site-header {
+    z-index: 5;
     font-family: 'Secular One', sans-serif;
     font-weight: 600;
     width: auto;
@@ -79,6 +80,10 @@
 }
 
 @media only screen and (max-device-width: 1000px) {
+    #site-header {
+        position: sticky;
+        top: 0;
+    }
     #add-advertisements-button {
         width: 140px;
     }

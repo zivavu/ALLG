@@ -21,9 +21,10 @@
     justify-content: space-between;
     flex-wrap: wrap;
 }
-.advert-element-container {
+.advert-li-container {
+    position: relative;
     width: 49.5%;
-    height: 200px;
+    height: 180px;
     margin: 0.2%;
     padding: 0.4%;
     box-sizing: border-box;
@@ -31,44 +32,61 @@
     background-color: white;
     border: 2px solid black;
     display: grid;
-    grid-template-columns: 43% 57%;
+    grid-template-columns: 30% 70%;
+    text-decoration: none;
 }
-.advert-element-container:hover {
+.advert-li-container:hover {
     background-color: var(--orange-lighter);
 }
-.advert-element-container img {
+.advert-li-container img {
     z-index: 1;
     display: block;
     object-fit: contain;
-    height: 100%;
-    background-color: var(--gray);
+    max-height: 100%;
+    width: 100%;
+    background-repeat: no-repeat;
+    resize: none;
 }
-.home-advert-info {
+.advert-li-info {
     display: flex;
     text-align: right;
     color: black;
     padding: 10px;
     font-family: 'Secular One', sans-serif;
 }
-.home-advert-title {
-    width: 70%;
+.advert-li-title {
+    width: 80%;
     text-align: left;
-    font-size: 22px;
+    font-size: 19px;
 }
-.home-advert-details {
+.advert-li-details {
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     width: 30%;
 }
-.home-advert-info .advert-price {
+.advert-star-button {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+}
+.advert-star-svg {
+    width: 30px;
+    height: 30px;
+}
+.advert-star-svg:hover {
+    stroke: var(--orange);
+}
+.advert-li-info .advert-price {
     font-size: 24px;
     letter-spacing: 1px;
 }
-.home-advert-info .advert-location {
+.advert-li-info .advert-location {
     margin-top: 10px;
 }
-.home-advert-info .advert-condition {
+.advert-li-info .advert-condition {
     width: 90px;
     margin-top: 15px;
     background-color: var(--orange-light);
