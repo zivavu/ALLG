@@ -19,7 +19,7 @@ function AdvertsSection({ getAdvertsHandler, header, type, noAdvertsMessage }) {
     }, [user, setUser]);
 
     const getUsersWatchedAdverts = async () => {
-        if (user.uid === '') return;
+        if (!user || user.uid === '') return;
         const usersRef = doc(db, 'users', user.uid);
         try {
             const docSnap = await getDoc(usersRef);

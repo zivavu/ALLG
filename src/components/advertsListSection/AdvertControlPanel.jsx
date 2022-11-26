@@ -5,22 +5,19 @@ import { db, storage } from '../../config/firebase-config';
 function AdvertControlPanel({ advert, setIsDeleted, user }) {
     const handleAdvertDelete = async (e) => {
         e.preventDefault();
+        e.target.disabled = true;
         const imageToDeleteRef = ref(storage, advert.imagePath);
         const userDocRef = doc(db, 'users', user.uid);
         try {
-            console.log('0');
             await deleteDoc(doc(db, 'adverts', advert.id));
-            console.log('1');
             await deleteObject(imageToDeleteRef);
-            console.log('2');
             await updateDoc(userDocRef, {
                 adverts: arrayRemove(advert.id),
             });
-            console.log('3');
-            setIsDeleted(true);
-            console.log('4');
         } catch (error) {
             console.log(error);
+        } finally {
+            setIsDeleted(true);
         }
     };
     return (

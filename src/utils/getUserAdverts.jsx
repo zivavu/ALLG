@@ -5,7 +5,10 @@ const getUserAdverts = async (setAdvertsData, user) => {
     const docRef = doc(db, 'users', user.uid);
     const usersAdvertsIds = await getDoc(docRef);
     const advertsIds = usersAdvertsIds.data().adverts;
-
+    if (!advertsIds[0]) {
+        setAdvertsData([]);
+        return;
+    }
     const q = query(collection(db, 'adverts'), where('id', 'in', advertsIds));
     try {
         await getDocs(q).then((data) => {
