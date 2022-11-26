@@ -47,6 +47,7 @@
     flex-shrink: 60%;
 }
 .full-length .advert-li-title {
+    max-height: 40%;
     font-size: 20px;
 }
 .full-length .advert-li-category {
@@ -96,8 +97,8 @@
     font-size: 16px;
 }
 .advert-li-title {
+    max-height: 60%;
     margin-top: 2%;
-    max-height: 40%;
     overflow: hidden;
 }
 .advert-li-details {

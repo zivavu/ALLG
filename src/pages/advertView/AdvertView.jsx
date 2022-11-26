@@ -1,4 +1,4 @@
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, increment, updateDoc } from 'firebase/firestore';
 import { getDownloadURL, ref } from 'firebase/storage';
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
@@ -13,17 +13,20 @@ function AdvertView() {
     const docRef = doc(db, 'adverts', id);
 
     useEffect(() => {
+        getAdvertData();
+        updateFirebaseViewsCounter();
+    }, []);
+    const getAdvertData = () => {
         getDoc(docRef)
             .then((doc) => {
-                if (doc.exists) {
-                    setAdvertData(doc.data());
-                    downloadImage(doc.data().imagePath);
-                } else console.log('This document doesnt exist');
+                setAdvertData(doc.data());
+                downloadImage(doc.data().imagePath);
             })
             .catch((error) => {
                 console.log(error);
             });
-    }, []);
+    };
+
     const downloadImage = (imagePath) => {
         const imagePathRef = ref(FirebaseStorage, `${imagePath}`);
         getDownloadURL(imagePathRef)
@@ -33,6 +36,15 @@ function AdvertView() {
             .catch((error) => {
                 console.log(error);
             });
+    };
+    const updateFirebaseViewsCounter = async () => {
+        try {
+            await updateDoc(docRef, {
+                views: increment(1),
+            });
+        } catch {
+            console.log(error);
+        }
     };
 
     return (
