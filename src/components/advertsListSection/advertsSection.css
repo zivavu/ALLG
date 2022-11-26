@@ -24,15 +24,16 @@
 }
 .advert-li-container {
     position: relative;
+    text-decoration: none;
+    box-sizing: border-box;
+    border-radius: 3px;
+    background-color: white;
+    border: 2px solid black;
 }
 .full-length .advert-li-container {
     height: 160px;
     width: 90%;
     margin: 0.5%;
-    box-sizing: border-box;
-    border-radius: 3px;
-    background-color: white;
-    border: 2px solid black;
     display: flex;
     justify-content: space-between;
 }
@@ -44,6 +45,12 @@
 .full-length .advert-li-info {
     flex-basis: 80%;
     flex-shrink: 60%;
+}
+.full-length .advert-li-title {
+    font-size: 20px;
+}
+.full-length .advert-li-category {
+    font-size: 17px;
 }
 
 /* adverts section used in home page */
@@ -58,14 +65,8 @@
     width: 49.5%;
     height: 180px;
     margin: 0.2%;
-    padding: 0.4%;
-    box-sizing: border-box;
-    border-radius: 3px;
-    background-color: white;
-    border: 2px solid black;
     display: grid;
     grid-template-columns: 30% 70%;
-    text-decoration: none;
 }
 #adverts-list-container .advert-li-container:hover {
     background-color: var(--orange-lighter);
@@ -74,6 +75,9 @@
     max-height: 100%;
     width: 100%;
 }
+.advert-li-category {
+    font-size: 15px;
+}
 .advert-li-info {
     display: flex;
     text-align: right;
@@ -81,12 +85,23 @@
     padding: 10px;
     font-family: 'Secular One', sans-serif;
 }
-.advert-li-title {
+
+.advert-li-main-info {
     width: 80%;
     text-align: left;
     font-size: 19px;
 }
+.advert-li-views {
+    margin-top: 2%;
+    font-size: 16px;
+}
+.advert-li-title {
+    margin-top: 2%;
+    max-height: 40%;
+    overflow: hidden;
+}
 .advert-li-details {
+    padding: 2% 0;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
