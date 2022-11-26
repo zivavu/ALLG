@@ -8,11 +8,12 @@ import './advertsSection.css';
 function AdvertsSection({ getAdvertsHandler, header, type }) {
     const [advertsData, setAdvertsData] = useState([]);
     const [watchedAdverts, setWatchedAdverts] = useState([]);
+    const [isDeleted, setIsDeleted] = useState(false);
     const [user, setUser] = useContext(UserContext);
 
     useEffect(() => {
         getAdvertsHandler(setAdvertsData, user);
-    }, []);
+    }, [isDeleted]);
     useEffect(() => {
         getUsersWatchedAdverts();
     }, [user, setUser]);
@@ -39,6 +40,7 @@ function AdvertsSection({ getAdvertsHandler, header, type }) {
                         <AdvertElement
                             type={type}
                             key={advert.id}
+                            setIsDeleted={setIsDeleted}
                             advert={advert}
                             showControlPanel={advert.user.uid === user.uid}
                             user={user}

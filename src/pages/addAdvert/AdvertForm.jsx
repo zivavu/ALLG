@@ -14,7 +14,7 @@ import CitySearch from '../../components/advertSearch/CitySearch';
 import '../../components/categoryInput/categories.css';
 import CategoriesFlexbox from '../../components/categoryInput/CategoriesFlexbox';
 import FormValidationErrorMessage from '../../components/FormValidationErrorMessage';
-import { auth, db, FirebaseStorage } from '../../config/firebase-config';
+import { db, FirebaseStorage } from '../../config/firebase-config';
 import addAdvertSchema from '../../schemas/addAdvertFormSchema';
 import { ScrollToFieldError } from '../../utils/scrollToFieldError';
 import { UserContext } from '../authentication/UserContext';

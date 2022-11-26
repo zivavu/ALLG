@@ -12,6 +12,7 @@ const AdvertElement = ({
     user,
     isWatchedServerResponse,
     type,
+    setIsDeleted,
 }) => {
     const [imageURL, setImageURL] = useState('');
     const [imageLoading, setImageLoading] = useState(true);
@@ -79,7 +80,7 @@ const AdvertElement = ({
                     <div className="advert-li-views">Wyświetlono {advert.views} razy</div>
                 </div>
                 {showControlPanel && type != 'half-length' ? (
-                    <AdvertControlPanel advert={advert} />
+                    <AdvertControlPanel advert={advert} setIsDeleted={setIsDeleted} />
                 ) : null}
                 <div className="advert-li-details">
                     <span className="advert-price">{advert.price}zł</span>
