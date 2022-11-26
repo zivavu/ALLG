@@ -67,6 +67,7 @@ const AdvertElement = ({ advert, showControlPanel, user, isWatchedServerResponse
                     <div className="advert-location">{advert.city.name}</div>
                     <div className="advert-condition">{advert.condition}</div>
                     <WatchAdvertButton
+                        user={user}
                         isWatched={isWatched}
                         setIsWatched={setIsWatched}
                         addToUsersWatchedAdverts={addToUsersWatchedAdverts}

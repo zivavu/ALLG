@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const NotWatchedStarSVG = () => {
     return (
@@ -20,23 +20,27 @@ const WatchedStarSVG = () => {
         </svg>
     );
 };
-const WatchAdvertButton = ({
+function WatchAdvertButton({
     isWatched,
     setIsWatched,
     addToUsersWatchedAdverts,
     rmFromUsersWatchedAdverts,
-}) => {
+    user,
+}) {
+    const handleClick = (e) => {
+        e.preventDefault();
+        isWatched ? rmFromUsersWatchedAdverts() : addToUsersWatchedAdverts();
+        setIsWatched(!isWatched);
+    };
     return (
-        <button
-            className="advert-star-button"
-            onClick={(e) => {
-                e.preventDefault();
-                isWatched ? rmFromUsersWatchedAdverts() : addToUsersWatchedAdverts();
-                setIsWatched(!isWatched);
-            }}>
-            {isWatched ? <WatchedStarSVG /> : <NotWatchedStarSVG />}
-        </button>
+        <>
+            {user.uid != '' ? (
+                <button className="advert-star-button" onClick={handleClick}>
+                    {isWatched ? <WatchedStarSVG /> : <NotWatchedStarSVG />}
+                </button>
+            ) : null}
+        </>
     );
-};
+}
 
 export default WatchAdvertButton;
