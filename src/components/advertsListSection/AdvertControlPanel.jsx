@@ -1,4 +1,4 @@
 const AdvertControlPanel = () => {
-    return <div></div>;
+    return <div className="advert-owner-control-container"></div>;
 };
 export default AdvertControlPanel;

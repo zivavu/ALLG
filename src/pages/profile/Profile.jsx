@@ -5,6 +5,7 @@ function Profile() {
     return (
         <div id="profile-page">
             <AdvertsSection
+                type="full-length"
                 header="Twoje ogłoszenia"
                 getAdvertsHandler={getUserAdverts}
             />

@@ -62,11 +62,14 @@ const AdvertElement = ({ advert, showControlPanel, user, isWatchedServerResponse
             )}
             <div className="advert-li-info">
                 <div className="advert-li-title">{advert.title}</div>
+                {showControlPanel ? <AdvertControlPanel /> : null}
                 <div className="advert-li-details">
                     <div className="advert-price">{advert.price}zł</div>
                     <div className="advert-location">{advert.city.name}</div>
                     <div className="advert-condition">{advert.condition}</div>
+
                     <WatchAdvertButton
+                        advert={advert}
                         user={user}
                         isWatched={isWatched}
                         setIsWatched={setIsWatched}
@@ -75,7 +78,6 @@ const AdvertElement = ({ advert, showControlPanel, user, isWatchedServerResponse
                     />
                 </div>
             </div>
-            {showControlPanel ? <AdvertControlPanel /> : null}
         </Link>
     );
 };

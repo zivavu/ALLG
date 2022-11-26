@@ -1,7 +1,3 @@
-#adverts-section {
-    background-color: var(--gray);
-    width: 100%;
-}
 #adverts-list-container {
     background-color: var(--gray);
     margin: 15px auto;
@@ -14,15 +10,51 @@
     font-family: 'Secular One', sans-serif;
     background-color: black;
 }
-#adverts-list {
+.advert-li-container img {
+    margin: 0 5px;
+    object-fit: contain;
+    resize: none;
+}
+/* adverts section used in profile and stared pages */
+.full-length {
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.advert-li-container {
+    position: relative;
+}
+.full-length .advert-li-container {
+    height: 160px;
+    width: 90%;
+    margin: 0.5%;
+    box-sizing: border-box;
+    border-radius: 3px;
+    background-color: white;
+    border: 2px solid black;
+    display: flex;
+    justify-content: space-between;
+}
+.full-length .advert-li-container img {
+    max-height: 100%;
+    width: 18%;
+}
+
+.full-length .advert-li-info {
+    flex-basis: 80%;
+    flex-shrink: 60%;
+}
+
+/* adverts section used in home page */
+.half-length {
     padding: 5px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: wrap;
 }
-.advert-li-container {
-    position: relative;
+.half-length .advert-li-container {
     width: 49.5%;
     height: 180px;
     margin: 0.2%;
@@ -35,17 +67,12 @@
     grid-template-columns: 30% 70%;
     text-decoration: none;
 }
-.advert-li-container:hover {
+#adverts-list-container .advert-li-container:hover {
     background-color: var(--orange-lighter);
 }
-.advert-li-container img {
-    z-index: 1;
-    display: block;
-    object-fit: contain;
+.half-length .advert-li-container img {
     max-height: 100%;
     width: 100%;
-    background-repeat: no-repeat;
-    resize: none;
 }
 .advert-li-info {
     display: flex;
@@ -92,6 +119,11 @@
     background-color: var(--orange-light);
     text-align: center;
     border: 1px solid black;
+}
+
+.advert-owner-control-container {
+    width: 20%;
+    height: 100%;
 }
 
 /* image loading animation */

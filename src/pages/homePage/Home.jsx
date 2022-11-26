@@ -11,6 +11,7 @@ const HomePage = () => {
             <AdvertsSection
                 header="To udało się nam znaleźć"
                 getAdvertsHandler={getAllAdverts}
+                type="half-length"
             />
         </div>
     );

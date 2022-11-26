@@ -26,6 +26,7 @@ function WatchAdvertButton({
     addToUsersWatchedAdverts,
     rmFromUsersWatchedAdverts,
     user,
+    advert,
 }) {
     const handleClick = (e) => {
         e.preventDefault();
@@ -34,7 +35,7 @@ function WatchAdvertButton({
     };
     return (
         <>
-            {user.uid != '' ? (
+            {user.uid != '' && user.uid != advert.user.uid ? (
                 <button className="advert-star-button" onClick={handleClick}>
                     {isWatched ? <WatchedStarSVG /> : <NotWatchedStarSVG />}
                 </button>

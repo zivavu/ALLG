@@ -5,7 +5,7 @@ import { UserContext } from '../../pages/authentication/UserContext';
 import AdvertElement from './AdvertElement';
 import './advertsSection.css';
 
-function AdvertsSection({ getAdvertsHandler, header }) {
+function AdvertsSection({ getAdvertsHandler, header, type }) {
     const [advertsData, setAdvertsData] = useState([]);
     const [watchedAdverts, setWatchedAdverts] = useState([]);
     const [user, setUser] = useContext(UserContext);
@@ -29,14 +29,15 @@ function AdvertsSection({ getAdvertsHandler, header }) {
     };
 
     return (
-        <section id="home-adverts-section">
+        <section id="adverts-section">
             <div id="adverts-list-container">
                 <div className="adverts-list-header">
                     <h3>{advertsData[0] ? header : null}</h3>
                 </div>
-                <div id="adverts-list">
+                <div className={type}>
                     {advertsData.map((advert) => (
                         <AdvertElement
+                            type={type}
                             key={advert.id}
                             advert={advert}
                             showControlPanel={advert.user.uid === user.uid}
