@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Route, Routes, UNSAFE_RouteContext, useParams } from 'react-router-dom';
+import {
+    Route,
+    Routes,
+    UNSAFE_RouteContext,
+    useNavigate,
+    useParams,
+} from 'react-router-dom';
 import SiteHeader from './components/header/SiteHeader.jsx';
 import { auth } from './config/firebase-config.js';
 import './main.css';
@@ -39,7 +45,11 @@ function App() {
                     <Route
                         path="/new-advert"
                         element={
-                            !user || user.uid == '' ? <AuthPage /> : <AdvertForm />
+                            !user || user.uid == '' ? (
+                                <AuthPage type="auth" />
+                            ) : (
+                                <AdvertForm />
+                            )
                         }></Route>
 
                     {/* route to view other users profiles */}
@@ -51,9 +61,15 @@ function App() {
                     <Route
                         path="/my-profile"
                         element={
-                            !user || user.uid == '' ? <AuthPage /> : <Profile />
+                            !user || user.uid == '' ? (
+                                <AuthPage type="auth" />
+                            ) : (
+                                <Profile />
+                            )
                         }></Route>
-
+                    <Route
+                        path="/re-authenticate"
+                        element={<AuthPage type="reAuth" />}></Route>
                     <Route path="/" element={<HomePage />}></Route>
                 </Routes>
             </UserContext.Provider>

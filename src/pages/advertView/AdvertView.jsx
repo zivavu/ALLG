@@ -15,7 +15,6 @@ function AdvertView() {
 
     useEffect(() => {
         getAdvertData();
-        console.log(advertData, id);
     }, [id]);
 
     const docRef = doc(db, 'adverts', id);

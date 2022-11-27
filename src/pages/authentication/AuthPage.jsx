@@ -1,11 +1,14 @@
 import {
     createUserWithEmailAndPassword,
+    EmailAuthProvider,
+    reauthenticateWithCredential,
     signInWithEmailAndPassword,
     signOut,
     updateProfile,
 } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { auth, db } from '../../config/firebase-config';
 import userLoginSchema from '../../schemas/userLoginFormSchema';
 import userRegisterSchema from '../../schemas/userRegisterFormSchema';
@@ -14,7 +17,8 @@ import './AuthPage.css';
 import LogInWithGoogleBtn from './LogInWithGoogle';
 import { UserContext } from './UserContext';
 
-function AuthPage() {
+function AuthPage({ type }) {
+    const navigate = useNavigate();
     const [user, setUser] = useContext(UserContext);
     const [isLoading, setLoading] = useState(false);
 
@@ -46,7 +50,7 @@ function AuthPage() {
         setLoading(true);
         try {
             return await signInWithEmailAndPassword(auth, email, password).then(
-                async (userCredential) => {
+                (userCredential) => {
                     setUser(userCredential.user);
                 }
             );
@@ -55,21 +59,29 @@ function AuthPage() {
         }
         setLoading(false);
     }
-
-    const logoutUser = async () => {
+    async function reauthUser(email, passowrd) {
+        setLoading(true);
+        const providedCredential = EmailAuthProvider.credential(email, passowrd);
         try {
-            await signOut(auth).then(setUser({ uid: '', displayName: '' }));
+            return await reauthenticateWithCredential(user, providedCredential).then(
+                () => {
+                    setUser({ ...user, recentylyLoggedIn: true });
+                    navigate('/my-profile');
+                }
+            );
         } catch (error) {
             console.log(error.message);
         }
-    };
+        setLoading(false);
+    }
 
     const submitUserRegistration = (e) => {
         registerUser(e.email, e.password, e.displayName);
     };
 
     const submitUserLogIn = (e) => {
-        loginUser(e.email, e.password);
+        if (type === 'auth') loginUser(e.email, e.password);
+        else reauthUser(e.email, e.password);
     };
 
     const [visibleAuthContainer, setVisibleAuthContainer] = useState('login');
@@ -88,17 +100,19 @@ function AuthPage() {
                         }}>
                         Logowanie
                     </button>
-                    <button
-                        className={
-                            visibleAuthContainer === 'register'
-                                ? `auth-option-button selected`
-                                : `auth-option-button`
-                        }
-                        onClick={() => {
-                            setVisibleAuthContainer('register');
-                        }}>
-                        Rejestracja
-                    </button>
+                    {type === 'reAuth' ? null : (
+                        <button
+                            className={
+                                visibleAuthContainer === 'register'
+                                    ? `auth-option-button selected`
+                                    : `auth-option-button`
+                            }
+                            onClick={() => {
+                                setVisibleAuthContainer('register');
+                            }}>
+                            Rejestracja
+                        </button>
+                    )}
                 </div>
 
                 {visibleAuthContainer === 'login' ? (

@@ -20,7 +20,13 @@ function AdvertsSection({ type, header, size, noAdvertsMessage }) {
     const [isDeleted, setIsDeleted] = useState(false);
     const [user, setUser] = useContext(UserContext);
 
+    //used only when viewing other user adverts
     const { otherUserUID } = useParams(user);
+    useEffect(() => {
+        if (otherUserUID && advertsData[0]) {
+            setDynamicHeader(`${header} ${advertsData[0].user.displayName}`);
+        }
+    }, [advertsData]);
 
     useEffect(() => {
         switch (type) {
@@ -37,12 +43,7 @@ function AdvertsSection({ type, header, size, noAdvertsMessage }) {
                 break;
             case 'otherUserAdverts':
                 getUserAdvertsIDs(otherUserUID).then((ids) => {
-                    getAdvertsByIdArr(ids, setAdvertsData).then(() => {
-                        if (advertsData[0])
-                            setDynamicHeader(
-                                `${header} ${advertsData[0].user.displayName}`
-                            );
-                    });
+                    getAdvertsByIdArr(ids, setAdvertsData);
                 });
                 break;
         }

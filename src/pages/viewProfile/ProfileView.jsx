@@ -3,9 +3,6 @@ import { useParams } from 'react-router-dom';
 import AdvertsSection from '../../components/advertsListSection/AdvertsSection';
 
 const ProfileView = () => {
-    const { otherUserUID } = useParams();
-    const [profileData, setProfileData] = useState({});
-
     return (
         <>
             <AdvertsSection

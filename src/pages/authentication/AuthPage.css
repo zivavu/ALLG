@@ -23,6 +23,7 @@
 }
 #auth-option-chose-container {
     height: min(20%, 87px);
+    max-height: 120px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -31,7 +32,8 @@
 }
 .auth-option-button {
     box-sizing: border-box;
-    width: 50%;
+    flex-basis: 100%;
+    flex-shrink: 50%;
     height: 100%;
     border: none;
     background-color: black;
