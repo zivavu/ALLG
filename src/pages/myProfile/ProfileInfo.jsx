@@ -1,8 +1,9 @@
 import { useContext } from 'react';
 import { UserContext } from '../authentication/UserContext';
 
-const ProfileInfo = () => {
+const ProfileInfo = ({ emailValue }) => {
     const [user, setUser] = useContext(UserContext);
+
     return (
         <div id="profile-user-base-info">
             <span className="profile-info">
@@ -11,7 +12,7 @@ const ProfileInfo = () => {
             </span>
             <span className="profile-info">
                 <span className="profile-info-prefix">Z konta: </span>
-                <span className="profile-info-data"> {user.email}</span>
+                <span className="profile-info-data">{emailValue}</span>
             </span>
         </div>
     );

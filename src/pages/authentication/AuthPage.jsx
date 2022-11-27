@@ -19,6 +19,7 @@ import { UserContext } from './UserContext';
 
 function AuthPage({ type }) {
     const navigate = useNavigate();
+
     const [user, setUser] = useContext(UserContext);
     const [isLoading, setLoading] = useState(false);
 
@@ -63,12 +64,10 @@ function AuthPage({ type }) {
         setLoading(true);
         const providedCredential = EmailAuthProvider.credential(email, passowrd);
         try {
-            return await reauthenticateWithCredential(user, providedCredential).then(
-                () => {
-                    setUser({ ...user, recentylyLoggedIn: true });
-                    navigate('/my-profile');
-                }
-            );
+            await reauthenticateWithCredential(user, providedCredential).then(() => {
+                setUser({ ...user, recentylyLoggedIn: true });
+                navigate('/my-profile');
+            });
         } catch (error) {
             console.log(error.message);
         }
@@ -98,7 +97,7 @@ function AuthPage({ type }) {
                         onClick={(e) => {
                             setVisibleAuthContainer('login');
                         }}>
-                        Logowanie
+                        {type === 'auth' ? 'Logowanie' : 'Potwierdź tożsamość'}
                     </button>
                     {type === 'reAuth' ? null : (
                         <button

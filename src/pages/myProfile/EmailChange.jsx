@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { auth } from '../../config/firebase-config';
 import { UserContext } from '../authentication/UserContext';
 
-function EmailChange() {
+function EmailChange({ emailWasChanged, setEmailWasChanged, setCurrentEmail }) {
     const navigate = useNavigate();
 
     const [user, setUser] = useContext(UserContext);
@@ -14,9 +14,15 @@ function EmailChange() {
 
     const changeUserEmail = () => {
         if (userEmailInput)
-            updateEmail(auth.currentUser, userEmailInput).catch((error) => {
-                setShowChangeEmail(false);
-            });
+            try {
+                updateEmail(auth.currentUser, userEmailInput).then(() => {
+                    setShowChangeEmail(false);
+                    setEmailWasChanged(true);
+                    setCurrentEmail(userEmailInput);
+                });
+            } catch (error) {
+                console.log(error.message);
+            }
     };
     const validateEmail = () => {
         {
@@ -27,7 +33,18 @@ function EmailChange() {
     };
     return (
         <div id="email-change-container">
-            {showChangeEmail ? (
+            {!showChangeEmail ? (
+                <button
+                    className="account-manage-item"
+                    disabled={emailWasChanged}
+                    onClick={() => {
+                        if (!user.recentylyLoggedIn) {
+                            navigate('/re-authenticate');
+                        } else setShowChangeEmail(true);
+                    }}>
+                    {emailWasChanged ? 'Sukces!' : 'Zmień e-mail'}
+                </button>
+            ) : (
                 <>
                     <input
                         type="text"
@@ -35,7 +52,7 @@ function EmailChange() {
                         className="account-manage-item"
                         placeholder="Podaj nowy email"
                         value={userEmailInput}
-                        onChange={(e) => {
+                        onInput={(e) => {
                             setUserEmailInput(e.target.value);
                             setIsEmailValid(true);
                         }}
@@ -47,16 +64,6 @@ function EmailChange() {
                         {isEmailValid ? 'Zatwierdź email' : 'Błędny email'}
                     </button>
                 </>
-            ) : (
-                <button
-                    className="account-manage-item"
-                    onClick={(e) => {
-                        if (!user.recentylyLoggedIn) {
-                            navigate('/re-authenticate');
-                        } else setShowChangeEmail(true);
-                    }}>
-                    Zmień e-mail
-                </button>
             )}
         </div>
     );

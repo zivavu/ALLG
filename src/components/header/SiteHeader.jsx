@@ -8,13 +8,6 @@ import './header.css';
 
 const SiteHeader = () => {
     const [user, setUser] = useContext(UserContext);
-    const logoutUser = async () => {
-        try {
-            await signOut(auth).then(setUser({ uid: '', displayName: '' }));
-        } catch (error) {
-            console.log(error.message);
-        }
-    };
 
     return (
         <header id="site-header">
@@ -27,7 +20,6 @@ const SiteHeader = () => {
                 </div>
             </Link>
             <nav id="header-nav">
-                <button onClick={logoutUser}></button>
                 <Link
                     to="my-profile"
                     className="nav-element nav-link"

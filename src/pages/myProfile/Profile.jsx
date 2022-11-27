@@ -15,7 +15,7 @@ function Profile() {
                 size="full-width"
                 type="watchedAdverts"
                 header="Obserowane ogłoszenia"
-                noAdvertsMessage="Nie masz obserowanych ogłoszeń"
+                noAdvertsMessage="Nie obserwujesz jeszcze żadnych ogłoszeń"
             />
         </div>
     );

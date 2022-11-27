@@ -27,9 +27,9 @@ function App() {
 
     //handle user auth persistance
     useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged((user) => {
-            if (user) {
-                setUser(user);
+        const unsubscribe = auth.onAuthStateChanged((providedUser) => {
+            if (providedUser) {
+                setUser(providedUser);
             } else setUser({ uid: '', displayName: '' });
         });
         return unsubscribe;
