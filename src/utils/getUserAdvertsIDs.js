@@ -1,8 +1,8 @@
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../config/firebase-config';
 
-const getUserAdvertsIDs = async (user) => {
-    const userDocRef = doc(db, 'users', user.uid);
+const getUserAdvertsIDs = async (uid) => {
+    const userDocRef = doc(db, 'users', uid);
     const usersAdvertsIds = await getDoc(userDocRef);
     if (!usersAdvertsIds.data()) {
         return [];

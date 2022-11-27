@@ -124,7 +124,6 @@ function AuthPage() {
                         <LogInWithGoogleBtn />
                     </div>
                 ) : null}
-                <button onClick={logoutUser}>Wyloguj</button>
             </div>
         </div>
     );

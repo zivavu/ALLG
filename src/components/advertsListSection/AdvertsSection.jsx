@@ -1,5 +1,6 @@
 import { doc, getDoc } from 'firebase/firestore';
 import { useContext, useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { db } from '../../config/firebase-config';
 import { UserContext } from '../../pages/authentication/UserContext';
 import getAdvertsByIdArr from '../../utils/getAdvertsByIdArr';
@@ -15,23 +16,34 @@ function AdvertsSection({ type, header, size, noAdvertsMessage }) {
     const [watchedAdverts, setWatchedAdverts] = useState([]);
 
     //set to true when any advert got deleted by user
+    const [dynamicHeader, setDynamicHeader] = useState(header);
     const [isDeleted, setIsDeleted] = useState(false);
     const [user, setUser] = useContext(UserContext);
+
+    const { otherUserUID } = useParams(user);
 
     useEffect(() => {
         switch (type) {
             case 'allAdverts':
-                getAllAdverts(user, setAdvertsData);
+                getAllAdverts(setAdvertsData);
                 break;
             case 'usersAdverts':
-                setTimeout(() => {
-                    getUserAdvertsIDs(user).then((ids) => {
-                        getAdvertsByIdArr(ids, setAdvertsData);
-                    });
-                }, 150);
+                getUserAdvertsIDs(user.uid).then((ids) => {
+                    getAdvertsByIdArr(ids, setAdvertsData);
+                });
                 break;
             case 'watchedAdverts':
                 getAdvertsByIdArr(watchedAdverts, setAdvertsData);
+                break;
+            case 'otherUserAdverts':
+                getUserAdvertsIDs(otherUserUID).then((ids) => {
+                    getAdvertsByIdArr(ids, setAdvertsData).then(() => {
+                        if (advertsData[0])
+                            setDynamicHeader(
+                                `${header} ${advertsData[0].user.displayName}`
+                            );
+                    });
+                });
                 break;
         }
     }, [isDeleted, watchedAdverts]);
@@ -44,7 +56,7 @@ function AdvertsSection({ type, header, size, noAdvertsMessage }) {
         <section id="adverts-section">
             <div id="adverts-list-container">
                 <div className="adverts-list-header">
-                    <h3>{advertsData[0] ? header : noAdvertsMessage}</h3>
+                    <h3>{advertsData[0] ? dynamicHeader : noAdvertsMessage}</h3>
                 </div>
                 <div className={size}>
                     {advertsData.map((advert) => (

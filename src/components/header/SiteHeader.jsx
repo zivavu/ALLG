@@ -29,7 +29,7 @@ const SiteHeader = () => {
             <nav id="header-nav">
                 <button onClick={logoutUser}></button>
                 <Link
-                    to="/profile"
+                    to="my-profile"
                     className="nav-element nav-link"
                     id="nav-profile"
                     title="Twoje Konto">

@@ -98,26 +98,27 @@
 }
 
 .login-with-google-btn {
+    cursor: pointer;
     width: 280px;
     min-height: 70px;
     border: none;
     border-radius: 7px;
-    background: url('src/assets/btn_google_signin_light_normal_web@2x.png');
-    background-size: 280px;
-    background-repeat: no-repeat;
-    background-position: center;
+    box-sizing: border-box;
 }
 .login-with-google-btn:hover {
-    background-color: white;
-    border: 4px solid rgb(63, 74, 112);
+    background-color: #4285f4;
 }
 
 @media only screen and (max-device-width: 600px) {
     #auth-container {
-        height: 80%;
+        height: 85%;
     }
 
     .auth-form .form-validation-error-message {
         font-size: 13px;
+    }
+    .login-with-google-btn {
+        width: 230px;
+        min-height: 50px;
     }
 }

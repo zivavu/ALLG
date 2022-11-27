@@ -10,7 +10,6 @@
     width: 60%;
     height: 100%;
     margin: 15px auto;
-    border-radius: 4px;
 }
 #advert-view-page-container hr {
     width: 100%;
@@ -21,10 +20,11 @@
 }
 #advert-view-main .advert-info-container,
 #advert-picture-section {
-    font-family: 'Secular One', sans-serif;
+    width: 100%;
     background-color: white;
     box-sizing: border-box;
-    width: 100%;
+    font-family: 'Secular One', sans-serif;
+    border-radius: 5px;
 }
 #advert-view-main #advert-picture-section {
     padding: 20px;
@@ -43,8 +43,7 @@
     box-shadow: inset 0 0 3px 2px black;
 }
 #advert-basic-info-container {
-    border-top-left-radius: 3px;
-    border-top-right-radius: 3px;
+    border-radius: 5px;
     padding: 15px 5%;
     margin: 10px auto;
 }
@@ -70,6 +69,9 @@
     margin: 1% 0;
 }
 #advert-view-main #advert-description-container {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
     padding: 15px 5%;
 }
 #advert-view-main #advert-description {
@@ -86,6 +88,8 @@
     align-items: flex-end;
     padding: 20px;
     margin-bottom: 20px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
 #advert-owner-profile-container #profile {
     background-color: var(--orange-light);

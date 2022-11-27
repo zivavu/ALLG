@@ -37,7 +37,11 @@ function LoginWithGoogleBtn({ setLoading }) {
 
     return (
         <>
-            <button className="login-with-google-btn" onClick={loginWithGoogle}></button>
+            <img
+                className="login-with-google-btn"
+                src="src/assets/btn_google_signin_light_normal_web@2x.png"
+                alt="login with google"
+                onClick={loginWithGoogle}></img>
         </>
     );
 }

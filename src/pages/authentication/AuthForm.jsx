@@ -18,6 +18,9 @@ const AuthForm = ({ type, onSubmit, schema, isDisabled }) => {
         <form className="auth-form" onSubmit={handleSubmit}>
             {type === 'register' ? (
                 <>
+                    {errors.displayName && touched.displayName ? (
+                        <FormValidationErrorMessage error={errors.displayName} />
+                    ) : null}
                     <input
                         type="text"
                         id="display-name-input"
@@ -30,10 +33,10 @@ const AuthForm = ({ type, onSubmit, schema, isDisabled }) => {
                         autoCorrect="off"
                         placeholder="Podaj Imię"
                     />
-                    {errors.displayName && touched.displayName ? (
-                        <FormValidationErrorMessage error={errors.displayName} />
-                    ) : null}
                 </>
+            ) : null}
+            {errors.email && touched.email ? (
+                <FormValidationErrorMessage error={errors.email} />
             ) : null}
             <input
                 type="text"
@@ -47,10 +50,10 @@ const AuthForm = ({ type, onSubmit, schema, isDisabled }) => {
                 autoCorrect="off"
                 placeholder="Podaj Email"
             />
-            {errors.email && touched.email ? (
-                <FormValidationErrorMessage error={errors.email} />
-            ) : null}
 
+            {errors.password && touched.password ? (
+                <FormValidationErrorMessage error={errors.password} />
+            ) : null}
             <input
                 type="password"
                 id="password-input"
@@ -63,12 +66,12 @@ const AuthForm = ({ type, onSubmit, schema, isDisabled }) => {
                 autoCorrect="off"
                 placeholder="Podaj Hasło"
             />
-            {errors.password && touched.password ? (
-                <FormValidationErrorMessage error={errors.password} />
-            ) : null}
 
             {type === 'register' ? (
                 <>
+                    {errors.confirmPassword && touched.confirmPassword ? (
+                        <FormValidationErrorMessage error={errors.confirmPassword} />
+                    ) : null}
                     <input
                         type="password"
                         id="password-input"
@@ -81,9 +84,6 @@ const AuthForm = ({ type, onSubmit, schema, isDisabled }) => {
                         autoCorrect="off"
                         placeholder="Powtórz Hasło"
                     />
-                    {errors.confirmPassword && touched.confirmPassword ? (
-                        <FormValidationErrorMessage error={errors.confirmPassword} />
-                    ) : null}
                 </>
             ) : null}
             <input

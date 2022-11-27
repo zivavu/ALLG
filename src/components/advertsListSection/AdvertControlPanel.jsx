@@ -5,8 +5,10 @@ import { db, storage } from '../../config/firebase-config';
 
 function AdvertControlPanel({ advert, setIsDeleted, user }) {
     const [showDeleteConfrim, setShowDeleteConfirm] = useState(false);
+    const [isDisabled, setIsDisabled] = useState(false);
 
     const handleAdvertDelete = async (e) => {
+        setIsDisabled(true);
         e.preventDefault();
         e.target.disabled = true;
         const imageToDeleteRef = ref(storage, advert.imagePath);
@@ -22,9 +24,12 @@ function AdvertControlPanel({ advert, setIsDeleted, user }) {
         } catch (error) {
             console.log(error);
         } finally {
+            setIsDisabled(false);
+            //handles component rerender on delete
             setIsDeleted(true);
         }
     };
+
     return (
         <div className="advert-owner-control-container">
             {showDeleteConfrim ? (
@@ -36,6 +41,7 @@ function AdvertControlPanel({ advert, setIsDeleted, user }) {
             ) : (
                 <button
                     className="advert-delete-btn"
+                    disabled={isDisabled}
                     onClick={(e) => {
                         e.preventDefault();
                         setShowDeleteConfirm(true);

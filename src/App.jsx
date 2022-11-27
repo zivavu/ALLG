@@ -8,7 +8,8 @@ import AdvertView from './pages/advertView/AdvertView.jsx';
 import AuthPage from './pages/authentication/AuthPage.jsx';
 import { UserContext } from './pages/authentication/UserContext.jsx';
 import HomePage from './pages/homePage/Home.jsx';
-import Profile from './pages/profile/Profile.jsx';
+import Profile from './pages/myProfile/Profile.jsx';
+import ProfileView from './pages/viewProfile/ProfileView.jsx';
 
 <style>
     @import
@@ -34,16 +35,25 @@ function App() {
                 <SiteHeader />
                 <Routes>
                     <Route path="/advert/:id" element={<AdvertView />}></Route>
-                    <Route
-                        path="/profile"
-                        element={
-                            !user || user.uid == '' ? <AuthPage /> : <Profile />
-                        }></Route>
+
                     <Route
                         path="/new-advert"
                         element={
                             !user || user.uid == '' ? <AuthPage /> : <AdvertForm />
                         }></Route>
+
+                    {/* route to view other users profiles */}
+                    <Route
+                        path="/profile/:otherUserUID"
+                        element={<ProfileView />}></Route>
+
+                    {/* route to view active user profile */}
+                    <Route
+                        path="/my-profile"
+                        element={
+                            !user || user.uid == '' ? <AuthPage /> : <Profile />
+                        }></Route>
+
                     <Route path="/" element={<HomePage />}></Route>
                 </Routes>
             </UserContext.Provider>
