@@ -9,7 +9,6 @@ import AuthPage from './pages/authentication/AuthPage.jsx';
 import { UserContext } from './pages/authentication/UserContext.jsx';
 import HomePage from './pages/homePage/Home.jsx';
 import Profile from './pages/profile/Profile.jsx';
-import Steared from './pages/profile/Steared.jsx';
 
 <style>
     @import

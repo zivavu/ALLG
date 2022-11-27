@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { db, storage } from '../../config/firebase-config';
 
 function AdvertControlPanel({ advert, setIsDeleted, user }) {
-    const [showConfirmDelete, setShowConfirmDelete] = useState(false);
+    const [showDeleteConfrim, setShowDeleteConfirm] = useState(false);
 
     const handleAdvertDelete = async (e) => {
         e.preventDefault();
@@ -25,7 +25,7 @@ function AdvertControlPanel({ advert, setIsDeleted, user }) {
     };
     return (
         <div className="advert-owner-control-container">
-            {showConfirmDelete ? (
+            {showDeleteConfrim ? (
                 <button
                     className="advert-delete-btn confrim"
                     onClick={handleAdvertDelete}>
@@ -36,7 +36,7 @@ function AdvertControlPanel({ advert, setIsDeleted, user }) {
                     className="advert-delete-btn"
                     onClick={(e) => {
                         e.preventDefault();
-                        setShowConfirmDelete(true);
+                        setShowDeleteConfirm(true);
                     }}>
                     Usuń
                 </button>

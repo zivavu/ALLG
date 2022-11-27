@@ -1,10 +1,10 @@
 import { signOut } from 'firebase/auth';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { PlusSignSVG, UserSVG } from '../../assets/svg.jsx';
 import { auth } from '../../config/firebase-config';
 import { UserContext } from '../../pages/authentication/UserContext';
 import './header.css';
-import { HeartSVG, PlusSignSVG, UserSVG } from './svg.jsx';
 
 const SiteHeader = () => {
     const [user, setUser] = useContext(UserContext);
@@ -28,14 +28,6 @@ const SiteHeader = () => {
             </Link>
             <nav id="header-nav">
                 <button onClick={logoutUser}></button>
-                <Link
-                    to="/profile/steared"
-                    className="nav-element nav-link"
-                    id="nav-steared"
-                    title="Obserwowane ogłoszenia">
-                    <HeartSVG />
-                    <span>Obserwowane</span>
-                </Link>
                 <Link
                     to="/profile"
                     className="nav-element nav-link"
