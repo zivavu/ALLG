@@ -6,8 +6,10 @@
     width: 80%;
     box-sizing: border-box;
 }
-.adverts-list-header {
+#adverts-list-container * {
     font-family: 'Secular One', sans-serif;
+}
+.adverts-list-header {
     background-color: black;
 }
 .advert-li-container img {
@@ -82,7 +84,6 @@
     text-align: right;
     color: black;
     padding: 10px;
-    font-family: 'Secular One', sans-serif;
 }
 
 .advert-li-main-info {
@@ -138,8 +139,31 @@
 .advert-owner-control-container {
     width: 20%;
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-
+.advert-delete-btn {
+    width: 80%;
+    height: 30%;
+    font-size: 16px;
+    background-color: black;
+    box-sizing: border-box;
+    color: white;
+    border: none;
+    border-radius: 3px;
+}
+.advert-delete-btn:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+    box-shadow: inset 0 0 5px 1px black;
+}
+.advert-delete-btn.confrim {
+    background-color: rgb(214, 0, 0);
+    border: 2px solid black;
+    color: black;
+}
 /* image loading animation */
 .lds-hourglass {
     display: inline-block;

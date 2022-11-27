@@ -1,8 +1,11 @@
 import { arrayRemove, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { deleteObject, ref } from 'firebase/storage';
+import { useState } from 'react';
 import { db, storage } from '../../config/firebase-config';
 
 function AdvertControlPanel({ advert, setIsDeleted, user }) {
+    const [showConfirmDelete, setShowConfirmDelete] = useState(false);
+
     const handleAdvertDelete = async (e) => {
         e.preventDefault();
         e.target.disabled = true;
@@ -22,7 +25,22 @@ function AdvertControlPanel({ advert, setIsDeleted, user }) {
     };
     return (
         <div className="advert-owner-control-container">
-            <button onClick={handleAdvertDelete}>Usuń</button>
+            {showConfirmDelete ? (
+                <button
+                    className="advert-delete-btn confrim"
+                    onClick={handleAdvertDelete}>
+                    Na pewno?
+                </button>
+            ) : (
+                <button
+                    className="advert-delete-btn"
+                    onClick={(e) => {
+                        e.preventDefault();
+                        setShowConfirmDelete(true);
+                    }}>
+                    Usuń
+                </button>
+            )}
         </div>
     );
 }
