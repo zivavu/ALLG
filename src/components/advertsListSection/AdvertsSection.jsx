@@ -20,12 +20,17 @@ function AdvertsSection({ getAdvertsHandler, header, type, noAdvertsMessage }) {
 
     const getUsersWatchedAdverts = async () => {
         if (!user || user.uid === '') return;
-        const usersRef = doc(db, 'users', user.uid);
+        const userRef = doc(db, 'users', user.uid);
         try {
-            const docSnap = await getDoc(usersRef);
-            setWatchedAdverts(docSnap.data().watched);
+            await getDoc(userRef).then((data) => {
+                if (data.watched) setWatchedAdverts(data.watched);
+                else {
+                    setWatchedAdverts([]);
+                    return;
+                }
+            });
         } catch {
-            console.log('nie było takiego użytkownika');
+            console.log('Użytkownik nie ma dokumentu z obserwowanymi');
         }
     };
 

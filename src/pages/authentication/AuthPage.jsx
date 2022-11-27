@@ -27,13 +27,13 @@ function AuthPage() {
                 password
             );
             setUser(userCredential.user);
-            await updateProfile(auth.currentUser, {
-                displayName: displayName,
-            });
-
             await setDoc(doc(db, 'users', userCredential.user.uid), {
                 watched: [],
                 adverts: [],
+                displayName: 'GoogleUser',
+            });
+            await updateProfile(auth.currentUser, {
+                displayName: displayName,
             });
         } catch (error) {
             console.log(error.message);
@@ -47,10 +47,6 @@ function AuthPage() {
         try {
             return await signInWithEmailAndPassword(auth, email, password).then(
                 async (userCredential) => {
-                    await setDoc(doc(db, 'users', userCredential.user.uid), {
-                        watched: [],
-                        adverts: [],
-                    });
                     setUser(userCredential.user);
                 }
             );
@@ -113,7 +109,7 @@ function AuthPage() {
                             onSubmit={submitUserLogIn}
                             schema={userLoginSchema}
                         />
-                        <LogInWithGoogleBtn />
+                        <LogInWithGoogleBtn setLoading={setLoading} />
                     </div>
                 ) : null}
 

@@ -4,6 +4,10 @@ import { db } from '../config/firebase-config';
 const getUserAdverts = async (setAdvertsData, user) => {
     const docRef = doc(db, 'users', user.uid);
     const usersAdvertsIds = await getDoc(docRef);
+    if (!usersAdvertsIds.data()) {
+        setAdvertsData([]);
+        return;
+    }
     const advertsIds = usersAdvertsIds.data().adverts;
     if (!advertsIds[0]) {
         setAdvertsData([]);

@@ -12,11 +12,13 @@ function AdvertControlPanel({ advert, setIsDeleted, user }) {
         const imageToDeleteRef = ref(storage, advert.imagePath);
         const userDocRef = doc(db, 'users', user.uid);
         try {
-            await deleteDoc(doc(db, 'adverts', advert.id));
-            await deleteObject(imageToDeleteRef);
-            await updateDoc(userDocRef, {
-                adverts: arrayRemove(advert.id),
-            });
+            Promise.allSettled([
+                deleteDoc(doc(db, 'adverts', advert.id)),
+                deleteObject(imageToDeleteRef),
+                updateDoc(userDocRef, {
+                    adverts: arrayRemove(advert.id),
+                }),
+            ]);
         } catch (error) {
             console.log(error);
         } finally {
