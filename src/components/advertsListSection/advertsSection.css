@@ -18,7 +18,7 @@
     resize: none;
 }
 /* adverts section used in profile and stared pages */
-.full-length {
+.full-width {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -31,42 +31,42 @@
     background-color: white;
     border: 2px solid black;
 }
-.full-length .advert-li-container {
+.full-width .advert-li-container {
     height: 160px;
     width: 90%;
     margin: 0.5%;
     display: flex;
     justify-content: space-between;
 }
-.full-length .advert-li-container img {
+.full-width .advert-li-container img {
     max-height: 100%;
     width: 18%;
 }
 
-.full-length .advert-li-info {
+.full-width .advert-li-info {
     flex-basis: 80%;
     flex-shrink: 60%;
 }
-.full-length .advert-li-title {
+.full-width .advert-li-title {
     max-height: 40%;
     font-size: 20px;
 }
-.full-length .advert-li-category {
+.full-width .advert-li-category {
     font-size: 17px;
 }
-.full-length .advert-li-details {
+.full-width .advert-li-details {
     align-items: center;
     width: 20%;
 }
 
 /* adverts section used in home page */
-.half-length {
+.half-width {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     flex-wrap: wrap;
 }
-.half-length .advert-li-container {
+.half-width .advert-li-container {
     width: 49%;
     height: 180px;
     margin: 0.5%;
@@ -76,7 +76,7 @@
 #adverts-list-container .advert-li-container:hover {
     background-color: var(--orange-lighter);
 }
-.half-length .advert-li-container img {
+.half-width .advert-li-container img {
     max-height: 100%;
     width: 100%;
 }

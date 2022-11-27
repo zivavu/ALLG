@@ -1,6 +1,5 @@
 import SearchSection from '../../components/advertSearch/SearchSection.jsx';
 import AdvertsSection from '../../components/advertsListSection/AdvertsSection.jsx';
-import getAllAdverts from '../../utils/getAllAdverts.jsx';
 import CategoriesSection from './CategoriesSection.jsx';
 
 const HomePage = () => {
@@ -10,9 +9,9 @@ const HomePage = () => {
             <CategoriesSection />
             <AdvertsSection
                 header="To udało się nam znaleźć"
+                type="allAdverts"
                 noAdvertsMessage="Nie znaleźliśmy takich ogłoszeń"
-                getAdvertsHandler={getAllAdverts}
-                type="half-length"
+                size="half-width"
             />
         </div>
     );
