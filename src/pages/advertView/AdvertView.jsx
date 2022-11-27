@@ -12,19 +12,20 @@ function AdvertView() {
     const { id } = useParams();
     const [advertData, setAdvertData] = useState();
     const [imageURL, setImageURL] = useState('');
-    const docRef = doc(db, 'adverts', id);
 
     useEffect(() => {
         getAdvertData();
-        updateFirebaseViewsCounter();
-    }, []);
+        console.log(advertData, id);
+    }, [id]);
 
+    const docRef = doc(db, 'adverts', id);
     const getAdvertData = () => {
         getDoc(docRef)
             .then((doc) => {
                 if (doc.data()) {
                     setAdvertData(doc.data());
                     downloadImage(doc.data().imagePath);
+                    updateFirebaseViewsCounter();
                 } else return;
             })
             .catch((error) => {
@@ -95,7 +96,7 @@ function AdvertView() {
                         </svg>
 
                         {advertData && user && advertData.user.uid === user.uid ? (
-                            <Link to="/profile">
+                            <Link to="/my-profile">
                                 <span id="profile-name">
                                     {advertData ? advertData.user.displayName : null}
                                 </span>
