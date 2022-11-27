@@ -7,7 +7,7 @@ const CategoriesSection = () => {
         <section id="categories-section">
             <div id="categories-container">
                 <div id="heading-container">
-                    <h3>Kategorie Ogłoszeń</h3>
+                    <h3>Wybierz kategorie ogłoszeń</h3>
                 </div>
                 <CategoriesFlexbox />
             </div>

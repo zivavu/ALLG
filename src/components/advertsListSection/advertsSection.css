@@ -54,6 +54,10 @@
 .full-length .advert-li-category {
     font-size: 17px;
 }
+.full-length .advert-li-details {
+    align-items: center;
+    width: 20%;
+}
 
 /* adverts section used in home page */
 .half-length {
@@ -63,9 +67,9 @@
     flex-wrap: wrap;
 }
 .half-length .advert-li-container {
-    width: 49.5%;
+    width: 49%;
     height: 180px;
-    margin: 0.2%;
+    margin: 0.5%;
     display: grid;
     grid-template-columns: 30% 70%;
 }
@@ -107,18 +111,18 @@
     align-items: flex-end;
     width: 30%;
 }
-.advert-star-button {
+.advert-heart-button {
     position: absolute;
-    bottom: 10px;
-    right: 10px;
+    bottom: 0;
+    right: 5px;
     background-color: transparent;
     border: none;
 }
-.advert-star-svg {
+.advert-heart-svg {
     width: 30px;
     height: 30px;
 }
-.advert-star-svg:hover {
+.advert-heart-svg:hover {
     stroke: var(--orange);
 }
 .advert-li-info .advert-price {
@@ -138,6 +142,7 @@
 
 .advert-owner-control-container {
     width: 20%;
+    margin: 0 5%;
     height: 100%;
     display: flex;
     align-items: center;
