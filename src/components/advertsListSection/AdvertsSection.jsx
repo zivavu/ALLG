@@ -52,7 +52,7 @@ function AdvertsSection({ type, header, size, noAdvertsMessage, userSearchInput 
                 getAdvertsByUserInput(userSearchInput, setAdvertsData);
                 break;
         }
-    }, [isDeleted, watchedAdverts]);
+    }, [isDeleted, watchedAdverts, userSearchInput]);
 
     useEffect(() => {
         getWatchedAdvertsIds(setWatchedAdverts, user);

@@ -5,9 +5,10 @@ import AdvertsSearchForm from './AdvertsSearchForm.jsx';
 const HomePage = () => {
     const [didUserSearch, setDidUserSearch] = useState(false);
     const [userSearchInput, setUserSearchInput] = useState();
-
     useEffect(() => {
-        if (userSearchInput) setDidUserSearch(true);
+        if (userSearchInput) {
+            setDidUserSearch(true);
+        }
     }, [userSearchInput]);
 
     return (
@@ -15,7 +16,7 @@ const HomePage = () => {
             <AdvertsSearchForm setUserSearchInput={setUserSearchInput} />
             {didUserSearch ? (
                 <AdvertsSection
-                    key="1"
+                    key="advertsByUserInput"
                     header="To udało się nam znaleźć"
                     type="advertsByUserInput"
                     noAdvertsMessage="Nie znaleźliśmy takich ogłoszeń"
@@ -24,7 +25,7 @@ const HomePage = () => {
                 />
             ) : (
                 <AdvertsSection
-                    key="2"
+                    key="allAdverts"
                     header="Najnowsze ogłoszenia"
                     type="allAdverts"
                     noAdvertsMessage="Nie znaleźliśmy żadnych ogłoszeń"
