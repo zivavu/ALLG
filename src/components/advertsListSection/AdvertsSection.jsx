@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { db } from '../../config/firebase-config';
 import { UserContext } from '../../pages/authentication/UserContext';
 import getAdvertsByIdArr from '../../utils/getAdvertsByIdArr';
+import getAdvertsByUserInput from '../../utils/getAdvertsByUserInput';
 import getAllAdverts from '../../utils/getAllAdverts';
 import getUserAdvertsIDs from '../../utils/getUserAdvertsIDs';
 import getWatchedAdvertsIds from '../../utils/getWatchedAdvertsIds';
@@ -11,7 +12,7 @@ import AdvertElement from './AdvertElement';
 
 import './advertsSection.css';
 
-function AdvertsSection({ type, header, size, noAdvertsMessage }) {
+function AdvertsSection({ type, header, size, noAdvertsMessage, userSearchInput }) {
     const [advertsData, setAdvertsData] = useState([]);
     const [watchedAdverts, setWatchedAdverts] = useState([]);
 
@@ -45,6 +46,10 @@ function AdvertsSection({ type, header, size, noAdvertsMessage }) {
                 getUserAdvertsIDs(otherUserUID).then((ids) => {
                     getAdvertsByIdArr(ids, setAdvertsData);
                 });
+                break;
+            case 'advertsByUserInput':
+                console.log('goin in ');
+                getAdvertsByUserInput(userSearchInput, setAdvertsData);
                 break;
         }
     }, [isDeleted, watchedAdverts]);

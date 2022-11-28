@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-    Route,
-    Routes,
-    UNSAFE_RouteContext,
-    useNavigate,
-    useParams,
-} from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import SiteHeader from './components/header/SiteHeader.jsx';
 import { auth } from './config/firebase-config.js';
 import './main.css';
