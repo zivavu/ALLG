@@ -9,6 +9,7 @@ const Category = ({
     setFieldValue,
     expandedCategory,
     setExpandedCategory,
+    isSingleCategoryInputAlowed,
 }) => {
     const [showSubCategories, setShowSubCategories] = useState(false);
     const [isSelected, setIsSelected] = useState(false);
@@ -17,12 +18,16 @@ const Category = ({
         setIsSelected(name === selectedCategory.category);
     }, [selectedCategory]);
 
-    //Adds mobile support by allowing only one selected category
-    //and prevents flashing when setting selected category
-    const handleTouch = (e) => {
+    //Adds mobile support by allowing only one expanded category element
+    const handleClick = (e) => {
         e.preventDefault();
         if (e.target.className != 'sub-category') {
             setExpandedCategory(isSelected ? null : name);
+        }
+        //Haandles selection of category without a subcategory if it's allowed
+        if (isSingleCategoryInputAlowed) {
+            setSelectedCategory({ category: name });
+            setFieldValue('category', { category: name });
         }
     };
     useEffect(() => {
@@ -44,7 +49,7 @@ const Category = ({
                     setShowSubCategories(false);
                     setExpandedCategory(null);
                 }}
-                onTouchStart={handleTouch}>
+                onClick={handleClick}>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path d={svgPath} />
                 </svg>

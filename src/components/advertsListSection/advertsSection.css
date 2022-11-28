@@ -118,12 +118,17 @@
     background-color: transparent;
     border: none;
 }
-.advert-heart-svg {
-    width: 30px;
+.heart-svg {
+    width: 35px;
     height: 30px;
 }
-.advert-heart-svg:hover {
+.empty-heart:hover {
     stroke: var(--orange);
+}
+.full-heart {
+    stroke: black;
+    stroke-width: 2px;
+    fill: var(--orange);
 }
 .advert-li-info .advert-price {
     font-size: 24px;

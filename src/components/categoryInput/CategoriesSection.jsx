@@ -1,5 +1,4 @@
-import './home.css';
-import '/src/components/categoryInput/categories.css';
+import './categories.css';
 import CategoriesFlexbox from '/src/components/categoryInput/CategoriesFlexbox';
 
 const CategoriesSection = () => {
@@ -9,7 +8,7 @@ const CategoriesSection = () => {
                 <div id="heading-container">
                     <h3>Wybierz kategorie ogłoszeń</h3>
                 </div>
-                <CategoriesFlexbox />
+                <CategoriesFlexbox isSingleCategoryInputAlowed="true" />
             </div>
         </section>
     );

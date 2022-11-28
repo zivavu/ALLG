@@ -3,7 +3,7 @@ import './categories.css';
 import { categories } from './categories.json';
 import Category from './Category.jsx';
 
-const CategoriesFlexbox = ({ setFieldValue }) => {
+const CategoriesFlexbox = ({ setFieldValue, isSingleCategoryInputAlowed }) => {
     const [selectedCategory, setSelectedCategory] = useState({});
     const [expandedCategory, setExpandedCategory] = useState('');
 
@@ -22,6 +22,8 @@ const CategoriesFlexbox = ({ setFieldValue }) => {
                         selectedCategory={selectedCategory}
                         setSelectedCategory={setSelectedCategory}
                         setFieldValue={setFieldValue}
+                        //allows user to select category without a subcategory
+                        isSingleCategoryInputAlowed={isSingleCategoryInputAlowed}
                     />
                 );
             })}

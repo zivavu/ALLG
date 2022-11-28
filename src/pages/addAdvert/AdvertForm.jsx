@@ -93,22 +93,22 @@ function AdvertForm() {
     }
     const uploadAdvert = async (values) => {
         const advertsCollectionRef = doc(db, 'adverts', values.id);
-        await setDoc(advertsCollectionRef, values)
-            .then(() => {
-                console.log('ogłoszenie dodane');
-            })
-            .catch('Dane były niepoprawne');
+        try {
+            await setDoc(advertsCollectionRef, values);
+        } catch {
+            console.log('Dane były niepoprawne');
+        }
     };
     const addAdvertToUserDoc = async (values) => {
         const userDocRef = doc(db, 'users', values.user.uid);
-        await updateDoc(userDocRef, {
-            displayName: values.user.displayName,
-            adverts: arrayUnion(values.id),
-        })
-            .then(() => {
-                console.log('ogłosenie dodane do użytkownika');
-            })
-            .catch('Nie udało się podpiąć do użytkownika');
+        try {
+            await updateDoc(userDocRef, {
+                displayName: values.user.displayName,
+                adverts: arrayUnion(values.id),
+            });
+        } catch {
+            console.log('Nie udało się podpiąć do użytkownika');
+        }
     };
     const uploadImage = async (values) => {
         const advertImagesRef = ref(storage, `${values.imagePath}`);
@@ -204,7 +204,10 @@ function AdvertForm() {
 
                         <label htmlFor="category-input">Kategoria</label>
                         <div id="add-advert-categories-container">
-                            <CategoriesFlexbox setFieldValue={setFieldValue} />
+                            <CategoriesFlexbox
+                                setFieldValue={setFieldValue}
+                                isSingleCategoryInputAlowed={false}
+                            />
                         </div>
                         {errors.category && touched.category ? (
                             <FormValidationErrorMessage
