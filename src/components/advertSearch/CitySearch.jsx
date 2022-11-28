@@ -5,13 +5,7 @@ import { useDebounce } from '../../utils/useDebounce';
 import './searchArea.css';
 import CityOption from './SearchedCityOptions.jsx';
 
-function CitySearch({
-    setFieldValue,
-    setFieldError,
-    setFieldTouched,
-    handleBlur,
-    fieldValue,
-}) {
+function CitySearch({ setFieldValue, handleBlur, fieldValue }) {
     const [searchTerm, setSearchTerm] = useState('');
     const [citiesResponse, setCitiesResponse] = useState([]);
     const debouncedValue = useDebounce(searchTerm, 500);
@@ -54,8 +48,8 @@ function CitySearch({
                     handleChange(e);
                 }}
                 onBlur={(e) => {
-                    setCitiesResponse([]);
                     handleBlur(e);
+                    setCitiesResponse([]);
                 }}
                 value={searchTerm}></input>
 

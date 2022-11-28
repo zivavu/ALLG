@@ -1,12 +1,5 @@
 import { uuidv4 } from '@firebase/util';
-import {
-    addDoc,
-    arrayUnion,
-    collection,
-    doc,
-    setDoc,
-    updateDoc,
-} from 'firebase/firestore';
+import { arrayUnion, doc, setDoc, updateDoc } from 'firebase/firestore';
 import { ref, uploadBytes } from 'firebase/storage';
 import { useFormik } from 'formik';
 import { useContext, useEffect, useState } from 'react';

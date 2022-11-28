@@ -2,13 +2,21 @@ import { useState } from 'react';
 import '../../components/advertSearch/searchArea.css';
 import CitySearch from './CitySearch';
 import ProductSearch from './ProductSearch';
-function SearchSection() {
+function SearchSection({ setFieldValue, handleBlur, handleChange, values }) {
     const [selectedCity, setSelectedCity] = useState('');
     return (
         <section id="search-section">
             <div id="search-container">
-                <ProductSearch />
-                <CitySearch selectedCity={selectedCity} setFieldValue={setSelectedCity} />
+                <ProductSearch
+                    setFieldValue={setFieldValue}
+                    fieldValue={values.advertName}
+                />
+                <CitySearch
+                    selectedCity={selectedCity}
+                    setFieldValue={setFieldValue}
+                    handleBlur={handleBlur}
+                    fieldValue={values.city.name}
+                />
                 <button id="search-submit">Szukaj</button>
             </div>
         </section>
