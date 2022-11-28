@@ -65,7 +65,9 @@ const AdvertElement = ({
             {imageLoading ? (
                 <div className="lds-hourglass"></div>
             ) : (
-                <img src={imageURL} alt="Przedmiot ogłoszenia" />
+                <div className="image-container">
+                    <img src={imageURL} alt="Przedmiot ogłoszenia" />
+                </div>
             )}
             <div className="advert-li-info">
                 <div className="advert-li-main-info">

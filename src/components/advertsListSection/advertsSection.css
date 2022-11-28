@@ -12,9 +12,15 @@
 .adverts-list-header {
     background-color: black;
 }
+.advert-li-container .image-container {
+    width: max(130px, 15%);
+    display: flex;
+    justify-content: center;
+    margin: 0 5px;
+}
 .advert-li-container img {
+    max-width: 100%;
     max-height: 100%;
-    margin: auto 5px;
     object-fit: contain;
 }
 #adverts-list-container .advert-li-container:hover {
@@ -74,9 +80,7 @@
 .half-width .advert-li-details {
     width: 30%;
 }
-.half-width .advert-li-container img {
-    width: 100%;
-}
+
 .advert-li-category {
     font-size: 15px;
 }
@@ -86,7 +90,7 @@
     text-align: right;
     color: black;
     padding: 10px;
-    flex-basis: 80%;
+    flex-basis: 90%;
 }
 
 .advert-li-main-info {
@@ -107,6 +111,7 @@
 .advert-li-details {
     display: flex;
     flex-direction: column;
+    align-content: flex-end;
     align-items: flex-end;
     justify-self: flex-end;
 }
@@ -129,6 +134,8 @@
 }
 .advert-li-info .advert-price {
     font-size: 24px;
+    white-space: nowrap;
+    max-height: 30px;
     letter-spacing: 1px;
 }
 .advert-li-info .advert-location {
@@ -172,7 +179,7 @@
     color: black;
 }
 
-@media only screen and (max-device-width: 1000px) {
+@media only screen and (max-device-width: 1250px) {
     #adverts-list-container {
         width: 96%;
         margin: 5px 2%;
@@ -194,9 +201,6 @@
         margin: 0.5%;
         display: flex;
         justify-content: flex-start;
-    }
-    .half-width .advert-li-container img {
-        width: 18%;
     }
 
     .half-width .advert-li-title {
@@ -261,10 +265,7 @@
         width: 30%;
         padding-right: 3px;
     }
-    .advert-li-container img {
-        margin: 0 5px;
-        width: 20%;
-    }
+
     .advert-li-main-info {
         width: 50%;
     }
