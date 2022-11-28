@@ -1,7 +1,8 @@
 import { useFormik } from 'formik';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import SearchSection from '../../components/advertSearch/SearchSection.jsx';
 import CategoriesSection from '../../components/categoryInput/CategoriesSection.jsx';
+import getAdvertsByUserInput from '../../utils/getAndFilterAdvertsByUserInput.js';
 
 function AdvertsSearchForm() {
     const {
@@ -21,11 +22,21 @@ function AdvertsSearchForm() {
         },
         onSubmit,
     });
-    console.log(values);
     const [isLoading, setIsLoading] = useState(false);
+    const [advertsServerResponse, setAdvertsServerResponse] = useState([]);
+
+    useEffect(() => {
+        console.log(advertsServerResponse);
+    }, [advertsServerResponse]);
+
     async function onSubmit(values) {
         setIsLoading(true);
-        console.log(values);
+        try {
+            await getAdvertsByUserInput(setAdvertsServerResponse, values);
+        } catch (error) {
+            console.log(error.message);
+        }
+        setIsLoading(false);
     }
     return (
         <form onSubmit={handleSubmit}>

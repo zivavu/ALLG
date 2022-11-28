@@ -23,11 +23,12 @@ const Category = ({
         e.preventDefault();
         if (e.target.className != 'sub-category') {
             setExpandedCategory(isSelected ? null : name);
-        }
-        //Haandles selection of category without a subcategory if it's allowed
-        if (isSingleCategoryInputAlowed) {
-            setSelectedCategory({ category: name });
-            setFieldValue('category', { category: name });
+
+            //Haandles selection of category without a subcategory if it's allowed
+            if (isSingleCategoryInputAlowed) {
+                setSelectedCategory({ category: name });
+                setFieldValue('category', { category: name });
+            }
         }
     };
     useEffect(() => {

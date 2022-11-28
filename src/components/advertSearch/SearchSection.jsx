@@ -17,7 +17,9 @@ function SearchSection({ setFieldValue, handleBlur, handleChange, values }) {
                     handleBlur={handleBlur}
                     fieldValue={values.city.name}
                 />
-                <button id="search-submit">Szukaj</button>
+                <button id="search-submit" type="submit">
+                    Szukaj
+                </button>
             </div>
         </section>
     );
