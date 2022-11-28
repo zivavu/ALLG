@@ -10,6 +10,7 @@ import {
 import { ref, uploadBytes } from 'firebase/storage';
 import { useFormik } from 'formik';
 import { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import CitySearch from '../../components/advertSearch/CitySearch';
 import '../../components/categoryInput/categories.css';
 import CategoriesFlexbox from '../../components/categoryInput/CategoriesFlexbox';
@@ -63,6 +64,8 @@ function AdvertForm() {
 
     const [uploadedImage, setUploadedImage] = useState(null);
     const [inputBoxImage, setInputBoxImage] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
 
     const handleImageInput = (e) => {
         const randomImagePath = `images/${uuidv4()}`;
@@ -73,10 +76,20 @@ function AdvertForm() {
     };
 
     async function onSubmit(values) {
-        uploadAdvert(values);
-        addAdvertToUserDoc(values);
-        uploadImage(values);
-        resetForm();
+        setIsLoading(true);
+        try {
+            await Promise.allSettled([
+                await uploadAdvert(values),
+                await addAdvertToUserDoc(values),
+                await uploadImage(values),
+            ]).then(() => {
+                navigate(`/advert/${values.id}`);
+            });
+        } catch (error) {
+            console.log(error.message);
+        } finally {
+            setIsLoading(false);
+        }
     }
     const uploadAdvert = async (values) => {
         const advertsCollectionRef = doc(db, 'adverts', values.id);
@@ -99,11 +112,11 @@ function AdvertForm() {
     };
     const uploadImage = async (values) => {
         const advertImagesRef = ref(storage, `${values.imagePath}`);
-        uploadBytes(advertImagesRef, uploadedImage)
-            .then(() => {
-                console.log('uploaded file');
-            })
-            .catch('Nie udało się wysłać zdjęcia');
+        try {
+            await uploadBytes(advertImagesRef, uploadedImage);
+        } catch {
+            console.log('Nie udało się wysłać zdjęcia');
+        }
     };
     return (
         <div id="add-advert-container">
@@ -237,6 +250,7 @@ function AdvertForm() {
                             id="add-advert-form-submit"
                             type="submit"
                             value="Opublikuj ogłoszenie"
+                            disabled={isLoading}
                         />
                     </main>
                 </form>
