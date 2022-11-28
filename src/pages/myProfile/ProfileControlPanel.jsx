@@ -1,14 +1,19 @@
-import { signOut, updateEmail } from 'firebase/auth';
+import { signOut } from 'firebase/auth';
 import { useContext, useEffect, useState } from 'react';
 import { auth } from '../../config/firebase-config';
 import { UserContext } from '../authentication/UserContext';
 import EmailChange from './EmailChange';
+import PasswordChange from './PasswordChange';
 import ProfileInfo from './ProfileInfo';
 
 const ProfileControlPanel = () => {
     const [user, setUser] = useContext(UserContext);
     const [emailWasChanged, setEmailWasChanged] = useState(false);
+    const [passwordWasChanged, setPasswordWasChanged] = useState(false);
+
+    //used only as visual representation of real current user email on email change
     const [currentEmail, setCurrentEmail] = useState('');
+
     const logoutUser = async () => {
         try {
             await signOut(auth).then(setUser({ uid: '', displayName: '' }));
@@ -33,6 +38,12 @@ const ProfileControlPanel = () => {
                             emailWasChanged={emailWasChanged}
                             setEmailWasChanged={setEmailWasChanged}
                             setCurrentEmail={setCurrentEmail}
+                        />
+                    ) : null}
+                    {user.providerData[0].providerId === 'password' ? (
+                        <PasswordChange
+                            passwordWasChanged={passwordWasChanged}
+                            setPasswordWasChanged={setPasswordWasChanged}
                         />
                     ) : null}
                 </div>

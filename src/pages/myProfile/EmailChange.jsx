@@ -12,7 +12,7 @@ function EmailChange({ emailWasChanged, setEmailWasChanged, setCurrentEmail }) {
     const [showChangeEmail, setShowChangeEmail] = useState(false);
     const [isEmailValid, setIsEmailValid] = useState(true);
 
-    const changeUserEmail = () => {
+    const updateUserEmail = () => {
         if (userEmailInput)
             try {
                 updateEmail(auth.currentUser, userEmailInput).then(() => {
@@ -27,10 +27,17 @@ function EmailChange({ emailWasChanged, setEmailWasChanged, setCurrentEmail }) {
     const validateEmail = () => {
         {
             if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(userEmailInput)) {
-                changeUserEmail();
+                updateUserEmail();
             } else setIsEmailValid(false);
         }
     };
+
+    useEffect(() => {
+        if (user.recentylyLoggedIn) {
+            setShowChangeEmail(true);
+        }
+    }, [user]);
+
     return (
         <div id="email-change-container">
             {!showChangeEmail ? (
@@ -58,7 +65,7 @@ function EmailChange({ emailWasChanged, setEmailWasChanged, setCurrentEmail }) {
                         }}
                     />
                     <button
-                        className="account-manage-item"
+                        className="account-manage-item data-change-confirm-btn"
                         id="email-change-confirm"
                         onClick={validateEmail}>
                         {isEmailValid ? 'Zatwierdź email' : 'Błędny email'}
