@@ -117,12 +117,12 @@ function AdvertForm() {
                 <div id="heading-container">
                     <h3 id="add-advert-heading">Dodaj ogłoszenie</h3>
                 </div>
-                <ScrollToFieldError
-                    isValid={isValid}
-                    submitCount={submitCount}
-                    errors={errors}
-                />
                 <form id="add-advert-form" onSubmit={handleSubmit}>
+                    <ScrollToFieldError
+                        isValid={isValid}
+                        submitCount={submitCount}
+                        errors={errors}
+                    />
                     <main id="add-advert-main">
                         <label htmlFor="title">Tytuł ogłoszenia</label>
                         <input

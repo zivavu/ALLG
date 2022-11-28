@@ -69,13 +69,13 @@ const AdvertElement = ({
             )}
             <div className="advert-li-info">
                 <div className="advert-li-main-info">
-                    <span className="advert-li-category">
+                    <div className="advert-li-category">
                         <span>{advert.category ? advert.category.category : null}</span>
                         <span> &#8250; </span>
                         <span>
                             {advert.category ? advert.category.subCategory : null}
                         </span>
-                    </span>
+                    </div>
                     <div className="advert-li-title">{advert.title}</div>
                     <div className="advert-li-views">Wyświetlono {advert.views} razy</div>
                 </div>

@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 import SiteHeader from './components/header/SiteHeader.jsx';
 import { auth } from './config/firebase-config.js';
 import './main.css';
-import AdvertForm from './pages/addAdvert/AdvertForm.jsx';
+import AdvertForm from './pages/addAdvert/addAdvertForm.jsx';
 import AdvertView from './pages/advertView/AdvertView.jsx';
 import AuthPage from './pages/authentication/AuthPage.jsx';
 import { UserContext } from './pages/authentication/UserContext.jsx';

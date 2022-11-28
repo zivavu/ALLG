@@ -6,8 +6,9 @@ const HomePage = () => {
     const [didUserSearch, setDidUserSearch] = useState(false);
     const [userSearchInput, setUserSearchInput] = useState();
     useEffect(() => {
-        if (userSearchInput) {
+        if (userSearchInput && userSearchInput.category) {
             setDidUserSearch(true);
+            console.log('switching shit');
         }
     }, [userSearchInput]);
 

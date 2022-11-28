@@ -10,6 +10,10 @@
     width: 60%;
     height: 100%;
     margin: 15px auto;
+    border: 3px solid black;
+    background-color: rgb(0, 0, 0);
+    border-radius: 5px;
+    padding: 15px 10px;
 }
 #advert-view-page-container hr {
     width: 100%;
@@ -18,22 +22,27 @@
     background-color: var(--orange-light);
     box-shadow: 0 0 1px 2px rgb(100, 100, 100);
 }
-#advert-view-main .advert-info-container,
-#advert-picture-section {
+#advert-view-main .advert-info-container {
     width: 100%;
     background-color: white;
     box-sizing: border-box;
     font-family: 'Secular One', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+#advert-view-main > #advert-picture-section {
+    background-color: white;
+    padding: 5px 20px;
+    min-width: 50%;
+    max-width: 80%;
+    margin: 0 auto;
     border-radius: 5px;
 }
-#advert-view-main #advert-picture-section {
-    padding: 20px;
-    width: 100%;
-}
-#advert-picture-section img {
+
+#advert-picture-section .normal-size-image {
     display: block;
     height: auto;
-    width: 90%;
     object-fit: cover;
     height: 540px;
     margin: auto;
@@ -49,6 +58,9 @@
 }
 .category-separator {
     margin: 0 3px;
+}
+#advert-view-main #advert-city {
+    font-size: 24px;
 }
 #advert-view-main #advert-title {
     display: block;
@@ -71,7 +83,6 @@
 #advert-view-main #advert-description-container {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-
     padding: 15px 5%;
 }
 #advert-view-main #advert-description {
@@ -85,9 +96,8 @@
 #advert-owner-profile-container {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
     padding: 20px;
-    margin-bottom: 20px;
+    border-radius: 0;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
 }
@@ -99,6 +109,7 @@
     border: 2px solid black;
     border-radius: 4px;
     font-size: 30px;
+    align-self: flex-end;
     display: flex;
     align-items: center;
 }
@@ -118,9 +129,47 @@
     #advert-view-main {
         width: 75%;
     }
+    #advert-picture-section .normal-size-image {
+        height: 340px;
+    }
 }
 @media only screen and (max-device-width: 600px) {
     #advert-view-main {
         width: 95%;
+    }
+    #advert-picture-section .normal-size-image {
+        height: 240px;
+    }
+    #advert-view-main #advert-title {
+        font-size: 22px;
+    }
+    #advert-view-main #advert-city {
+        padding-top: 10px;
+        font-size: 18px;
+    }
+    #advert-view-main #advert-price {
+        font-size: 27px;
+        margin-top: 5px;
+    }
+    #advert-view-main #advert-condition {
+        width: 100px;
+        height: 20px;
+        line-height: 20px;
+        font-size: 13px;
+        text-align: center;
+        margin: 1% 0;
+    }
+    #advert-view-main #advert-description-container {
+        padding: 5px 2%;
+    }
+    #advert-view-main #advert-description {
+        font-size: 15px;
+    }
+    #advert-owner-profile-container {
+        padding: 5px;
+    }
+    #advert-owner-profile-container #profile {
+        margin-right: 10%;
+        font-size: 20px;
     }
 }

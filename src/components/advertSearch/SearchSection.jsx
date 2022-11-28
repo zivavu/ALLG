@@ -2,7 +2,7 @@ import { useState } from 'react';
 import '../../components/advertSearch/searchArea.css';
 import CitySearch from './CitySearch';
 import ProductSearch from './ProductSearch';
-function SearchSection({ setFieldValue, handleBlur, handleChange, values, isLoading }) {
+function SearchSection({ setFieldValue, handleBlur, values, isLoading }) {
     const [selectedCity, setSelectedCity] = useState('');
     return (
         <section id="search-section">

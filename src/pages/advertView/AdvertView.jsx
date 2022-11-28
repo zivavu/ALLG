@@ -12,6 +12,7 @@ function AdvertView() {
     const { id } = useParams();
     const [advertData, setAdvertData] = useState();
     const [imageURL, setImageURL] = useState('');
+    const [viewFullImage, setViewFullImage] = useState(false);
 
     useEffect(() => {
         getAdvertData();
@@ -54,24 +55,30 @@ function AdvertView() {
 
     return (
         <div id="advert-view-page-container">
-            <SearchSection />
-            <hr />
             <main id="advert-view-main">
                 <section id="advert-picture-section">
-                    <img src={imageURL}></img>
+                    <img
+                        className="normal-size-image"
+                        onClick={() => setViewFullImage(!viewFullImage)}
+                        src={imageURL}></img>
                 </section>
 
                 <div className="advert-info-container" id="advert-basic-info-container">
                     <div className="advert-info-container" id="advert-category-container">
-                        <span id="advert-category">
-                            {advertData ? advertData.category.category : null}
-                        </span>
-                        <span className="category-separator">&#8250;</span>
-                        <span id="adver-sub-category">
-                            {advertData ? advertData.category.subCategory : null}
+                        <span>
+                            <span id="advert-category">
+                                {advertData ? advertData.category.category : null}
+                            </span>
+                            <span className="category-separator">&#8250;</span>
+                            <span id="adver-sub-category">
+                                {advertData ? advertData.category.subCategory : null}
+                            </span>
                         </span>
                     </div>
                     <span id="advert-title">{advertData ? advertData.title : null}</span>
+                    <span id="advert-city">
+                        {advertData ? advertData.city.name : null}
+                    </span>
                     <span id="advert-price">
                         {advertData ? advertData.price : null}zł
                     </span>
