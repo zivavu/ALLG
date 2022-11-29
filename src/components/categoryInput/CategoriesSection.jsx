@@ -1,12 +1,12 @@
 import './categories.css';
 import CategoriesFlexbox from '/src/components/categoryInput/CategoriesFlexbox';
 
-const CategoriesSection = ({ setFieldValue }) => {
+const CategoriesSection = ({ setFieldValue, status }) => {
     return (
         <section id="categories-section">
             <div id="categories-container">
                 <div id="heading-container">
-                    <h3>Wybierz kategorie ogłoszeń</h3>
+                    <h3>{status ? status : 'Wybierz kategorie ogłoszeń'}</h3>
                 </div>
                 <CategoriesFlexbox
                     setFieldValue={setFieldValue}

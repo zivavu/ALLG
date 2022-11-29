@@ -3,7 +3,16 @@ import SearchSection from '../../components/advertSearch/SearchSection.jsx';
 import CategoriesSection from '../../components/categoryInput/CategoriesSection.jsx';
 
 function AdvertsSearchForm({ setUserSearchInput }) {
-    const { values, handleBlur, handleChange, handleSubmit, setFieldValue } = useFormik({
+    const {
+        values,
+        handleBlur,
+        handleChange,
+        handleSubmit,
+        setFieldValue,
+        setFieldError,
+        setStatus,
+        status,
+    } = useFormik({
         initialValues: {
             advertName: '',
             city: '',
@@ -13,6 +22,11 @@ function AdvertsSearchForm({ setUserSearchInput }) {
     });
 
     function onSubmit(values) {
+        if (!values.category.category && !values.city) {
+            setStatus('Musisz wprowadzić miasto lub kategorię');
+            return;
+        }
+        setStatus('');
         setUserSearchInput(values);
     }
     return (
@@ -26,6 +40,7 @@ function AdvertsSearchForm({ setUserSearchInput }) {
                 setFieldValue={setFieldValue}
                 handleBlur={handleBlur}
                 handleChange={handleChange}
+                status={status}
             />
         </form>
     );

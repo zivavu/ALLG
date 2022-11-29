@@ -9,6 +9,9 @@
 #adverts-list-container * {
     font-family: 'Secular One', sans-serif;
 }
+#adverts-list-container *::selection {
+    background-color: var(--dark-user-select);
+}
 .adverts-list-header {
     background-color: black;
 }

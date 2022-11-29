@@ -4,6 +4,9 @@
 #profile-section {
     margin-top: 15px;
 }
+#profile-section *::selection {
+    background-color: var(--dark-user-select);
+}
 #profile-container {
     width: 80%;
     height: 100%;

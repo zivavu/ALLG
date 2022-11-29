@@ -59,10 +59,9 @@ const getAdvertsByUserInput = async (values, setAdvertsData) => {
             console.log(error.message);
         }
     }
-    console.log(possibleCategories);
 
     const filterByUserInput = (advert) => {
-        //check if user input(if exists) matches the querried adverts
+        //Matches are true on match and when user input was empty
         const titleMatch =
             !title || advert.title.toLowerCase().includes(title.toLowerCase());
         const cityMatch = !city || advert.city.id === city.id;
@@ -70,11 +69,7 @@ const getAdvertsByUserInput = async (values, setAdvertsData) => {
             !category ||
             possibleCategories.some((category) => isEqual(category, advert.category));
 
-        console.log(titleMatch, cityMatch, categoryMatch);
         if (categoryMatch && titleMatch && cityMatch) {
-            return advert;
-        }
-        if (cityMatch && titleMatch && categoryMatch) {
             return advert;
         }
     };

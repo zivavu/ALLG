@@ -25,9 +25,13 @@ const Category = ({
             setExpandedCategory(isSelected ? null : name);
 
             //Haandles selection of category without a subcategory if it's allowed
-            if (isSingleCategoryInputAlowed) {
+            if (isSingleCategoryInputAlowed && !isSelected) {
                 setSelectedCategory({ category: name });
                 setFieldValue('category', { category: name });
+            }
+            if (isSelected) {
+                setSelectedCategory({});
+                setFieldValue('category', '');
             }
         }
     };

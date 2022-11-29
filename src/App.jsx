@@ -1,20 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import SiteHeader from './components/header/SiteHeader.jsx';
 import { auth } from './config/firebase-config.js';
 import './main.css';
-import AdvertForm from './pages/addAdvert/addAdvertForm.jsx';
-import AdvertView from './pages/advertView/AdvertView.jsx';
 import AuthPage from './pages/authentication/AuthPage.jsx';
 import { UserContext } from './pages/authentication/UserContext.jsx';
 import HomePage from './pages/homePage/Home.jsx';
-import Profile from './pages/myProfile/Profile.jsx';
-import ProfileView from './pages/viewProfile/ProfileView.jsx';
 
 <style>
     @import
     url('https://fonts.googleapis.com/css2?family=Aclonica&family=Secular+One&display=swap');
 </style>;
+
+const Profile = lazy(() => import('./pages/myProfile/Profile.jsx'));
+const ProfileView = lazy(() => import('./pages/viewProfile/ProfileView.jsx'));
+const AdvertView = lazy(() => import('./pages/advertView/AdvertView.jsx'));
+const AdvertForm = lazy(() => import('./pages/addAdvert/addAdvertForm.jsx'));
 
 function App() {
     const [user, setUser] = useState({ uid: '', displayName: '' });
@@ -33,39 +34,41 @@ function App() {
         <>
             <UserContext.Provider value={[user, setUser]}>
                 <SiteHeader />
-                <Routes>
-                    <Route path="/advert/:id" element={<AdvertView />}></Route>
+                <Suspense fallback={<div>Loading...</div>}>
+                    <Routes>
+                        <Route path="/advert/:id" element={<AdvertView />}></Route>
 
-                    <Route
-                        path="/new-advert"
-                        element={
-                            !user || user.uid == '' ? (
-                                <AuthPage type="auth" />
-                            ) : (
-                                <AdvertForm />
-                            )
-                        }></Route>
+                        <Route
+                            path="/new-advert"
+                            element={
+                                !user || user.uid == '' ? (
+                                    <AuthPage type="auth" />
+                                ) : (
+                                    <AdvertForm />
+                                )
+                            }></Route>
 
-                    {/* route to view other users profiles */}
-                    <Route
-                        path="/profile/:otherUserUID"
-                        element={<ProfileView />}></Route>
+                        {/* route to view other users profiles */}
+                        <Route
+                            path="/profile/:otherUserUID"
+                            element={<ProfileView />}></Route>
 
-                    {/* route to view active user profile */}
-                    <Route
-                        path="/my-profile"
-                        element={
-                            !user || user.uid == '' ? (
-                                <AuthPage type="auth" />
-                            ) : (
-                                <Profile />
-                            )
-                        }></Route>
-                    <Route
-                        path="/re-authenticate"
-                        element={<AuthPage type="reAuth" />}></Route>
-                    <Route path="/" element={<HomePage />}></Route>
-                </Routes>
+                        {/* route to view active user profile */}
+                        <Route
+                            path="/my-profile"
+                            element={
+                                !user || user.uid == '' ? (
+                                    <AuthPage type="auth" />
+                                ) : (
+                                    <Profile />
+                                )
+                            }></Route>
+                        <Route
+                            path="/re-authenticate"
+                            element={<AuthPage type="reAuth" />}></Route>
+                        <Route path="/" element={<HomePage />}></Route>
+                    </Routes>
+                </Suspense>
             </UserContext.Provider>
         </>
     );
