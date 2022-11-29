@@ -1,7 +1,14 @@
 Website is functional but it's build as a plaything.
 
-It has all of the basic online marketplace features such as:
+Technologies used: 
+- React + Vite
+- React-router
+- Firebase 
+Packages: 
+- Formik + Yup
+- lodash
 
+It has all of the basic online marketplace features such as:
 - search for adverts(based on title, city and category) and view them
 - account menagment
 - add new adverts
