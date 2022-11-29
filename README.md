@@ -20,5 +20,13 @@ It has all of the basic online marketplace features such as:
 - add/delete watched adverts
 - advet views counter
 
+You can register your own account or log with one of 4 example ones: 
+- example1@example.com
+- example2@example.com
+- example3@example.com
+- example4@example.com
+
+Password to all of them is example123.
+
 Work in progress.
 
