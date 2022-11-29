@@ -18,7 +18,7 @@ It has all of the basic online marketplace features such as:
 - view others adverts
 - view others profiles
 - add/delete watched adverts
-- advet view counter
+- advet views counter
 
 Work in progress.
 
