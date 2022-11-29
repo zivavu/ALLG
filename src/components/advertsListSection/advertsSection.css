@@ -14,6 +14,7 @@
 }
 .advert-li-container .image-container {
     width: max(130px, 15%);
+    max-height: 170px;
     display: flex;
     justify-content: center;
     margin: 0 5px;
@@ -21,6 +22,7 @@
 .advert-li-container img {
     max-width: 100%;
     max-height: 100%;
+    margin: auto 0;
     object-fit: contain;
 }
 #adverts-list-container .advert-li-container:hover {

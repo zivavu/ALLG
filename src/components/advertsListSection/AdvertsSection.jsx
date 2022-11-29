@@ -48,7 +48,6 @@ function AdvertsSection({ type, header, size, noAdvertsMessage, userSearchInput 
                 });
                 break;
             case 'advertsByUserInput':
-                console.log('goin in ');
                 getAdvertsByUserInput(userSearchInput, setAdvertsData);
                 break;
         }

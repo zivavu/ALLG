@@ -5,10 +5,10 @@ import AdvertsSearchForm from './AdvertsSearchForm.jsx';
 const HomePage = () => {
     const [didUserSearch, setDidUserSearch] = useState(false);
     const [userSearchInput, setUserSearchInput] = useState();
+
     useEffect(() => {
-        if (userSearchInput && userSearchInput.category) {
+        if (userSearchInput) {
             setDidUserSearch(true);
-            console.log('switching shit');
         }
     }, [userSearchInput]);
 

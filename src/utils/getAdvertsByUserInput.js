@@ -1,14 +1,16 @@
 import { collection, getDocs, query, where } from 'firebase/firestore';
+import isEqual from 'lodash/isEqual';
 import { categories as CategoriesData } from '../components/categoryInput/categories.json';
 import { db } from '../config/firebase-config';
 
 const getAdvertsByUserInput = async (values, setAdvertsData) => {
-    const { city, advertName, category } = values;
-    if (!category) return;
+    const { city, advertName: title, category } = values;
+    if (!category && !city) return;
+    const advertsRef = collection(db, 'adverts');
 
-    //array of objects containing category and all its subcategories
-    //based on categories.json file and category selected by user
     const possibleCategories = [];
+    //if user selected category without subCategory
+    //populates array with category subcategory object from categories json file
     if (!category.subCategory) {
         CategoriesData.forEach((categoryData) => {
             if (categoryData.name != category.category) return;
@@ -19,37 +21,64 @@ const getAdvertsByUserInput = async (values, setAdvertsData) => {
                 });
             });
         });
+        //else sets it to category subCategory object selected by user
     } else {
         possibleCategories.push(category);
     }
 
-    const advertsRef = collection(db, 'adverts');
-    const q = query(advertsRef, where('category', 'in', possibleCategories));
     const advertsResult = [];
-    try {
-        await getDocs(q).then((data) => {
-            if (data.docs) {
-                data.forEach((doc) => {
-                    advertsResult.push(doc.data());
-                });
-            } else setAdvertsData([]);
-        });
-    } catch (error) {
-        console.log(error.message);
+    if (city) {
+        const queryByCity = query(advertsRef, where('city', '==', city));
+        try {
+            await getDocs(queryByCity).then((data) => {
+                if (data.docs) {
+                    data.forEach((doc) => {
+                        advertsResult.push(doc.data());
+                    });
+                } else setAdvertsData([]);
+            });
+        } catch (error) {
+            console.log(error.message);
+        }
     }
 
+    if (category && !city) {
+        let queryByCategory = query(
+            advertsRef,
+            where('category', 'in', possibleCategories)
+        );
+        try {
+            await getDocs(queryByCategory).then((data) => {
+                if (data.docs) {
+                    data.forEach((doc) => {
+                        advertsResult.push(doc.data());
+                    });
+                } else setAdvertsData([]);
+            });
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
+    console.log(possibleCategories);
+
     const filterByUserInput = (advert) => {
-        if (!advertName && !city) return advert;
-        if (city && !advertName && advert.city.name === city.name) return advert;
-        if (
-            !city &&
-            advertName &&
-            advert.title.toLowerCase().includes(advertName.toLowerCase())
-        )
+        //check if user input(if exists) matches the querried adverts
+        const titleMatch =
+            !title || advert.title.toLowerCase().includes(title.toLowerCase());
+        const cityMatch = !city || advert.city.id === city.id;
+        const categoryMatch =
+            !category ||
+            possibleCategories.some((category) => isEqual(category, advert.category));
+
+        console.log(titleMatch, cityMatch, categoryMatch);
+        if (categoryMatch && titleMatch && cityMatch) {
             return advert;
+        }
+        if (cityMatch && titleMatch && categoryMatch) {
+            return advert;
+        }
     };
-    console.log(advertsResult);
-    console.log(advertsResult.filter((advert) => filterByUserInput(advert)));
     setAdvertsData(advertsResult.filter((advert) => filterByUserInput(advert)));
 };
+
 export default getAdvertsByUserInput;

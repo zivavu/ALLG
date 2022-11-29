@@ -4,6 +4,8 @@ const ProductSearch = ({ fieldValue, setFieldValue }) => {
             name="advertName"
             id="product-search"
             type="text"
+            autoComplete="off"
+            autoCorrect="off"
             onChange={(e) => {
                 setFieldValue('advertName', e.target.value);
             }}

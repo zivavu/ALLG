@@ -3,6 +3,7 @@ import { doc, getDoc, setDoc } from 'firebase/firestore';
 import React, { useContext } from 'react';
 import { auth, db } from '../../config/firebase-config';
 import { UserContext } from './UserContext';
+import googleImg from '/src/assets/googleSingInImg.png';
 
 function LoginWithGoogleBtn({ setLoading }) {
     const [user, setUser] = useContext(UserContext);
@@ -39,7 +40,7 @@ function LoginWithGoogleBtn({ setLoading }) {
         <>
             <img
                 className="login-with-google-btn"
-                src="src/assets/btn_google_signin_light_normal_web@2x.png"
+                src={googleImg}
                 alt="login with google"
                 onClick={loginWithGoogle}></img>
         </>
