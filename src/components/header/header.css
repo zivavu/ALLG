@@ -1,6 +1,5 @@
 #site-header {
     z-index: 5;
-    font-family: 'Secular One', sans-serif;
     font-weight: 600;
     width: auto;
     height: 70px;
@@ -11,6 +10,9 @@
     align-items: center;
     user-select: none;
 }
+#site-header {
+    font-family: 'Secular One', sans-serif;
+}
 #header-logo {
     text-decoration: none;
     color: white;
@@ -20,7 +22,7 @@
     text-shadow: none;
     transition: text-shadow 0.2s ease-in-out;
 }
-#logo {
+#site-header #logo {
     font-family: 'Aclonica', sans-serif;
 }
 .l-letter-logo {
@@ -57,6 +59,7 @@
     text-shadow: 0 0 2px white;
 }
 #add-advertisements-button {
+    font-family: 'Secular One', sans-serif;
     font-size: 17px;
     font-weight: 700;
     background-color: white;

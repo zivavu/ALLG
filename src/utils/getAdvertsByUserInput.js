@@ -61,7 +61,7 @@ const getAdvertsByUserInput = async (values, setAdvertsData) => {
     }
 
     const filterByUserInput = (advert) => {
-        //Matches are true on match and when user input was empty
+        //Matches are true on match or when user input was empty
         const titleMatch =
             !title || advert.title.toLowerCase().includes(title.toLowerCase());
         const cityMatch = !city || advert.city.id === city.id;

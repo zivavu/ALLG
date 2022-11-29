@@ -1,3 +1,5 @@
+//Code By Diego Castillo
+
 export const getFieldErrorNames = (formikErrors) => {
     const transformObjectToDotNotation = (obj, prefix = '', result = []) => {
         Object.keys(obj).forEach((key) => {
@@ -17,3 +19,5 @@ export const getFieldErrorNames = (formikErrors) => {
 
     return transformObjectToDotNotation(formikErrors);
 };
+
+//Code By Diego Castillo

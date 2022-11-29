@@ -295,7 +295,9 @@
         font-size: 13px;
     }
 }
+
 /* image loading animation */
+/* Code by https://github.com/zbryikt */
 .lds-hourglass {
     display: inline-block;
     position: relative;
@@ -328,3 +330,4 @@
         transform: rotate(1800deg);
     }
 }
+/* Code by https://github.com/zbryikt */

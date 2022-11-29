@@ -6,6 +6,7 @@ const getAdvertsByIdArr = async (idArr, setAdvertsData) => {
         setAdvertsData([]);
         return;
     }
+    //Max number of adverts requests capped to 10 coz of firebase query 'in' limitations
     if (idArr.length >= 10) idArr = idArr.slice(0, 10);
     const q = query(collection(db, 'adverts'), where('id', 'in', idArr));
     try {

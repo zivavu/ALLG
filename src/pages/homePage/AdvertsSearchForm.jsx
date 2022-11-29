@@ -22,6 +22,7 @@ function AdvertsSearchForm({ setUserSearchInput }) {
     });
 
     function onSubmit(values) {
+        //search form requires user to input category or value due to firebase text search limitations
         if (!values.category.category && !values.city) {
             setStatus('Musisz wprowadzić miasto lub kategorię');
             return;
