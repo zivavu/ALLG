@@ -4,6 +4,7 @@ Technologies used:
 - React + Vite
 - React-router
 - Firebase 
+
 Packages: 
 - Formik + Yup
 - lodash
