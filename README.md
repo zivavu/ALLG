@@ -26,7 +26,7 @@ You can register your own account or log with one of 4 example ones:
 - example3@example.com
 - example4@example.com
 
-Password to all of them is example123.
+Password to all of them is example123
 
 Work in progress.
 
