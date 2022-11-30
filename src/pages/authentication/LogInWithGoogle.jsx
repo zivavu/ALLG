@@ -29,8 +29,6 @@ function LoginWithGoogleBtn({ setLoading }) {
                         displayName: 'GoogleUser',
                     }),
                 ]);
-        } catch (error) {
-            console.log(error);
         } finally {
             setLoading(false);
         }

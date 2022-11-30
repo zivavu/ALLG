@@ -15,7 +15,10 @@ const ErrorPage = () => {
                     href="https://github.com/zivavu/ALLG/issues/new"
                     target="_blank"
                     className="add-issue error-page-link">
-                    Zgłoś problem na GitHubi'e
+                    Stwórz problem na GitHubi'e
+                </a>
+                <a href="mailto:zivavu@gmail.com" className="add-issue error-page-link">
+                    Napisz do mnie bezpośrednio
                 </a>
             </div>
         </div>

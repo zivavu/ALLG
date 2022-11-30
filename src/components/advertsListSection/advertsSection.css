@@ -185,6 +185,9 @@
     border: 2px solid black;
     color: black;
 }
+.advert-element-error-display {
+    color: rgb(92, 0, 0);
+}
 
 @media only screen and (max-device-width: 1250px) {
     #adverts-list-container {

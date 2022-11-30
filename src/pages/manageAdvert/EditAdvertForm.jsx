@@ -11,7 +11,7 @@ import { db } from '../../config/firebase-config';
 import addAdvertSchema from '../../schemas/addAdvertFormSchema';
 import { ScrollToFieldError } from '../../utils/scrollToFieldError';
 import { UserContext } from '../authentication/UserContext';
-import './addAdvert.css';
+import './manageAdvert.css';
 
 function EditAdvertForm() {
     const [user, setUser] = useContext(UserContext);
@@ -74,31 +74,25 @@ function EditAdvertForm() {
                     setAdvertInitValues(doc.data());
                 }
             });
-        } catch (error) {
-            console.log(error);
+        } catch {
+            navigate('/error/Nie-mogliśmy-znaleźć-tego-ogłoszenia');
         }
     }, []);
 
     async function onSubmit(values) {
+        const advertRef = doc(db, 'adverts', values.id);
         setIsLoading(true);
         try {
-            await uploadEditedAdvert(values).then(() => {
+            await updateDoc(advertRef, values).then(() => {
                 navigate(`/advert/${values.id}`);
             });
-        } catch (error) {
-            console.log(error.message);
+        } catch {
+            navigate('/error/Wystąpił-problem-przy-edytowaniu-ogłoszenia');
         } finally {
             setIsLoading(false);
         }
     }
-    const uploadEditedAdvert = async (values) => {
-        const advertRef = doc(db, 'adverts', values.id);
-        try {
-            await updateDoc(advertRef, values);
-        } catch {
-            navigate('/error/Wystąpił-problem-przy-edytowaniu-ogłoszenia');
-        }
-    };
+
     return (
         <div id="add-advert-container">
             <div id="advert-form-container">

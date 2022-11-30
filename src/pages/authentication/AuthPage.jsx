@@ -41,7 +41,7 @@ function AuthPage({ type }) {
             await updateProfile(auth.currentUser, {
                 displayName: displayName,
             });
-        } catch (error) {
+        } catch {
             setMainError('Jest już konto z takim adresem email');
         } finally {
             setLoading(false);
@@ -57,10 +57,11 @@ function AuthPage({ type }) {
                     setUser(userCredential.user);
                 }
             );
-        } catch (error) {
+        } catch {
             setMainError('Nie znaleźliśmy takiego użytkownika');
+        } finally {
+            setLoading(false);
         }
-        setLoading(false);
     }
     async function reauthUser(email, passowrd) {
         setLoading(true);
@@ -71,10 +72,11 @@ function AuthPage({ type }) {
                 setUser({ ...user, recentylyLoggedIn: true });
                 navigate('/my-profile');
             });
-        } catch (error) {
-            setMainError('Wprowadziłeś złe dane');
+        } catch {
+            setMainError('Wprowadziłeś błędne dane');
+        } finally {
+            setLoading(false);
         }
-        setLoading(false);
     }
 
     const submitUserRegistration = (e) => {

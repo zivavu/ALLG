@@ -12,7 +12,7 @@ import { db, storage } from '../../config/firebase-config';
 import addAdvertSchema from '../../schemas/addAdvertFormSchema';
 import { ScrollToFieldError } from '../../utils/scrollToFieldError';
 import { UserContext } from '../authentication/UserContext';
-import './addAdvert.css';
+import './manageAdvert.css';
 
 function AdvertForm() {
     const [user, setUser] = useContext(UserContext);
@@ -26,7 +26,6 @@ function AdvertForm() {
         touched,
         setFieldError,
         setFieldTouched,
-        resetForm,
         isValid,
         submitCount,
     } = useFormik({

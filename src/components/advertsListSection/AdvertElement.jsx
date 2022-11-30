@@ -18,10 +18,22 @@ const AdvertElement = ({
     const [imageURL, setImageURL] = useState('');
     const [imageLoading, setImageLoading] = useState(true);
     const [isWatched, setIsWatched] = useState(false);
+    const [mainError, setMainError] = useState();
 
     useEffect(() => {
         setIsWatched(isWatchedServerResponse);
     }, [isWatchedServerResponse]);
+
+    useEffect(() => {
+        downloadImage();
+    }, []);
+
+    //hides error 2secs after it appears
+    useEffect(() => {
+        setTimeout(() => {
+            setMainError();
+        }, 2000);
+    }, [mainError]);
 
     const downloadImage = async () => {
         setImageLoading(true);
@@ -32,15 +44,11 @@ const AdvertElement = ({
                 setImageURL(url);
                 setImageLoading(false);
             }
-        } catch (error) {
+        } catch {
             setImageLoading(false);
             setImageURL(imageNotFound);
         }
     };
-
-    useEffect(() => {
-        downloadImage();
-    }, []);
 
     const addToUsersWatchedAdverts = async () => {
         const watchedAdvertsRef = doc(db, 'users', user.uid);
@@ -49,7 +57,7 @@ const AdvertElement = ({
                 watched: arrayUnion(advert.id),
             });
         } catch {
-            console.log('stared not addded');
+            setMainError('Nie udało się polubić');
         }
     };
     const rmFromUsersWatchedAdverts = async () => {
@@ -59,7 +67,7 @@ const AdvertElement = ({
                 watched: arrayRemove(advert.id),
             });
         } catch {
-            console.log('stared not addded');
+            setMainError('Nie udało się usunąć z obserwowanych');
         }
     };
 
@@ -83,6 +91,9 @@ const AdvertElement = ({
                     </div>
                     <div className="advert-li-title">{advert.title}</div>
                     <div className="advert-li-views">Wyświetlono {advert.views} razy</div>
+                    <div className="advert-element-error-display">
+                        {mainError ? mainError : null}
+                    </div>
                 </div>
                 {showControlPanel && size != 'half-width' ? (
                     <AdvertControlPanel
