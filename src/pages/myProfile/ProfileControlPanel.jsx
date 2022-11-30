@@ -1,5 +1,6 @@
 import { signOut } from 'firebase/auth';
 import { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { auth } from '../../config/firebase-config';
 import { UserContext } from '../authentication/UserContext';
 import EmailChange from './EmailChange';
@@ -7,6 +8,8 @@ import PasswordChange from './PasswordChange';
 import ProfileInfo from './ProfileInfo';
 
 const ProfileControlPanel = () => {
+    const navigate = useNavigate();
+
     const [user, setUser] = useContext(UserContext);
     const [emailWasChanged, setEmailWasChanged] = useState(false);
     const [passwordWasChanged, setPasswordWasChanged] = useState(false);
@@ -18,7 +21,7 @@ const ProfileControlPanel = () => {
         try {
             await signOut(auth).then(setUser({ uid: '', displayName: '' }));
         } catch (error) {
-            console.log(error.message);
+            navigate('/error/Wystąpił-problem-przy-wylogowywaniu');
         }
     };
 

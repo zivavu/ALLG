@@ -3,12 +3,11 @@ import {
     EmailAuthProvider,
     reauthenticateWithCredential,
     signInWithEmailAndPassword,
-    signOut,
     updateProfile,
 } from 'firebase/auth';
 import { doc, setDoc } from 'firebase/firestore';
-import { useContext, useEffect, useState } from 'react';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useContext, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { auth, db } from '../../config/firebase-config';
 import userLoginSchema from '../../schemas/userLoginFormSchema';
 import userRegisterSchema from '../../schemas/userRegisterFormSchema';
@@ -92,21 +91,21 @@ function AuthPage({ type }) {
         <div id="auth-page-container">
             <div id="auth-container">
                 <div id="auth-option-chose-container">
-                    {/* Change type(login/register) of auth  */}
+                    {/* Change type(login/register) of auth form */}
                     <button
                         className={
                             visibleAuthContainer === 'login'
                                 ? `auth-option-button selected`
                                 : `auth-option-button`
                         }
-                        onClick={(e) => {
+                        onClick={() => {
                             setMainError('');
                             setVisibleAuthContainer('login');
                         }}>
                         {type === 'auth' ? 'Logowanie' : 'Potwierdź tożsamość'}
                     </button>
 
-                    {/* If type of auth is reauth shows only options same as with login */}
+                    {/* If type of auth is reauth shows only inputs same as with login */}
                     {type === 'reAuth' ? null : (
                         <button
                             className={
@@ -131,7 +130,6 @@ function AuthPage({ type }) {
                             onSubmit={submitUserLogIn}
                             schema={userLoginSchema}
                             mainError={mainError}
-                            setMainError={setMainError}
                         />
                         <LogInWithGoogleBtn setLoading={setLoading} />
                     </div>
@@ -145,7 +143,6 @@ function AuthPage({ type }) {
                             onSubmit={submitUserRegistration}
                             schema={userRegisterSchema}
                             mainError={mainError}
-                            setMainError={setMainError}
                         />
                         <LogInWithGoogleBtn />
                     </div>

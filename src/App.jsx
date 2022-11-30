@@ -5,6 +5,7 @@ import { auth } from './config/firebase-config.js';
 import './main.css';
 import AuthPage from './pages/authentication/AuthPage.jsx';
 import { UserContext } from './pages/authentication/UserContext.jsx';
+import ErrorPage from './pages/errorPage/ErrorPage.jsx';
 import HomePage from './pages/homePage/Home.jsx';
 
 <style>
@@ -15,8 +16,8 @@ import HomePage from './pages/homePage/Home.jsx';
 const Profile = lazy(() => import('./pages/myProfile/Profile.jsx'));
 const ProfileView = lazy(() => import('./pages/viewProfile/ProfileView.jsx'));
 const AdvertView = lazy(() => import('./pages/advertView/AdvertView.jsx'));
-const AdvertForm = lazy(() => import('./pages/addAdvert/addAdvertForm.jsx'));
-const EditAdvertForm = lazy(() => import('./pages/addAdvert/EditAdvertForm.jsx'));
+const AdvertForm = lazy(() => import('./pages/manageAdvert/addAdvertForm.jsx'));
+const EditAdvertForm = lazy(() => import('./pages/manageAdvert/EditAdvertForm.jsx'));
 
 function App() {
     const [user, setUser] = useState({ uid: '', displayName: '' });
@@ -72,6 +73,7 @@ function App() {
                             path="/re-authenticate"
                             element={<AuthPage type="reAuth" />}></Route>
                         <Route path="/" element={<HomePage />}></Route>
+                        <Route path="/error/:error" element={<ErrorPage />}></Route>
                     </Routes>
                 </Suspense>
             </UserContext.Provider>

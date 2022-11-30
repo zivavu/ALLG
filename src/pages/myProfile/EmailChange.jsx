@@ -20,8 +20,8 @@ function EmailChange({ emailWasChanged, setEmailWasChanged, setCurrentEmail }) {
                     setEmailWasChanged(true);
                     setCurrentEmail(userEmailInput);
                 });
-            } catch (error) {
-                console.log(error.message);
+            } catch {
+                navigate('/error/Nie udało się zmienić e-maila');
             }
     };
     const validateEmail = () => {

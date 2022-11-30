@@ -1,37 +1,21 @@
 import { uuidv4 } from '@firebase/util';
-import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { arrayUnion, doc, setDoc, updateDoc } from 'firebase/firestore';
+import { ref, uploadBytes } from 'firebase/storage';
 import { useFormik } from 'formik';
 import { useContext, useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import CitySearch from '../../components/advertSearch/CitySearch';
 import '../../components/categoryInput/categories.css';
 import CategoriesFlexbox from '../../components/categoryInput/CategoriesFlexbox';
 import FormValidationErrorMessage from '../../components/FormValidationErrorMessage';
-import { db } from '../../config/firebase-config';
+import { db, storage } from '../../config/firebase-config';
 import addAdvertSchema from '../../schemas/addAdvertFormSchema';
 import { ScrollToFieldError } from '../../utils/scrollToFieldError';
 import { UserContext } from '../authentication/UserContext';
 import './addAdvert.css';
 
-function EditAdvertForm() {
-    const editedAdvertId = useParams('id');
+function AdvertForm() {
     const [user, setUser] = useContext(UserContext);
-    const [advertInitValues, setAdvertInitValues] = useState({
-        id: '',
-        title: '',
-        description: '',
-        city: {
-            id: '',
-            name: '',
-            voivodeship: '',
-            country: '',
-        },
-        category: {},
-        price: '',
-        imagePath: '',
-        condition: '',
-        views: 0,
-    });
     const {
         values,
         errors,
@@ -42,15 +26,32 @@ function EditAdvertForm() {
         touched,
         setFieldError,
         setFieldTouched,
+        resetForm,
         isValid,
         submitCount,
     } = useFormik({
-        initialValues: advertInitValues,
+        initialValues: {
+            id: '',
+            title: '',
+            description: '',
+            city: {
+                id: '',
+                name: '',
+                voivodeship: '',
+                country: 'Polska',
+            },
+            category: {},
+            price: '',
+            imagePath: '',
+            condition: '',
+            views: 0,
+        },
         validationSchema: addAdvertSchema,
-        enableReinitialize: true,
         onSubmit,
     });
 
+    const [uploadedImage, setUploadedImage] = useState(null);
+    const [inputBoxImage, setInputBoxImage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
@@ -59,51 +60,62 @@ function EditAdvertForm() {
         setFieldValue('id', uuidv4());
     }, [user]);
 
-    //basic user validation
-    useEffect(() => {
-        try {
-            const advertRef = doc(db, 'adverts', editedAdvertId.id);
-            getDoc(advertRef).then((doc) => {
-                if (
-                    !user.uid ||
-                    !doc.data().user.uid ||
-                    user.uid != doc.data().user.uid
-                ) {
-                    navigate('/');
-                } else {
-                    setAdvertInitValues(doc.data());
-                }
-            });
-        } catch (error) {
-            console.log(error);
-        }
-    }, []);
+    const handleImageInput = (e) => {
+        const randomImagePath = `images/${uuidv4()}`;
+        setFieldValue('imagePath', randomImagePath);
+        setUploadedImage(e.target.files[0]);
+        //display image on the image input element
+        setInputBoxImage(`${URL.createObjectURL(e.target.files[0])}`);
+    };
 
     async function onSubmit(values) {
         setIsLoading(true);
         try {
-            await uploadEditedAdvert(values).then(() => {
+            await Promise.allSettled([
+                await uploadAdvert(values),
+                await addAdvertToUserDoc(values),
+                await uploadImage(values),
+            ]).then(() => {
                 navigate(`/advert/${values.id}`);
             });
         } catch (error) {
-            console.log(error.message);
+            navigate('/error/Wystąpił-problem-przy-dodawaniu-ogłoszenia');
         } finally {
             setIsLoading(false);
         }
     }
-    const uploadEditedAdvert = async (values) => {
+    const uploadAdvert = async (values) => {
         const advertRef = doc(db, 'adverts', values.id);
         try {
-            await updateDoc(advertRef, values);
+            await setDoc(advertRef, values);
         } catch {
             console.log('Dane były niepoprawne');
+        }
+    };
+    const addAdvertToUserDoc = async (values) => {
+        const userDocRef = doc(db, 'users', values.user.uid);
+        try {
+            await updateDoc(userDocRef, {
+                displayName: values.user.displayName,
+                adverts: arrayUnion(values.id),
+            });
+        } catch {
+            console.log('Nie udało się podpiąć do użytkownika');
+        }
+    };
+    const uploadImage = async (values) => {
+        const advertImagesRef = ref(storage, `${values.imagePath}`);
+        try {
+            await uploadBytes(advertImagesRef, uploadedImage);
+        } catch {
+            console.log('Nie udało się wysłać zdjęcia');
         }
     };
     return (
         <div id="add-advert-container">
             <div id="advert-form-container">
                 <div id="heading-container">
-                    <h3 id="add-advert-heading">Edycja ogłoszenia</h3>
+                    <h3 id="add-advert-heading">Dodaj ogłoszenie</h3>
                 </div>
                 <form id="add-advert-form" onSubmit={handleSubmit}>
                     <ScrollToFieldError
@@ -122,7 +134,7 @@ function EditAdvertForm() {
                             onBlur={handleBlur}
                             autoComplete="off"
                             autoCorrect="off"
-                            placeholder="Nowy Tytuł"></input>
+                            placeholder="Dodaj Tytuł"></input>
                         {errors.title && touched.title ? (
                             <FormValidationErrorMessage error={errors.title} />
                         ) : null}
@@ -137,7 +149,7 @@ function EditAdvertForm() {
                             value={values.description}
                             onChange={handleChange}
                             onBlur={handleBlur}
-                            placeholder="Nowy Opis"></textarea>
+                            placeholder="Dodaj Opis"></textarea>
                         {errors.description && touched.description ? (
                             <FormValidationErrorMessage error={errors.description} />
                         ) : null}
@@ -150,7 +162,6 @@ function EditAdvertForm() {
                                     id="radio-new"
                                     className="advert-condition-radio"
                                     name="condition"
-                                    checked={values.condition === 'Nowy'}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value="Nowy"></input>
@@ -162,7 +173,6 @@ function EditAdvertForm() {
                                     id="radio-used"
                                     className="advert-condition-radio"
                                     name="condition"
-                                    checked={values.condition === 'Używany'}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value="używany"></input>
@@ -189,7 +199,6 @@ function EditAdvertForm() {
                         <div id="add-advert-categories-container">
                             <CategoriesFlexbox
                                 setFieldValue={setFieldValue}
-                                fieldValue={values.category}
                                 isSingleCategoryInputAlowed={false}
                             />
                         </div>
@@ -198,6 +207,22 @@ function EditAdvertForm() {
                                 error={errors.category.category}
                             />
                         ) : null}
+                        <label htmlFor="photo-custom-input">Zdjęcia</label>
+                        <label
+                            htmlFor="photo-input"
+                            className="photo-custom-input"
+                            style={{ backgroundImage: `url(${inputBoxImage})` }}
+                            id="photo-custom-input">
+                            <span className={inputBoxImage ? 'hidden' : ''}>
+                                Dodaj Zdjęcie
+                            </span>
+                        </label>
+                        <input
+                            type="file"
+                            id="photo-input"
+                            onChange={handleImageInput}
+                            accept="image/heic, image/png, image/jpeg, image/webp"
+                            multiple=""></input>
 
                         <label htmlFor="price-input">Cena</label>
                         <div id="advert-price-input-box">
@@ -220,7 +245,7 @@ function EditAdvertForm() {
                         <input
                             id="add-advert-form-submit"
                             type="submit"
-                            value="Edytuj ogłoszenie"
+                            value="Opublikuj ogłoszenie"
                             disabled={isLoading}
                         />
                     </main>
@@ -229,4 +254,4 @@ function EditAdvertForm() {
         </div>
     );
 }
-export default EditAdvertForm;
+export default AdvertForm;

@@ -1,13 +1,15 @@
 import { doc, getDoc, increment, updateDoc } from 'firebase/firestore';
 import { getDownloadURL, ref } from 'firebase/storage';
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import SearchSection from '../../components/advertSearch/SearchSection';
 import { db, storage } from '../../config/firebase-config';
 import { UserContext } from '../authentication/UserContext';
 import './advertView.css';
+import imageNotFound from '/src/assets/image-not-found-icon.webp';
 
 function AdvertView() {
+    const navigate = useNavigate();
     const [user, setUser] = useContext(UserContext);
     const { id } = useParams();
     const [advertData, setAdvertData] = useState();
@@ -26,31 +28,29 @@ function AdvertView() {
                     setAdvertData(doc.data());
                     downloadImage(doc.data().imagePath);
                     updateFirebaseViewsCounter();
-                } else return;
+                } else {
+                    navigate('/error/Nie-mogliśmy-znaleźć-tego-ogłoszenia');
+                }
             })
-            .catch((error) => {
-                console.log(error);
+            .catch(() => {
+                navigate('/error/Nie-mogliśmy-znaleźć-tego-ogłoszenia');
             });
     };
 
-    const downloadImage = (imagePath) => {
+    const downloadImage = async (imagePath) => {
         const imagePathRef = ref(storage, `${imagePath}`);
-        getDownloadURL(imagePathRef)
-            .then((url) => {
-                setImageURL(url);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    };
-    const updateFirebaseViewsCounter = async () => {
         try {
-            await updateDoc(docRef, {
-                views: increment(1),
-            });
-        } catch {
-            console.log(error);
+            const url = await getDownloadURL(imagePathRef);
+            if (url) setImageURL(url);
+        } catch (error) {
+            setImageURL(imageNotFound);
         }
+    };
+
+    const updateFirebaseViewsCounter = () => {
+        updateDoc(docRef, {
+            views: increment(1),
+        });
     };
 
     return (

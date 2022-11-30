@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { db, storage } from '../../config/firebase-config';
 import AdvertControlPanel from './AdvertControlPanel';
 import WatchAdvertButton from './WatchAdvertButton';
+import imageNotFound from '/src/assets/image-not-found-icon.webp';
 
 const AdvertElement = ({
     advert,
@@ -22,17 +23,19 @@ const AdvertElement = ({
         setIsWatched(isWatchedServerResponse);
     }, [isWatchedServerResponse]);
 
-    const downloadImage = () => {
+    const downloadImage = async () => {
         setImageLoading(true);
         const imagePathRef = ref(storage, `${advert.imagePath}`);
-        getDownloadURL(imagePathRef)
-            .then((url) => {
+        try {
+            const url = await getDownloadURL(imagePathRef);
+            if (url) {
                 setImageURL(url);
                 setImageLoading(false);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+            }
+        } catch (error) {
+            setImageLoading(false);
+            setImageURL(imageNotFound);
+        }
     };
 
     useEffect(() => {

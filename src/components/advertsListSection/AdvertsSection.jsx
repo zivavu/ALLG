@@ -6,7 +6,7 @@ import { UserContext } from '../../pages/authentication/UserContext';
 import getAdvertsByIdArr from '../../utils/getAdvertsByIdArr';
 import getAdvertsByUserInput from '../../utils/getAdvertsByUserInput';
 import getAllAdverts from '../../utils/getAllAdverts';
-import getUserAdvertsIDs from '../../utils/getUserAdvertsIDs';
+import getUsersAdvertsIDs from '../../utils/getUsersAdvertsIDs';
 import getWatchedAdvertsIds from '../../utils/getWatchedAdvertsIds';
 import AdvertElement from './AdvertElement';
 
@@ -34,19 +34,23 @@ function AdvertsSection({ type, header, size, noAdvertsMessage, userSearchInput 
             case 'allAdverts':
                 getAllAdverts(setAdvertsData);
                 break;
+
             case 'usersAdverts':
-                getUserAdvertsIDs(user.uid).then((ids) => {
+                getUsersAdvertsIDs(user.uid).then((ids) => {
                     getAdvertsByIdArr(ids, setAdvertsData);
                 });
                 break;
+
             case 'watchedAdverts':
                 getAdvertsByIdArr(watchedAdverts, setAdvertsData);
                 break;
+
             case 'otherUserAdverts':
-                getUserAdvertsIDs(otherUserUID).then((ids) => {
+                getUsersAdvertsIDs(otherUserUID).then((ids) => {
                     getAdvertsByIdArr(ids, setAdvertsData);
                 });
                 break;
+
             case 'advertsByUserInput':
                 getAdvertsByUserInput(userSearchInput, setAdvertsData);
                 break;

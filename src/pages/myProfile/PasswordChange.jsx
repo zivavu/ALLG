@@ -19,8 +19,8 @@ function PasswordChange({ passwordWasChanged, setPasswordWasChanged }) {
                     setShowChangePassword(false);
                     setPasswordWasChanged(true);
                 });
-            } catch (error) {
-                console.log(error.message);
+            } catch {
+                navigate('/error/Nie udało się zmienić hasła');
             }
     };
     useEffect(() => {
