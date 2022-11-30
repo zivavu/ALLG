@@ -22,10 +22,12 @@ function AuthPage({ type }) {
 
     const [user, setUser] = useContext(UserContext);
     const [isLoading, setLoading] = useState(false);
+    const [mainError, setMainError] = useState();
 
     const registerUser = async (email, password, displayName) => {
         try {
             setLoading(true);
+            setMainError('');
             const userCredential = await createUserWithEmailAndPassword(
                 auth,
                 email,
@@ -41,7 +43,7 @@ function AuthPage({ type }) {
                 displayName: displayName,
             });
         } catch (error) {
-            console.log(error.message);
+            setMainError('Jest już konto z takim adresem email');
         } finally {
             setLoading(false);
         }
@@ -49,6 +51,7 @@ function AuthPage({ type }) {
 
     async function loginUser(email, password) {
         setLoading(true);
+        setMainError('');
         try {
             return await signInWithEmailAndPassword(auth, email, password).then(
                 (userCredential) => {
@@ -56,12 +59,13 @@ function AuthPage({ type }) {
                 }
             );
         } catch (error) {
-            console.log(error.message);
+            setMainError('Nie znaleźliśmy takiego użytkownika');
         }
         setLoading(false);
     }
     async function reauthUser(email, passowrd) {
         setLoading(true);
+        setMainError('');
         const providedCredential = EmailAuthProvider.credential(email, passowrd);
         try {
             await reauthenticateWithCredential(user, providedCredential).then(() => {
@@ -69,7 +73,7 @@ function AuthPage({ type }) {
                 navigate('/my-profile');
             });
         } catch (error) {
-            console.log(error.message);
+            setMainError('Wprowadziłeś złe dane');
         }
         setLoading(false);
     }
@@ -88,6 +92,7 @@ function AuthPage({ type }) {
         <div id="auth-page-container">
             <div id="auth-container">
                 <div id="auth-option-chose-container">
+                    {/* Change type(login/register) of auth  */}
                     <button
                         className={
                             visibleAuthContainer === 'login'
@@ -95,10 +100,13 @@ function AuthPage({ type }) {
                                 : `auth-option-button`
                         }
                         onClick={(e) => {
+                            setMainError('');
                             setVisibleAuthContainer('login');
                         }}>
                         {type === 'auth' ? 'Logowanie' : 'Potwierdź tożsamość'}
                     </button>
+
+                    {/* If type of auth is reauth shows only options same as with login */}
                     {type === 'reAuth' ? null : (
                         <button
                             className={
@@ -107,6 +115,7 @@ function AuthPage({ type }) {
                                     : `auth-option-button`
                             }
                             onClick={() => {
+                                setMainError('');
                                 setVisibleAuthContainer('register');
                             }}>
                             Rejestracja
@@ -121,6 +130,8 @@ function AuthPage({ type }) {
                             isDisabled={isLoading}
                             onSubmit={submitUserLogIn}
                             schema={userLoginSchema}
+                            mainError={mainError}
+                            setMainError={setMainError}
                         />
                         <LogInWithGoogleBtn setLoading={setLoading} />
                     </div>
@@ -133,6 +144,8 @@ function AuthPage({ type }) {
                             isDisabled={isLoading}
                             onSubmit={submitUserRegistration}
                             schema={userRegisterSchema}
+                            mainError={mainError}
+                            setMainError={setMainError}
                         />
                         <LogInWithGoogleBtn />
                     </div>

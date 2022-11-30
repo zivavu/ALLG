@@ -97,6 +97,13 @@
     font-weight: 200;
     margin: 0;
     font-size: 16px;
+    color: rgb(97, 0, 0);
+}
+.auth-form .form-validation-error-message.main {
+    font-weight: 200;
+    margin-top: 5px;
+    font-size: 19px;
+    color: rgb(131, 0, 0);
 }
 
 .login-with-google-btn {

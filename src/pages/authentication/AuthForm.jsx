@@ -1,18 +1,24 @@
 import { useFormik } from 'formik';
 import FormValidationErrorMessage from '../../components/FormValidationErrorMessage';
-const AuthForm = ({ type, onSubmit, schema, isDisabled }) => {
-    const { values, errors, handleBlur, handleChange, handleSubmit, touched } = useFormik(
-        {
-            initialValues: {
-                displayName: '',
-                email: '',
-                password: '',
-                confirmPassword: '',
-            },
-            validationSchema: schema,
-            onSubmit,
-        }
-    );
+const AuthForm = ({ type, onSubmit, schema, isDisabled, mainError }) => {
+    const {
+        values,
+        errors,
+        handleBlur,
+        handleChange,
+        handleSubmit,
+        touched,
+        setMainError,
+    } = useFormik({
+        initialValues: {
+            displayName: '',
+            email: '',
+            password: '',
+            confirmPassword: '',
+        },
+        validationSchema: schema,
+        onSubmit,
+    });
 
     return (
         <form className="auth-form" onSubmit={handleSubmit}>
@@ -92,6 +98,9 @@ const AuthForm = ({ type, onSubmit, schema, isDisabled }) => {
                 className="auth-submit"
                 value={type === 'login' ? 'Zaloguj się' : 'Zarejestruj się'}
             />
+            {mainError ? (
+                <FormValidationErrorMessage error={mainError} main={true} />
+            ) : null}
         </form>
     );
 };
