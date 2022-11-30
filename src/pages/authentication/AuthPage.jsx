@@ -37,7 +37,7 @@ function AuthPage({ type }) {
             await setDoc(doc(db, 'users', userCredential.user.uid), {
                 watched: [],
                 adverts: [],
-                displayName: 'GoogleUser',
+                displayName: displayName,
             });
             await updateProfile(auth.currentUser, {
                 displayName: displayName,
