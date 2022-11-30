@@ -1,6 +1,5 @@
 import { uuidv4 } from '@firebase/util';
-import { arrayUnion, doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
-import { ref, uploadBytes } from 'firebase/storage';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { useFormik } from 'formik';
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -8,13 +7,13 @@ import CitySearch from '../../components/advertSearch/CitySearch';
 import '../../components/categoryInput/categories.css';
 import CategoriesFlexbox from '../../components/categoryInput/CategoriesFlexbox';
 import FormValidationErrorMessage from '../../components/FormValidationErrorMessage';
-import { db, storage } from '../../config/firebase-config';
+import { db } from '../../config/firebase-config';
 import addAdvertSchema from '../../schemas/addAdvertFormSchema';
 import { ScrollToFieldError } from '../../utils/scrollToFieldError';
 import { UserContext } from '../authentication/UserContext';
 import './addAdvert.css';
 
-function EditAdvertForm({ initValues }) {
+function EditAdvertForm() {
     const editedAdvertId = useParams('id');
     const [user, setUser] = useContext(UserContext);
     const [advertInitValues, setAdvertInitValues] = useState({
@@ -52,8 +51,6 @@ function EditAdvertForm({ initValues }) {
         onSubmit,
     });
 
-    const [uploadedImage, setUploadedImage] = useState(null);
-    const [inputBoxImage, setInputBoxImage] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
@@ -62,6 +59,7 @@ function EditAdvertForm({ initValues }) {
         setFieldValue('id', uuidv4());
     }, [user]);
 
+    //basic user validation
     useEffect(() => {
         try {
             const advertRef = doc(db, 'adverts', editedAdvertId.id);
@@ -81,14 +79,6 @@ function EditAdvertForm({ initValues }) {
         }
     }, []);
 
-    const handleImageInput = (e) => {
-        const randomImagePath = `images/${uuidv4()}`;
-        setFieldValue('imagePath', randomImagePath);
-        setUploadedImage(e.target.files[0]);
-        //display image on the image input element
-        setInputBoxImage(`${URL.createObjectURL(e.target.files[0])}`);
-    };
-
     async function onSubmit(values) {
         setIsLoading(true);
         try {
@@ -104,7 +94,7 @@ function EditAdvertForm({ initValues }) {
     const uploadEditedAdvert = async (values) => {
         const advertRef = doc(db, 'adverts', values.id);
         try {
-            await setDoc(advertRef, values);
+            await updateDoc(advertRef, values);
         } catch {
             console.log('Dane były niepoprawne');
         }
