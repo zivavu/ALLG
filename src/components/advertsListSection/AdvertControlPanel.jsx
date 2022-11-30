@@ -1,9 +1,11 @@
 import { arrayRemove, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { deleteObject, ref } from 'firebase/storage';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { db, storage } from '../../config/firebase-config';
 
 function AdvertControlPanel({ advert, setIsDeleted, user }) {
+    const navigate = useNavigate();
     const [showDeleteConfrim, setShowDeleteConfirm] = useState(false);
     const [isDisabled, setIsDisabled] = useState(false);
 
@@ -29,18 +31,22 @@ function AdvertControlPanel({ advert, setIsDeleted, user }) {
             setIsDeleted(true);
         }
     };
+    const handleAdvertEdit = async (e) => {
+        e.preventDefault();
+        navigate(`/edit-advert/${advert.id}`);
+    };
 
     return (
         <div className="advert-owner-control-container">
             {showDeleteConfrim ? (
                 <button
-                    className="advert-delete-btn confrim"
+                    className="advert-control-btn confrim"
                     onClick={handleAdvertDelete}>
                     Na pewno?
                 </button>
             ) : (
                 <button
-                    className="advert-delete-btn"
+                    className="advert-control-btn"
                     disabled={isDisabled}
                     onClick={(e) => {
                         e.preventDefault();
@@ -49,6 +55,9 @@ function AdvertControlPanel({ advert, setIsDeleted, user }) {
                     Usuń
                 </button>
             )}
+            <button className="advert-control-btn" onClick={handleAdvertEdit}>
+                Edytuj
+            </button>
         </div>
     );
 }

@@ -4,6 +4,7 @@ import React, { useContext } from 'react';
 import { auth, db } from '../../config/firebase-config';
 import { UserContext } from './UserContext';
 import googleImg from '/src/assets/googleSingInImg.png';
+
 function LoginWithGoogleBtn({ setLoading }) {
     const [user, setUser] = useContext(UserContext);
     const googleProvider = new GoogleAuthProvider();

@@ -27,9 +27,13 @@ function CitySearch({ setFieldValue, handleBlur, fieldValue }) {
             const querySnapshot = await getDocs(q);
             setCitiesResponse(querySnapshot.docs.map((doc) => doc.data()));
         };
-
         getCities();
     }, [debouncedValue]);
+
+    //handles initial value of field on edit advert page
+    useEffect(() => {
+        if (fieldValue) setSearchTerm(fieldValue);
+    }, [fieldValue]);
 
     const handleChange = (e) => {
         setCitiesResponse([]);

@@ -9,7 +9,6 @@ function AdvertsSearchForm({ setUserSearchInput }) {
         handleChange,
         handleSubmit,
         setFieldValue,
-        setFieldError,
         setStatus,
         status,
     } = useFormik({

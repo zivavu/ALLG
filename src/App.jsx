@@ -16,6 +16,7 @@ const Profile = lazy(() => import('./pages/myProfile/Profile.jsx'));
 const ProfileView = lazy(() => import('./pages/viewProfile/ProfileView.jsx'));
 const AdvertView = lazy(() => import('./pages/advertView/AdvertView.jsx'));
 const AdvertForm = lazy(() => import('./pages/addAdvert/addAdvertForm.jsx'));
+const EditAdvertForm = lazy(() => import('./pages/addAdvert/EditAdvertForm.jsx'));
 
 function App() {
     const [user, setUser] = useState({ uid: '', displayName: '' });
@@ -47,6 +48,10 @@ function App() {
                                     <AdvertForm />
                                 )
                             }></Route>
+
+                        <Route
+                            path="/edit-advert/:id"
+                            element={<EditAdvertForm />}></Route>
 
                         {/* route to view other users profiles */}
                         <Route
