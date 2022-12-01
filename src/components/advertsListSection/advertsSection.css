@@ -303,7 +303,7 @@
 
 /* image loading animation */
 /* Code by https://github.com/zbryikt */
-.lds-hourglass {
+#adverts-list-container .lds-hourglass {
     display: inline-block;
     position: relative;
     margin: auto;

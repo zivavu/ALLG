@@ -14,6 +14,7 @@ function AdvertView() {
     const { id } = useParams();
     const [advertData, setAdvertData] = useState();
     const [imageURL, setImageURL] = useState('');
+    const [isImageLoading, setIsImageLoading] = useState(true);
     const [viewFullImage, setViewFullImage] = useState(false);
 
     useEffect(() => {
@@ -38,12 +39,15 @@ function AdvertView() {
     };
 
     const downloadImage = async (imagePath) => {
+        setIsImageLoading(true);
         const imagePathRef = ref(storage, `${imagePath}`);
         try {
             const url = await getDownloadURL(imagePathRef);
             if (url) setImageURL(url);
         } catch (error) {
             setImageURL(imageNotFound);
+        } finally {
+            setIsImageLoading(false);
         }
     };
 
@@ -57,10 +61,16 @@ function AdvertView() {
         <div id="advert-view-page-container">
             <main id="advert-view-main">
                 <section id="advert-picture-section">
-                    <img
-                        className="normal-size-image"
-                        onClick={() => setViewFullImage(!viewFullImage)}
-                        src={imageURL}></img>
+                    {isImageLoading ? (
+                        <div className="placeholder">
+                            <div className="animated-background"></div>
+                        </div>
+                    ) : (
+                        <img
+                            className="normal-size-image"
+                            onClick={() => setViewFullImage(!viewFullImage)}
+                            src={imageURL}></img>
+                    )}
                 </section>
 
                 <div className="advert-info-container" id="advert-basic-info-container">

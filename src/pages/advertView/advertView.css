@@ -126,6 +126,34 @@
     box-shadow: inset 0 0 2px 1px black;
 }
 
+/* Code from https://codepen.io/aji/pen/evMKWN */
+.placeholder {
+    margin: 0 auto;
+    width: 100%;
+    background-color: #eee;
+}
+@keyframes placeHolderShimmer {
+    0% {
+        background-position: -468px 0;
+    }
+    100% {
+        background-position: 468px 0;
+    }
+}
+.animated-background {
+    animation-duration: 1.25s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeHolderShimmer;
+    animation-timing-function: linear;
+    background: darkgray;
+    background: linear-gradient(to right, #eeeeee 10%, #dddddd 18%, #eeeeee 33%);
+    background-size: 800px 104px;
+    height: 500px;
+    position: relative;
+}
+/* ///////////// */
+
 @media only screen and (max-device-width: 1000px) {
     #advert-view-main {
         width: 75%;
@@ -133,12 +161,19 @@
     #advert-picture-section .normal-size-image {
         height: 340px;
     }
+    .animated-background {
+        height: 340px;
+    }
 }
+
 @media only screen and (max-device-width: 600px) {
     #advert-view-main {
         width: 95%;
     }
     #advert-picture-section .normal-size-image {
+        height: 240px;
+    }
+    .animated-background {
         height: 240px;
     }
     #advert-view-main #advert-title {

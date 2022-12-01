@@ -15,11 +15,11 @@ import './advertsSection.css';
 function AdvertsSection({ type, header, size, noAdvertsMessage, userSearchInput }) {
     const [advertsData, setAdvertsData] = useState([]);
     const [watchedAdverts, setWatchedAdverts] = useState([]);
-
-    //set to true when any advert got deleted by user
     const [dynamicHeader, setDynamicHeader] = useState(header);
-    const [isDeleted, setIsDeleted] = useState(false);
     const [user, setUser] = useContext(UserContext);
+
+    //is set to true when any advert got deleted by user
+    const [isDeleted, setIsDeleted] = useState(false);
 
     //used only when viewing other user adverts
     const { otherUserUID } = useParams(user);
@@ -38,6 +38,7 @@ function AdvertsSection({ type, header, size, noAdvertsMessage, userSearchInput 
             case 'usersAdverts':
                 getUsersAdvertsIDs(user.uid).then((ids) => {
                     getAdvertsByIdArr(ids, setAdvertsData);
+                    setIsDeleted(false);
                 });
                 break;
 
