@@ -7,6 +7,7 @@ import AuthPage from './pages/authentication/AuthPage.jsx';
 import { UserContext } from './pages/authentication/UserContext.jsx';
 import ErrorPage from './pages/errorPage/ErrorPage.jsx';
 import HomePage from './pages/homePage/Home.jsx';
+import NewAdvertForm from './pages/manageAdvert/NewAdvertForm.jsx';
 
 <style>
     @import
@@ -16,7 +17,6 @@ import HomePage from './pages/homePage/Home.jsx';
 const Profile = lazy(() => import('./pages/myProfile/Profile.jsx'));
 const ProfileView = lazy(() => import('./pages/viewProfile/ProfileView.jsx'));
 const AdvertView = lazy(() => import('./pages/advertView/AdvertView.jsx'));
-const AdvertForm = lazy(() => import('./pages/manageAdvert/addAdvertForm.jsx'));
 const EditAdvertForm = lazy(() => import('./pages/manageAdvert/EditAdvertForm.jsx'));
 
 function App() {
@@ -46,7 +46,7 @@ function App() {
                                 !user || user.uid == '' ? (
                                     <AuthPage type="auth" />
                                 ) : (
-                                    <AdvertForm />
+                                    <NewAdvertForm />
                                 )
                             }></Route>
 

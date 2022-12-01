@@ -57,7 +57,7 @@ const AdvertElement = ({
                 watched: arrayUnion(advert.id),
             });
         } catch {
-            setMainError('Nie udało się polubić');
+            setMainError('Nie udało się zaobserwować');
         }
     };
     const rmFromUsersWatchedAdverts = async () => {

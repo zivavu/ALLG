@@ -11,6 +11,7 @@ function CitySearch({ setFieldValue, handleBlur, fieldValue }) {
     const debouncedValue = useDebounce(searchTerm, 500);
 
     useEffect(() => {
+        //convert user input to format found in firestore
         const cityToSearch = searchTerm[0]
             ? searchTerm.split('')[0].toUpperCase() +
               searchTerm.split('').slice(1).join('')
@@ -53,6 +54,7 @@ function CitySearch({ setFieldValue, handleBlur, fieldValue }) {
                 }}
                 onBlur={(e) => {
                     handleBlur(e);
+                    if (citiesResponse[0]) setFieldValue('city', citiesResponse[0]);
                     setCitiesResponse([]);
                 }}
                 value={searchTerm}></input>

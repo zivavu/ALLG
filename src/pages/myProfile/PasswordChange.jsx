@@ -29,6 +29,12 @@ function PasswordChange({ passwordWasChanged, setPasswordWasChanged }) {
         }
     }, [user]);
 
+    const validatePassword = () => {
+        if (userPasswordInput.length > 8) {
+            updateUserPassword();
+        } else setIsPasswordValid(false);
+    };
+
     return (
         <div id="password-change-container">
             {!showChangePassword ? (
@@ -52,13 +58,14 @@ function PasswordChange({ passwordWasChanged, setPasswordWasChanged }) {
                         value={userPasswordInput}
                         onInput={(e) => {
                             setUserPasswordInput(e.target.value);
+                            setIsPasswordValid(true);
                         }}
                     />
                     <button
                         className="account-manage-item data-change-confirm-btn"
                         id="password-change-confirm"
-                        onClick={updateUserPassword}>
-                        {isPasswordValid ? 'Zatwierdź hasło' : 'Błędne hasło'}
+                        onClick={validatePassword}>
+                        {isPasswordValid ? 'Zatwierdź hasło' : 'Min 8 znaków'}
                     </button>
                 </>
             )}

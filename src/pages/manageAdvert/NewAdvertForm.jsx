@@ -25,6 +25,7 @@ function AdvertForm() {
         setFieldValue,
         touched,
         setFieldError,
+        setErrors,
         setFieldTouched,
         isValid,
         submitCount,
@@ -51,6 +52,7 @@ function AdvertForm() {
 
     const [uploadedImage, setUploadedImage] = useState(null);
     const [inputBoxImage, setInputBoxImage] = useState('');
+    const [isImageValid, setIsImageValid] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
@@ -60,6 +62,10 @@ function AdvertForm() {
     }, [user]);
 
     const handleImageInput = (e) => {
+        setFieldTouched('imagePath', true);
+        if (e.target.files[0].size / 1048576 > 5) {
+            return;
+        }
         const randomImagePath = `images/${uuidv4()}`;
         setFieldValue('imagePath', randomImagePath);
         setUploadedImage(e.target.files[0]);
@@ -88,7 +94,7 @@ function AdvertForm() {
         try {
             await setDoc(advertRef, values);
         } catch {
-            console.log('Dane były niepoprawne');
+            navigate('/error/Wprowadziłeś-niepoprawne-dane');
         }
     };
     const addAdvertToUserDoc = async (values) => {
@@ -99,7 +105,7 @@ function AdvertForm() {
                 adverts: arrayUnion(values.id),
             });
         } catch {
-            console.log('Nie udało się podpiąć do użytkownika');
+            navigate('/error/Wystąpił-problem-przy-dodawaniu-ogłoszenia');
         }
     };
     const uploadImage = async (values) => {
@@ -107,7 +113,7 @@ function AdvertForm() {
         try {
             await uploadBytes(advertImagesRef, uploadedImage);
         } catch {
-            console.log('Nie udało się wysłać zdjęcia');
+            navigate('/error/Zdjęcie-było-niepoprawne');
         }
     };
     return (
@@ -187,7 +193,6 @@ function AdvertForm() {
                             handleBlur={handleBlur}
                             fieldValue={values.city.name}
                             setFieldValue={setFieldValue}
-                            setFieldError={setFieldError}
                             setFieldTouched={setFieldTouched}
                         />
                         {errors.city && touched.city ? (
@@ -216,6 +221,9 @@ function AdvertForm() {
                                 Dodaj Zdjęcie
                             </span>
                         </label>
+                        {errors.imagePath && touched.imagePath ? (
+                            <FormValidationErrorMessage error={errors.imagePath} />
+                        ) : null}
                         <input
                             type="file"
                             id="photo-input"

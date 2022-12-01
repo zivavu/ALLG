@@ -19,6 +19,7 @@ const addAdvertSchema = yup.object().shape({
         })
         .required('Wybierz kategorię'),
     condition: yup.string().required('Podaj stan przedmiotu'),
+    imagePath: yup.string().required('Zdjęcie(max 5MB) jest wymagane'),
     price: yup
         .number()
         .typeError('Cena musi być liczbą')
