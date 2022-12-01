@@ -1,6 +1,7 @@
 import { arrayRemove, arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import { getDownloadURL, ref } from 'firebase/storage';
 import { useEffect, useState } from 'react';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
 import { db, storage } from '../../config/firebase-config';
 import AdvertControlPanel from './AdvertControlPanel';
@@ -77,7 +78,7 @@ const AdvertElement = ({
                 <div className="lds-hourglass"></div>
             ) : (
                 <div className="image-container">
-                    <img src={imageURL} alt="Przedmiot ogłoszenia" />
+                    <LazyLoadImage src={imageURL} alt="Przedmiot ogłoszenia" />
                 </div>
             )}
             <div className="advert-li-info">

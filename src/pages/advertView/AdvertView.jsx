@@ -69,6 +69,7 @@ function AdvertView() {
                         <img
                             className="normal-size-image"
                             onClick={() => setViewFullImage(!viewFullImage)}
+                            alt="Przedmiot ogłoszenia"
                             src={imageURL}></img>
                     )}
                 </section>
