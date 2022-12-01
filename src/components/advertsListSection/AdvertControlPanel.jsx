@@ -23,8 +23,8 @@ function AdvertControlPanel({ advert, setIsDeleted, user }) {
                     adverts: arrayRemove(advert.id),
                 }),
             ]);
-        } catch (error) {
-            console.log(error);
+        } catch {
+            navigate(`/error/Wystąpił-błąd-przy-usuwaniu-ogłoszenia`);
         } finally {
             setIsDisabled(false);
             //handles component rerender on delete

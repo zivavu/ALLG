@@ -13,7 +13,7 @@ const getWatchedAdvertsIds = async (setWatchedAdverts, user) => {
             }
         });
     } catch {
-        console.log('Użytkownik nie ma dokumentu z obserwowanymi');
+        setWatchedAdverts([]);
     }
 };
 export default getWatchedAdvertsIds;

@@ -37,8 +37,8 @@ const getAdvertsByUserInput = async (values, setAdvertsData) => {
                     });
                 } else setAdvertsData([]);
             });
-        } catch (error) {
-            console.log(error.message);
+        } catch {
+            setAdvertsData([]);
         }
     }
 
@@ -55,8 +55,8 @@ const getAdvertsByUserInput = async (values, setAdvertsData) => {
                     });
                 } else setAdvertsData([]);
             });
-        } catch (error) {
-            console.log(error.message);
+        } catch {
+            setAdvertsData([]);
         }
     }
 

@@ -18,7 +18,7 @@ const getAdvertsByIdArr = async (idArr, setAdvertsData) => {
             }
         });
     } catch {
-        (error) => console.log(error);
+        setAdvertsData([]);
     }
 };
 export default getAdvertsByIdArr;
