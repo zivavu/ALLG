@@ -2,12 +2,11 @@ import { doc, getDoc, increment, updateDoc } from 'firebase/firestore';
 import { getDownloadURL, ref } from 'firebase/storage';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import SearchSection from '../../components/advertSearch/SearchSection';
 import { db, storage } from '../../config/firebase-config';
 import { UserContext } from '../authentication/UserContext';
 import './advertView.css';
+import FullImageView from './FullImageView';
 import imageNotFound from '/src/assets/image-not-found-icon.webp';
-
 function AdvertView() {
     const navigate = useNavigate();
     const [user, setUser] = useContext(UserContext);
@@ -59,6 +58,13 @@ function AdvertView() {
 
     return (
         <div id="advert-view-page-container">
+            {viewFullImage ? (
+                <FullImageView
+                    imageURL={imageURL}
+                    advertData={advertData}
+                    setViewFullImage={setViewFullImage}
+                />
+            ) : null}
             <main id="advert-view-main">
                 <section id="advert-picture-section">
                     {isImageLoading ? (
@@ -68,7 +74,11 @@ function AdvertView() {
                     ) : (
                         <img
                             className="normal-size-image"
-                            onClick={() => setViewFullImage(!viewFullImage)}
+                            onClick={() => {
+                                document.body.scrollTop =
+                                    document.documentElement.scrollTop = 0;
+                                setViewFullImage(!viewFullImage);
+                            }}
                             alt="Przedmiot ogłoszenia"
                             src={imageURL}></img>
                     )}

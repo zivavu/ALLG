@@ -51,6 +51,7 @@
     background-color: var(--gray);
     border-radius: 5px;
     box-shadow: inset 0 0 3px 2px black;
+    cursor: pointer;
 }
 #advert-basic-info-container {
     border-radius: 5px;
@@ -154,6 +155,40 @@
 }
 /* ///////////// */
 
+.full-image-view {
+    top: 70px;
+    position: absolute;
+    width: 100%;
+    height: calc(100% - 70px);
+    background-color: black;
+}
+.full-view-image-container {
+    position: absolute;
+    height: 100%;
+    max-width: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: row;
+}
+.full-view-image-container img {
+    height: 100%;
+    max-width: 100%;
+}
+.full-view-image-close-btn {
+    position: absolute;
+    right: 0;
+}
+.full-view-image-close-btn svg {
+    cursor: pointer;
+    width: 72px;
+    height: 72px;
+    fill: var(--orange);
+}
+.full-view-image-close-btn svg:hover {
+    fill: black;
+    stroke: none;
+}
 @media only screen and (max-device-width: 1000px) {
     #advert-view-main {
         width: 75%;
