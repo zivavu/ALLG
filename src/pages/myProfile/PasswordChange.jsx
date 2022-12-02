@@ -23,6 +23,7 @@ function PasswordChange({ passwordWasChanged, setPasswordWasChanged }) {
                 navigate('/error/Nie udało się zmienić hasła');
             }
     };
+    //lets user see the password change input box
     useEffect(() => {
         if (user.recentylyLoggedIn) {
             setShowChangePassword(true);

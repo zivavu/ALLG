@@ -27,7 +27,7 @@ const HomePage = () => {
             ) : (
                 <AdvertsSection
                     key="allAdverts"
-                    header="Najnowsze ogłoszenia"
+                    header="Poszukaj czegoś dla siebie"
                     type="allAdverts"
                     noAdvertsMessage="Nie znaleźliśmy żadnych ogłoszeń"
                     size="half-width"

@@ -1,4 +1,3 @@
-import { doc, getDoc } from 'firebase/firestore';
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { db } from '../../config/firebase-config';
@@ -61,6 +60,7 @@ function AdvertsSection({ type, header, size, noAdvertsMessage, userSearchInput 
                 break;
         }
     }, [isDeleted, userSearchInput]);
+
     useEffect(() => {
         getWatchedAdvertsIds(setWatchedAdverts, user);
     }, [user, setUser]);

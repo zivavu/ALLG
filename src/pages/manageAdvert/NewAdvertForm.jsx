@@ -24,8 +24,6 @@ function AdvertForm() {
         handleSubmit,
         setFieldValue,
         touched,
-        setFieldError,
-        setErrors,
         setFieldTouched,
         isValid,
         submitCount,
@@ -52,7 +50,6 @@ function AdvertForm() {
 
     const [uploadedImage, setUploadedImage] = useState(null);
     const [inputBoxImage, setInputBoxImage] = useState('');
-    const [isImageValid, setIsImageValid] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
@@ -63,6 +60,7 @@ function AdvertForm() {
 
     const handleImageInput = (e) => {
         setFieldTouched('imagePath', true);
+        //limit image size that user wants to upload to 5MB
         if (e.target.files[0].size / 1048576 > 5) {
             return;
         }
@@ -89,6 +87,7 @@ function AdvertForm() {
             setIsLoading(false);
         }
     }
+
     const uploadAdvert = async (values) => {
         const advertRef = doc(db, 'adverts', values.id);
         try {
@@ -116,6 +115,7 @@ function AdvertForm() {
             navigate('/error/Zdjęcie-było-niepoprawne');
         }
     };
+
     return (
         <div id="add-advert-container">
             <div id="advert-form-container">

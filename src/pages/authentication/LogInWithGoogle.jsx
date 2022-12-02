@@ -16,7 +16,7 @@ function LoginWithGoogleBtn({ setLoading }) {
             const userDocRef = doc(db, 'users', result.user.uid);
             const userSnap = await getDoc(userDocRef);
 
-            //handle new user
+            //handle new user document
             if (!userSnap.exists())
                 await Promise.all([
                     setDoc(userDocRef, {
