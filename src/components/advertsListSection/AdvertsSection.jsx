@@ -29,6 +29,14 @@ function AdvertsSection({ type, header, size, noAdvertsMessage, userSearchInput 
         }
     }, [advertsData]);
 
+    //used when user is viewing watched adverts on his profile
+    useEffect(() => {
+        if (type === 'watchedAdverts') {
+            getAdvertsByIdArr(watchedAdverts, setAdvertsData);
+        }
+    }, [watchedAdverts]);
+
+    //used for every different scenario
     useEffect(() => {
         switch (type) {
             case 'allAdverts':
@@ -42,10 +50,6 @@ function AdvertsSection({ type, header, size, noAdvertsMessage, userSearchInput 
                 });
                 break;
 
-            case 'watchedAdverts':
-                getAdvertsByIdArr(watchedAdverts, setAdvertsData);
-                break;
-
             case 'otherUserAdverts':
                 getUsersAdvertsIDs(otherUserUID).then((ids) => {
                     getAdvertsByIdArr(ids, setAdvertsData);
@@ -56,8 +60,7 @@ function AdvertsSection({ type, header, size, noAdvertsMessage, userSearchInput 
                 getAdvertsByUserInput(userSearchInput, setAdvertsData);
                 break;
         }
-    }, [isDeleted, watchedAdverts, userSearchInput]);
-
+    }, [isDeleted, userSearchInput]);
     useEffect(() => {
         getWatchedAdvertsIds(setWatchedAdverts, user);
     }, [user, setUser]);
