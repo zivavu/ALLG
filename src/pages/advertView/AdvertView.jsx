@@ -7,6 +7,7 @@ import { UserContext } from '../authentication/UserContext';
 import './advertView.css';
 import FullImageView from './FullImageView';
 import imageNotFound from '/src/assets/image-not-found-icon.webp';
+
 function AdvertView() {
     const navigate = useNavigate();
     const [user, setUser] = useContext(UserContext);

@@ -52,7 +52,7 @@ function PasswordChange({ passwordWasChanged, setPasswordWasChanged }) {
             ) : (
                 <>
                     <input
-                        type="text"
+                        type="password"
                         id="password-change-input"
                         className="account-manage-item"
                         placeholder="Podaj nowe hasło"
