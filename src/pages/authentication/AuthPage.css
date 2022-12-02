@@ -118,6 +118,27 @@
     background-color: #4285f4;
 }
 
+/* auth loading animation */
+/* Code by https://github.com/zbryikt */
+.auth-form .lds-hourglass {
+    display: inline-block;
+    position: relative;
+    margin: 0 auto;
+    width: 80px;
+    height: 80px;
+}
+.auth-form .lds-hourglass:after {
+    content: ' ';
+    display: block;
+    border-radius: 50%;
+    width: 0;
+    height: 0;
+    box-sizing: border-box;
+    border: 32px solid var(--orange);
+    border-color: black transparent black transparent;
+    animation: lds-hourglass 1.2s infinite;
+}
+
 @media only screen and (max-device-width: 600px) {
     #auth-container {
         height: 85%;

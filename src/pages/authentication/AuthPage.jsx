@@ -129,7 +129,7 @@ function AuthPage({ type }) {
                     <div id="auth-login-container" className="auth-login-screen">
                         <AuthForm
                             type="login"
-                            isDisabled={isLoading}
+                            isLoading={isLoading}
                             onSubmit={submitUserLogIn}
                             schema={userLoginSchema}
                             mainError={mainError}
@@ -142,7 +142,7 @@ function AuthPage({ type }) {
                     <div id="auth-register-container" className="auth-login-screen">
                         <AuthForm
                             type="register"
-                            isDisabled={isLoading}
+                            isLoading={isLoading}
                             onSubmit={submitUserRegistration}
                             schema={userRegisterSchema}
                             mainError={mainError}
