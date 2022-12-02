@@ -74,6 +74,7 @@ function App() {
                             element={<AuthPage type="reAuth" />}></Route>
                         <Route path="/" element={<HomePage />}></Route>
                         <Route path="/error/:error" element={<ErrorPage />}></Route>
+                        <Route path="*" element={<ErrorPage />}></Route>
                     </Routes>
                 </Suspense>
             </UserContext.Provider>

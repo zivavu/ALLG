@@ -3,7 +3,9 @@ import './error.css';
 
 const ErrorPage = () => {
     const { error } = useParams();
-    const errorMessage = error.split('-').join(' ');
+    let errorMessage;
+    if (!error) errorMessage = 'Ta strona nie istnieje';
+    else errorMessage = error.split('-').join(' ');
     return (
         <div className="error-page">
             <div className="error-container">

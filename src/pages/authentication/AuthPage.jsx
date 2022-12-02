@@ -63,6 +63,7 @@ function AuthPage({ type }) {
             setLoading(false);
         }
     }
+
     async function reauthUser(email, passowrd) {
         setLoading(true);
         setMainError('');

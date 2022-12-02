@@ -158,26 +158,28 @@
 .full-image-view {
     top: 70px;
     position: absolute;
+    height: 100%;
     width: 100%;
     height: calc(100% - 70px);
     background-color: black;
 }
 .full-view-image-container {
     position: absolute;
+    left: 50%;
     height: 100%;
     max-width: 100%;
-    left: 50%;
     transform: translateX(-50%);
     display: flex;
     flex-direction: row;
 }
 .full-view-image-container img {
+    margin: auto;
     height: 100%;
-    max-width: 100%;
+    width: auto;
 }
 .full-view-image-close-btn {
-    position: absolute;
     right: 0;
+    position: absolute;
 }
 .full-view-image-close-btn svg {
     cursor: pointer;
