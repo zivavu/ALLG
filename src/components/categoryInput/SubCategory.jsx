@@ -20,8 +20,8 @@ const SubCategory = ({
         <li
             className={`${
                 isSelected ? 'sub-category categories-selected' : 'sub-category'
-            }`}
-            onClick={categorySelectHandler}>
+            }`}>
+            <button onClick={categorySelectHandler}></button>
             {subCategory}
         </li>
     );

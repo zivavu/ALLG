@@ -53,12 +53,14 @@ const Category = ({
                 onMouseLeave={() => {
                     setShowSubCategories(false);
                     setExpandedCategory(null);
-                }}
-                onClick={handleClick}>
+                }}>
+                <button onClick={handleClick}></button>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <path d={svgPath} />
                 </svg>
+
                 <span>{name}</span>
+
                 {showSubCategories && (
                     <div className="sub-categories-container">
                         <ul>
