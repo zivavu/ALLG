@@ -2,24 +2,27 @@ Website is functional but it's build as a plaything.
 
 Technologies used:
 
--   React + Vite
--   React-router
--   Firebase
-
-Packages:
-
+-   ReactJs + Vite
+-   React Router
+-   HTML
+-   CSS
+-   JavaScript
+-   ES6
 -   Formik + Yup
--   lodash
+-   Firebase Hosting
+-   Firestore Auth
+-   Firestore Database
+-   Firestore Storage
 
 It has all of the basic online marketplace features such as:
 
--   search for adverts(based on title, city and category) and view them
--   add new adverts
--   edit adverts
+-   search for adverts(based on title, city and category)
+-   add your adverts
+-   edit your adverts
 -   form validation
 -   advet views counter
--   view others adverts
--   view others profiles
+-   view other users adverts
+-   view other users profiles
 -   account menagment
 -   add/delete watched adverts
 -   check or delete your adverts
