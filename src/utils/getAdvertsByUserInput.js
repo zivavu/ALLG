@@ -26,6 +26,7 @@ const getAdvertsByUserInput = async (values, setAdvertsData) => {
     }
 
     const advertsResult = [];
+
     if (city) {
         const queryByCity = query(advertsRef, where('city', '==', city));
         try {
@@ -63,7 +64,10 @@ const getAdvertsByUserInput = async (values, setAdvertsData) => {
         const categoryMatch =
             !category ||
             possibleCategories.some((possibleCategory) => {
-                return possibleCategory.subCategory === advert.category.subCategory;
+                return (
+                    possibleCategory.category === advert.category.category &&
+                    possibleCategory.subCategory === advert.category.subCategory
+                );
             });
 
         if (categoryMatch && titleMatch && cityMatch) {

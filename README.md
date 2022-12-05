@@ -1,4 +1,5 @@
-Website is functional but it's build as a plaything.
+Online marketplace clone.
+Website is functional but it's build as a plaything/showoff project.
 
 Technologies used:
 
@@ -30,5 +31,3 @@ It has all of the basic online marketplace features such as:
 You can register your own account or log with example one:
 email: example1@example.com
 password: example123
-
-Work in progress.

@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { db } from '../../config/firebase-config';
 import { UserContext } from '../../pages/authentication/UserContext';
 import getAdvertsByIdArr from '../../utils/getAdvertsByIdArr';
 import getAdvertsByUserInput from '../../utils/getAdvertsByUserInput';
