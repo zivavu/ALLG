@@ -18,22 +18,18 @@ const Category = ({
         setIsSelected(name === selectedCategory.category);
     }, [selectedCategory]);
 
-    //Adds mobile support by allowing only one expanded category element
+    //Adds mobile support by expanding category container on click, and allowing only one expanded category element
     const handleClick = (e) => {
         e.preventDefault();
-        if (e.target.className != 'sub-category') {
-            setExpandedCategory(isSelected ? null : name);
-
-            //Haandles selection of category without a subcategory if it's allowed
-            if (isSingleCategoryInputAlowed && !isSelected) {
-                setSelectedCategory({ category: name });
-                setFieldValue('category', { category: name });
-            }
-            if (isSelected) {
-                setSelectedCategory({});
-                setFieldValue('category', '');
-            }
+        console.log(isSelected);
+        if (isSingleCategoryInputAlowed && !isSelected) {
+            setIsSelected(true);
+            setSelectedCategory({ category: name });
+            setFieldValue('category', { category: name });
+            return;
         }
+        setExpandedCategory(isSelected ? name : null);
+        //Haandles selection of category without a subcategory if it's allowed
     };
     useEffect(() => {
         expandedCategory === name ? setShowSubCategories(true) : setShowSubCategories(false);

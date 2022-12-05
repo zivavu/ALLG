@@ -1,5 +1,5 @@
 Online marketplace clone.
-Website is functional but it's build as a plaything/showoff project.
+Website is functional, but it's build as a plaything/showoff project.
 
 Technologies used:
 
@@ -28,6 +28,6 @@ It has all of the basic online marketplace features such as:
 -   add/delete watched adverts
 -   check or delete your adverts
 
-You can register your own account or log with example one:
+You can register your own account, or log in with example one:
 email: example1@example.com
 password: example123

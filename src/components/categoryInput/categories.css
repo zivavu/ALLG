@@ -145,6 +145,9 @@ h3 {
         font-size: 14px;
         margin: 5px;
     }
+    h3 {
+        font-size: 20px;
+    }
 
     .category-container > svg {
         width: 40px;
