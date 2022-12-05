@@ -1,5 +1,4 @@
 import { collection, getDocs, query, where } from 'firebase/firestore';
-import isEqual from 'lodash/isEqual';
 import { categories as CategoriesData } from '../components/categoryInput/categories.json';
 import { db } from '../config/firebase-config';
 
@@ -43,10 +42,7 @@ const getAdvertsByUserInput = async (values, setAdvertsData) => {
     }
 
     if (category && !city) {
-        let queryByCategory = query(
-            advertsRef,
-            where('category', 'in', possibleCategories)
-        );
+        let queryByCategory = query(advertsRef, where('category', 'in', possibleCategories));
         try {
             await getDocs(queryByCategory).then((data) => {
                 if (data.docs) {
@@ -62,12 +58,13 @@ const getAdvertsByUserInput = async (values, setAdvertsData) => {
 
     const filterByUserInput = (advert) => {
         //Matches are true on match or when user input was empty
-        const titleMatch =
-            !title || advert.title.toLowerCase().includes(title.toLowerCase());
+        const titleMatch = !title || advert.title.toLowerCase().includes(title.toLowerCase());
         const cityMatch = !city || advert.city.id === city.id;
         const categoryMatch =
             !category ||
-            possibleCategories.some((category) => isEqual(category, advert.category));
+            possibleCategories.some((possibleCategory) => {
+                return possibleCategory.subCategory === advert.category.subCategory;
+            });
 
         if (categoryMatch && titleMatch && cityMatch) {
             return advert;
