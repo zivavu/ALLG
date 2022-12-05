@@ -7,10 +7,7 @@ function SearchSection({ setFieldValue, handleBlur, values, isLoading }) {
     return (
         <section id="search-section">
             <div id="search-container">
-                <ProductSearch
-                    setFieldValue={setFieldValue}
-                    fieldValue={values.advertName}
-                />
+                <ProductSearch setFieldValue={setFieldValue} fieldValue={values.advertName} />
                 <CitySearch
                     selectedCity={selectedCity}
                     setFieldValue={setFieldValue}

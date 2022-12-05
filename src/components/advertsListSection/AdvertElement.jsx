@@ -8,14 +8,7 @@ import AdvertControlPanel from './AdvertControlPanel';
 import WatchAdvertButton from './WatchAdvertButton';
 import imageNotFound from '/src/assets/image-not-found-icon.webp';
 
-const AdvertElement = ({
-    advert,
-    showControlPanel,
-    user,
-    isWatchedServerResponse,
-    size,
-    setIsDeleted,
-}) => {
+const AdvertElement = ({ advert, showControlPanel, user, isWatchedServerResponse, size, setIsDeleted }) => {
     const [imageURL, setImageURL] = useState('');
     const [imageLoading, setImageLoading] = useState(true);
     const [isWatched, setIsWatched] = useState(false);
@@ -86,22 +79,14 @@ const AdvertElement = ({
                     <div className="advert-li-category">
                         <span>{advert.category ? advert.category.category : null}</span>
                         <span> &#8250; </span>
-                        <span>
-                            {advert.category ? advert.category.subCategory : null}
-                        </span>
+                        <span>{advert.category ? advert.category.subCategory : null}</span>
                     </div>
                     <div className="advert-li-title">{advert.title}</div>
                     <div className="advert-li-views">Wyświetlono {advert.views} razy</div>
-                    <div className="advert-element-error-display">
-                        {mainError ? mainError : null}
-                    </div>
+                    <div className="advert-element-error-display">{mainError ? mainError : null}</div>
                 </div>
                 {showControlPanel && size != 'half-width' ? (
-                    <AdvertControlPanel
-                        advert={advert}
-                        setIsDeleted={setIsDeleted}
-                        user={user}
-                    />
+                    <AdvertControlPanel advert={advert} setIsDeleted={setIsDeleted} user={user} />
                 ) : null}
                 <div className="advert-li-details">
                     <span className="advert-price">{advert.price}zł</span>

@@ -3,9 +3,7 @@ const FullImageView = ({ imageURL, advertData, setViewFullImage }) => {
         <div className="full-image-view">
             <div className="full-view-image-container">
                 <img src={imageURL} alt="Przedmiot ogłoszenia"></img>
-                <div
-                    className="full-view-image-close-btn"
-                    onClick={() => setViewFullImage(false)}>
+                <div className="full-view-image-close-btn" onClick={() => setViewFullImage(false)}>
                     <svg
                         clipRule="evenodd"
                         fillRule="evenodd"

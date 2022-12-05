@@ -30,10 +30,7 @@ const ProfileControlPanel = () => {
             <div id="profile-container">
                 <ProfileInfo emailValue={emailWasChanged ? currentEmail : user.email} />
                 <div id="account-manage-container">
-                    <button
-                        id="log-out-button"
-                        className="account-manage-item"
-                        onClick={logoutUser}>
+                    <button id="log-out-button" className="account-manage-item" onClick={logoutUser}>
                         Wyloguj się
                     </button>
                     {user.providerData[0].providerId === 'password' ? (

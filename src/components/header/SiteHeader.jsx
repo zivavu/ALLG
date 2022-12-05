@@ -20,11 +20,7 @@ const SiteHeader = () => {
                 </div>
             </Link>
             <nav id="header-nav">
-                <Link
-                    to="my-profile"
-                    className="nav-element nav-link"
-                    id="nav-profile"
-                    title="Twoje Konto">
+                <Link to="my-profile" className="nav-element nav-link" id="nav-profile" title="Twoje Konto">
                     <UserSVG />
                     <span>Twoje konto</span>
                 </Link>

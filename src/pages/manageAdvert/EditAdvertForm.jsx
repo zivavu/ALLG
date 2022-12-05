@@ -64,11 +64,7 @@ function EditAdvertForm() {
         try {
             const advertRef = doc(db, 'adverts', editedAdvertId);
             getDoc(advertRef).then((doc) => {
-                if (
-                    !user.uid ||
-                    !doc.data().user.uid ||
-                    user.uid != doc.data().user.uid
-                ) {
+                if (!user.uid || !doc.data().user.uid || user.uid != doc.data().user.uid) {
                     navigate('/');
                 } else {
                     setAdvertInitValues(doc.data());
@@ -100,11 +96,7 @@ function EditAdvertForm() {
                     <h3 id="add-advert-heading">Edycja ogłoszenia</h3>
                 </div>
                 <form id="add-advert-form" onSubmit={handleSubmit}>
-                    <ScrollToFieldError
-                        isValid={isValid}
-                        submitCount={submitCount}
-                        errors={errors}
-                    />
+                    <ScrollToFieldError isValid={isValid} submitCount={submitCount} errors={errors} />
                     <main id="add-advert-main">
                         <label htmlFor="title">Tytuł ogłoszenia</label>
                         <input
@@ -186,9 +178,7 @@ function EditAdvertForm() {
                             />
                         </div>
                         {errors.category && touched.category ? (
-                            <FormValidationErrorMessage
-                                error={errors.category.category}
-                            />
+                            <FormValidationErrorMessage error={errors.category.category} />
                         ) : null}
 
                         <label htmlFor="price-input">Cena</label>

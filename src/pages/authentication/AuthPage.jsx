@@ -27,11 +27,7 @@ function AuthPage({ type }) {
         try {
             setLoading(true);
             setMainError('');
-            const userCredential = await createUserWithEmailAndPassword(
-                auth,
-                email,
-                password
-            );
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             setUser(userCredential.user);
             await setDoc(doc(db, 'users', userCredential.user.uid), {
                 watched: [],
@@ -52,11 +48,9 @@ function AuthPage({ type }) {
         setLoading(true);
         setMainError('');
         try {
-            return await signInWithEmailAndPassword(auth, email, password).then(
-                (userCredential) => {
-                    setUser(userCredential.user);
-                }
-            );
+            return await signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
+                setUser(userCredential.user);
+            });
         } catch {
             setMainError('Nie znaleźliśmy takiego użytkownika');
         } finally {

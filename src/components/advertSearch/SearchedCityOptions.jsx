@@ -1,12 +1,4 @@
-const CityOption = ({
-    name,
-    country,
-    voivodeship,
-    id,
-    setCitiesResponse,
-    setSearchTerm,
-    setFieldValue,
-}) => {
+const CityOption = ({ name, country, voivodeship, id, setCitiesResponse, setSearchTerm, setFieldValue }) => {
     const citySelectHandler = (e) => {
         setFieldValue('city', {
             id: id,

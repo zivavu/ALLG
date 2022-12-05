@@ -36,9 +36,7 @@ const Category = ({
         }
     };
     useEffect(() => {
-        expandedCategory === name
-            ? setShowSubCategories(true)
-            : setShowSubCategories(false);
+        expandedCategory === name ? setShowSubCategories(true) : setShowSubCategories(false);
     }, [expandedCategory]);
     ///////////////////////////////////////////////////////////////////////
 

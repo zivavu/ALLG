@@ -3,15 +3,7 @@ import SearchSection from '../../components/advertSearch/SearchSection.jsx';
 import CategoriesSection from '../../components/categoryInput/CategoriesSection.jsx';
 
 function AdvertsSearchForm({ setUserSearchInput }) {
-    const {
-        values,
-        handleBlur,
-        handleChange,
-        handleSubmit,
-        setFieldValue,
-        setStatus,
-        status,
-    } = useFormik({
+    const { values, handleBlur, handleChange, handleSubmit, setFieldValue, setStatus, status } = useFormik({
         initialValues: {
             advertName: '',
             city: '',
@@ -31,11 +23,7 @@ function AdvertsSearchForm({ setUserSearchInput }) {
     }
     return (
         <form onSubmit={handleSubmit}>
-            <SearchSection
-                setFieldValue={setFieldValue}
-                handleBlur={handleBlur}
-                values={values}
-            />
+            <SearchSection setFieldValue={setFieldValue} handleBlur={handleBlur} values={values} />
             <CategoriesSection
                 setFieldValue={setFieldValue}
                 handleBlur={handleBlur}

@@ -39,9 +39,7 @@ function AdvertControlPanel({ advert, setIsDeleted, user }) {
     return (
         <div className="advert-owner-control-container">
             {showDeleteConfrim ? (
-                <button
-                    className="advert-control-btn confrim"
-                    onClick={handleAdvertDelete}>
+                <button className="advert-control-btn confrim" onClick={handleAdvertDelete}>
                     Na pewno?
                 </button>
             ) : (

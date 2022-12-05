@@ -3,11 +3,7 @@ import './categories.css';
 import { categories } from './categories.json';
 import Category from './Category.jsx';
 
-const CategoriesFlexbox = ({
-    setFieldValue,
-    isSingleCategoryInputAlowed,
-    fieldValue,
-}) => {
+const CategoriesFlexbox = ({ setFieldValue, isSingleCategoryInputAlowed, fieldValue }) => {
     const [selectedCategory, setSelectedCategory] = useState({});
     const [expandedCategory, setExpandedCategory] = useState('');
 

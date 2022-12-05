@@ -8,10 +8,7 @@ const CategoriesSection = ({ setFieldValue, status }) => {
                 <div id="heading-container">
                     <h3>{status ? status : 'Wybierz kategorie ogłoszeń'}</h3>
                 </div>
-                <CategoriesFlexbox
-                    setFieldValue={setFieldValue}
-                    isSingleCategoryInputAlowed="true"
-                />
+                <CategoriesFlexbox setFieldValue={setFieldValue} isSingleCategoryInputAlowed="true" />
             </div>
         </section>
     );

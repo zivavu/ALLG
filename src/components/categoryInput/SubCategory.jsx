@@ -1,11 +1,5 @@
 import { useEffect, useState } from 'react';
-const SubCategory = ({
-    category,
-    subCategory,
-    selectedCategory,
-    setSelectedCategory,
-    setFieldValue,
-}) => {
+const SubCategory = ({ category, subCategory, selectedCategory, setSelectedCategory, setFieldValue }) => {
     const [isSelected, setIsSelected] = useState(false);
     useEffect(() => {
         setIsSelected(subCategory === selectedCategory.subCategory);
@@ -17,10 +11,7 @@ const SubCategory = ({
     };
 
     return (
-        <li
-            className={`${
-                isSelected ? 'sub-category categories-selected' : 'sub-category'
-            }`}>
+        <li className={`${isSelected ? 'sub-category categories-selected' : 'sub-category'}`}>
             <button onClick={categorySelectHandler}></button>
             {subCategory}
         </li>

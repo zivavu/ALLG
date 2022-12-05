@@ -13,8 +13,7 @@ function CitySearch({ setFieldValue, handleBlur, fieldValue }) {
     useEffect(() => {
         //convert user input to format found in firestore
         const cityToSearch = searchTerm[0]
-            ? searchTerm.split('')[0].toUpperCase() +
-              searchTerm.split('').slice(1).join('')
+            ? searchTerm.split('')[0].toUpperCase() + searchTerm.split('').slice(1).join('')
             : '';
         if (fieldValue === cityToSearch) return;
 

@@ -1,18 +1,16 @@
 import { useFormik } from 'formik';
 import FormValidationErrorMessage from '../../components/FormValidationErrorMessage';
 const AuthForm = ({ type, onSubmit, schema, mainError, isLoading }) => {
-    const { values, errors, handleBlur, handleChange, handleSubmit, touched } = useFormik(
-        {
-            initialValues: {
-                displayName: '',
-                email: '',
-                password: '',
-                confirmPassword: '',
-            },
-            validationSchema: schema,
-            onSubmit,
-        }
-    );
+    const { values, errors, handleBlur, handleChange, handleSubmit, touched } = useFormik({
+        initialValues: {
+            displayName: '',
+            email: '',
+            password: '',
+            confirmPassword: '',
+        },
+        validationSchema: schema,
+        onSubmit,
+    });
 
     return (
         <form className="auth-form" onSubmit={handleSubmit}>
@@ -35,9 +33,7 @@ const AuthForm = ({ type, onSubmit, schema, mainError, isLoading }) => {
                     />
                 </>
             ) : null}
-            {errors.email && touched.email ? (
-                <FormValidationErrorMessage error={errors.email} />
-            ) : null}
+            {errors.email && touched.email ? <FormValidationErrorMessage error={errors.email} /> : null}
             <input
                 type="text"
                 id="email-input"
@@ -93,9 +89,7 @@ const AuthForm = ({ type, onSubmit, schema, mainError, isLoading }) => {
                 value={type === 'login' ? 'Zaloguj się' : 'Zarejestruj się'}
             />
             {isLoading ? <div className="lds-hourglass"></div> : null}
-            {mainError ? (
-                <FormValidationErrorMessage error={mainError} main={true} />
-            ) : null}
+            {mainError ? <FormValidationErrorMessage error={mainError} main={true} /> : null}
         </form>
     );
 };

@@ -123,11 +123,7 @@ function AdvertForm() {
                     <h3 id="add-advert-heading">Dodaj ogłoszenie</h3>
                 </div>
                 <form id="add-advert-form" onSubmit={handleSubmit}>
-                    <ScrollToFieldError
-                        isValid={isValid}
-                        submitCount={submitCount}
-                        errors={errors}
-                    />
+                    <ScrollToFieldError isValid={isValid} submitCount={submitCount} errors={errors} />
                     <main id="add-advert-main">
                         <label htmlFor="title">Tytuł ogłoszenia</label>
                         <input
@@ -207,9 +203,7 @@ function AdvertForm() {
                             />
                         </div>
                         {errors.category && touched.category ? (
-                            <FormValidationErrorMessage
-                                error={errors.category.category}
-                            />
+                            <FormValidationErrorMessage error={errors.category.category} />
                         ) : null}
                         <label htmlFor="photo-custom-input">Zdjęcia</label>
                         <label
@@ -217,9 +211,7 @@ function AdvertForm() {
                             className="photo-custom-input"
                             style={{ backgroundImage: `url(${inputBoxImage})` }}
                             id="photo-custom-input">
-                            <span className={inputBoxImage ? 'hidden' : ''}>
-                                Dodaj Zdjęcie
-                            </span>
+                            <span className={inputBoxImage ? 'hidden' : ''}>Dodaj Zdjęcie</span>
                         </label>
                         {errors.imagePath && touched.imagePath ? (
                             <FormValidationErrorMessage error={errors.imagePath} />
