@@ -166,7 +166,7 @@ function AdvertForm() {
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     value="Nowy"></input>
-                                Nowe
+                                Nowy
                             </label>
                             <label htmlFor="radio-used" name="condition">
                                 <input
@@ -176,8 +176,8 @@ function AdvertForm() {
                                     name="condition"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value="używany"></input>
-                                Używane
+                                    value="Używany"></input>
+                                Używany
                             </label>
                         </div>
                         {errors.condition && touched.condition ? (

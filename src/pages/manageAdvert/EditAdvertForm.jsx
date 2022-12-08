@@ -59,7 +59,7 @@ function EditAdvertForm() {
         setFieldValue('id', uuidv4());
     }, [user]);
 
-    //basic user validation
+    //basic user validation, preventing oter users to editing someone else's adverts
     useEffect(() => {
         try {
             const advertRef = doc(db, 'adverts', editedAdvertId);
@@ -138,8 +138,9 @@ function EditAdvertForm() {
                                     name="condition"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value="Nowy"></input>
-                                Nowe
+                                    value="Nowy"
+                                    checked={values.condition === 'Nowy'}></input>
+                                Nowy
                             </label>
                             <label htmlFor="radio-used" name="condition">
                                 <input
@@ -149,8 +150,9 @@ function EditAdvertForm() {
                                     name="condition"
                                     onChange={handleChange}
                                     onBlur={handleBlur}
-                                    value="używany"></input>
-                                Używane
+                                    value="Używany"
+                                    checked={values.condition === 'Używany'}></input>
+                                Używany
                             </label>
                         </div>
                         {errors.condition && touched.condition ? (
