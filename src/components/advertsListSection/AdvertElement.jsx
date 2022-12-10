@@ -85,7 +85,7 @@ const AdvertElement = ({ advert, showControlPanel, user, isWatchedServerResponse
                     <div className="advert-li-views">Wyświetlono {advert.views} razy</div>
                     <div className="advert-element-error-display">{mainError ? mainError : null}</div>
                 </div>
-                {showControlPanel && size != 'half-width' ? (
+                {showControlPanel && size !== 'half-width' ? (
                     <AdvertControlPanel advert={advert} setIsDeleted={setIsDeleted} user={user} />
                 ) : null}
                 <div className="advert-li-details">

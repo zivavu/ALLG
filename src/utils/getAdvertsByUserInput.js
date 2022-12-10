@@ -12,7 +12,7 @@ const getAdvertsByUserInput = async (values, setAdvertsData) => {
     //populates array with category subcategory object from categories json file
     if (!category.subCategory) {
         CategoriesData.forEach((categoryData) => {
-            if (categoryData.name != category.category) return;
+            if (categoryData.name !== category.category) return;
             categoryData.subcategories.forEach((subCategory) => {
                 possibleCategories.push({
                     category: category.category,

@@ -16,7 +16,7 @@ function WatchAdvertButton({
     };
     return (
         <>
-            {user.uid != '' && user.uid != advert.user.uid ? (
+            {user.uid !== '' && user.uid !== advert.user.uid ? (
                 <button className="advert-heart-button" onClick={handleClick}>
                     {isWatched ? <FullHeartSVG /> : <EmptyHeartSVG />}
                 </button>

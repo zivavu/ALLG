@@ -64,7 +64,7 @@ function EditAdvertForm() {
         try {
             const advertRef = doc(db, 'adverts', editedAdvertId);
             getDoc(advertRef).then((doc) => {
-                if (!user.uid || !doc.data().user.uid || user.uid != doc.data().user.uid) {
+                if (!user.uid || !doc.data().user.uid || user.uid !== doc.data().user.uid) {
                     navigate('/');
                 } else {
                     setAdvertInitValues(doc.data());
