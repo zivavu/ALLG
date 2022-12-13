@@ -10,7 +10,7 @@ import imageNotFound from '/src/assets/image-not-found-icon.webp';
 
 function AdvertView() {
     const navigate = useNavigate();
-    const [user, setUser] = useContext(UserContext);
+    const { user } = useContext(UserContext);
     const { id } = useParams();
     const [advertData, setAdvertData] = useState();
     const [imageURL, setImageURL] = useState('');

@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { UserContext } from '../authentication/UserContext';
 
 const ProfileInfo = ({ emailValue }) => {
-    const [user, setUser] = useContext(UserContext);
+    const { user } = useContext(UserContext);
 
     return (
         <div id="profile-user-base-info">

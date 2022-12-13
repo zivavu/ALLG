@@ -33,7 +33,7 @@ function App() {
 
     return (
         <>
-            <UserContext.Provider value={[user, setUser]}>
+            <UserContext.Provider value={{ user, setUser }}>
                 <SiteHeader />
                 <Suspense fallback={<div>Loading...</div>}>
                     <Routes>
@@ -42,7 +42,7 @@ function App() {
                         <Route
                             path="/new-advert"
                             element={
-                                !user || user.uid == '' ? <AuthPage type="auth" /> : <NewAdvertForm />
+                                !user || user.uid === '' ? <AuthPage type="auth" /> : <NewAdvertForm />
                             }></Route>
 
                         <Route path="/edit-advert/:id" element={<EditAdvertForm />}></Route>
@@ -54,7 +54,7 @@ function App() {
                         <Route
                             path="/my-profile"
                             element={
-                                !user || user.uid == '' ? <AuthPage type="auth" /> : <Profile />
+                                !user || user.uid === '' ? <AuthPage type="auth" /> : <Profile />
                             }></Route>
                         <Route path="/re-authenticate" element={<AuthPage type="reAuth" />}></Route>
                         <Route path="/" element={<HomePage />}></Route>

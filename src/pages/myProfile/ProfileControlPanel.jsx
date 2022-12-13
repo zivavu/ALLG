@@ -10,7 +10,7 @@ import ProfileInfo from './ProfileInfo';
 const ProfileControlPanel = () => {
     const navigate = useNavigate();
 
-    const [user, setUser] = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
     const [emailWasChanged, setEmailWasChanged] = useState(false);
     const [passwordWasChanged, setPasswordWasChanged] = useState(false);
 

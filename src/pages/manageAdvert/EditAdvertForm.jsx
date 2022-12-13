@@ -14,7 +14,7 @@ import { UserContext } from '../authentication/UserContext';
 import './manageAdvert.css';
 
 function EditAdvertForm() {
-    const [user, setUser] = useContext(UserContext);
+    const { user } = useContext(UserContext);
     const [advertInitValues, setAdvertInitValues] = useState({
         id: '',
         title: '',

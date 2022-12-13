@@ -7,7 +7,7 @@ import { UserContext } from '../authentication/UserContext';
 function EmailChange({ emailWasChanged, setEmailWasChanged, setCurrentEmail }) {
     const navigate = useNavigate();
 
-    const [user, setUser] = useContext(UserContext);
+    const { user } = useContext(UserContext);
     const [userEmailInput, setUserEmailInput] = useState('');
     const [showChangeEmail, setShowChangeEmail] = useState(false);
     const [isEmailValid, setIsEmailValid] = useState(true);

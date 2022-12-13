@@ -19,7 +19,7 @@ import { UserContext } from './UserContext';
 function AuthPage({ type }) {
     const navigate = useNavigate();
 
-    const [user, setUser] = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
     const [isLoading, setLoading] = useState(false);
     const [mainError, setMainError] = useState();
 

@@ -7,7 +7,7 @@ import { UserContext } from '../authentication/UserContext';
 function PasswordChange({ passwordWasChanged, setPasswordWasChanged }) {
     const navigate = useNavigate();
 
-    const [user, setUser] = useContext(UserContext);
+    const { user } = useContext(UserContext);
     const [userPasswordInput, setUserPasswordInput] = useState('');
     const [showChangePassword, setShowChangePassword] = useState(false);
     const [isPasswordValid, setIsPasswordValid] = useState(true);

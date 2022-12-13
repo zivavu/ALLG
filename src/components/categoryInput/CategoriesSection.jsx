@@ -1,5 +1,5 @@
 import './categories.css';
-import CategoriesFlexbox from '/src/components/categoryInput/CategoriesFlexbox';
+import CategoriesFlexbox from '/src/components/categoryInput/CategoriesList';
 
 const CategoriesSection = ({ setFieldValue, status }) => {
     return (

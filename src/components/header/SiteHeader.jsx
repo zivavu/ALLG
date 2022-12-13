@@ -1,14 +1,8 @@
-import { signOut } from 'firebase/auth';
-import { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { PlusSignSVG, UserSVG } from '../../assets/svg.jsx';
-import { auth } from '../../config/firebase-config';
-import { UserContext } from '../../pages/authentication/UserContext';
+import { UserSVG } from '../../assets/svg.jsx';
 import './header.css';
 
 const SiteHeader = () => {
-    const [user, setUser] = useContext(UserContext);
-
     return (
         <header id="site-header">
             <Link to="/" id="header-logo" title="Ogłoszenia ALLG">

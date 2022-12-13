@@ -6,7 +6,7 @@ import { UserContext } from './UserContext';
 import googleImg from '/src/assets/googleSingInImg.png';
 
 function LoginWithGoogleBtn({ setLoading }) {
-    const [user, setUser] = useContext(UserContext);
+    const { setUser } = useContext(UserContext);
     const googleProvider = new GoogleAuthProvider();
     const loginWithGoogle = async () => {
         setLoading(true);

@@ -6,7 +6,7 @@ import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CitySearch from '../../components/advertSearch/CitySearch';
 import '../../components/categoryInput/categories.css';
-import CategoriesFlexbox from '../../components/categoryInput/CategoriesFlexbox';
+import CategoriesFlexbox from '../../components/categoryInput/CategoriesList';
 import FormValidationErrorMessage from '../../components/FormValidationErrorMessage';
 import { db, storage } from '../../config/firebase-config';
 import addAdvertSchema from '../../schemas/addAdvertFormSchema';
@@ -15,7 +15,7 @@ import { UserContext } from '../authentication/UserContext';
 import './manageAdvert.css';
 
 function AdvertForm() {
-    const [user, setUser] = useContext(UserContext);
+    const { user } = useContext(UserContext);
     const {
         values,
         errors,

@@ -14,7 +14,7 @@ function AdvertsSection({ type, header, size, noAdvertsMessage, userSearchInput 
     const [advertsData, setAdvertsData] = useState([]);
     const [watchedAdverts, setWatchedAdverts] = useState([]);
     const [dynamicHeader, setDynamicHeader] = useState(header);
-    const [user, setUser] = useContext(UserContext);
+    const { user, setUser } = useContext(UserContext);
 
     //is set to true when any advert got deleted by user
     const [isDeleted, setIsDeleted] = useState(false);
