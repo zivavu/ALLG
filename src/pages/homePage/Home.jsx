@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import AdvertsSection from '../../components/advertsList/AdvertsSection.jsx';
+import AdvertsList from '../../components/advertsList/AdvertsList.jsx';
 import AdvertsSearchForm from './AdvertsSearchForm.jsx';
 
 const HomePage = () => {
@@ -16,7 +16,7 @@ const HomePage = () => {
         <div id="home-page">
             <AdvertsSearchForm setUserSearchInput={setUserSearchInput} />
             {didUserSearch ? (
-                <AdvertsSection
+                <AdvertsList
                     key="advertsByUserInput"
                     header="To udało się nam znaleźć"
                     type="advertsByUserInput"
@@ -25,7 +25,7 @@ const HomePage = () => {
                     userSearchInput={userSearchInput}
                 />
             ) : (
-                <AdvertsSection
+                <AdvertsList
                     key="allAdverts"
                     header="Poszukaj czegoś dla siebie"
                     type="allAdverts"

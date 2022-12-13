@@ -1,17 +1,17 @@
-import AdvertsSection from '../../components/advertsList/AdvertsSection';
+import AdvertsList from '../../components/advertsList/AdvertsList';
 import './Profile.css';
 import ProfileControlPanel from './ProfileControlPanel';
 function Profile() {
     return (
         <div id="profile-page-container">
             <ProfileControlPanel />
-            <AdvertsSection
+            <AdvertsList
                 size="full-width"
                 type="usersAdverts"
                 header="Twoje ogłoszenia"
                 noAdvertsMessage="Nie dodałeś jeszcze żadnych ogłoszeń"
             />
-            <AdvertsSection
+            <AdvertsList
                 size="full-width"
                 type="watchedAdverts"
                 header="Obserowane ogłoszenia"

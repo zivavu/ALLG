@@ -2,7 +2,7 @@ import { collection, getDocs, query, where } from 'firebase/firestore';
 import { categories as CategoriesData } from '../components/categoryInput/categories.json';
 import { db } from '../config/firebase-config';
 
-const getAdvertsByUserInput = async (values, setAdvertsData) => {
+const getAdvertsByUserInput = async (values) => {
     const { city, advertName: title, category } = values;
     if (!category && !city) return;
     const advertsRef = collection(db, 'adverts');
@@ -35,10 +35,10 @@ const getAdvertsByUserInput = async (values, setAdvertsData) => {
                     data.forEach((doc) => {
                         advertsResult.push(doc.data());
                     });
-                } else setAdvertsData([]);
+                } else return [];
             });
         } catch {
-            setAdvertsData([]);
+            return [];
         }
     }
 
@@ -50,10 +50,11 @@ const getAdvertsByUserInput = async (values, setAdvertsData) => {
                     data.forEach((doc) => {
                         advertsResult.push(doc.data());
                     });
-                } else setAdvertsData([]);
+                }
+                return [];
             });
         } catch {
-            setAdvertsData([]);
+            return [];
         }
     }
 
@@ -74,7 +75,7 @@ const getAdvertsByUserInput = async (values, setAdvertsData) => {
             return advert;
         }
     };
-    setAdvertsData(advertsResult.filter((advert) => filterByUserInput(advert)));
+    return advertsResult.filter((advert) => filterByUserInput(advert));
 };
 
 export default getAdvertsByUserInput;

@@ -1,12 +1,12 @@
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../config/firebase-config';
 
-const getAllAdverts = async (setAdvertsData) => {
+const getAllAdverts = async () => {
     const data = await getDocs(collection(db, 'adverts'));
     if (data.docs) {
-        setAdvertsData(data.docs.slice(0, 20).map((doc) => ({ ...doc.data(), id: doc.id })));
+        return data.docs.slice(0, 20).map((doc) => ({ ...doc.data(), id: doc.id }));
     } else {
-        setAdvertsData([]);
+        return [];
     }
 };
 export default getAllAdverts;

@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import AdvertsSection from '../../components/advertsList/AdvertsSection';
+import AdvertsList from '../../components/advertsList/AdvertsList';
 
 const ProfileView = () => {
     return (
         <>
-            <AdvertsSection
+            <AdvertsList
                 size="full-width"
                 type="otherUserAdverts"
                 header="Ogłoszenia użytkownika"

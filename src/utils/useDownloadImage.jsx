@@ -26,6 +26,6 @@ const useDownloadImage = (imagePath) => {
         getImageUrl();
     }, [imagePath]);
 
-    return { isImageLoading, imageURL };
+    return { imageURL, isImageLoading };
 };
 export default useDownloadImage;

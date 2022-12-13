@@ -21,7 +21,6 @@ const Category = ({
     //Adds mobile support by expanding category container on click, and allowing only one expanded category element
     const handleClick = (e) => {
         e.preventDefault();
-        console.log(isSelected);
         if (isSingleCategoryInputAlowed && !isSelected) {
             setIsSelected(true);
             setSelectedCategory({ category: name });
