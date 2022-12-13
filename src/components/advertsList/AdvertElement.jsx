@@ -4,23 +4,20 @@ import { useEffect, useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
 import { db, storage } from '../../config/firebase-config';
+import useDownloadImage from '../../utils/useDownloadImage';
 import AdvertControlPanel from './AdvertControlPanel';
 import WatchAdvertButton from './WatchAdvertButton';
 import imageNotFound from '/src/assets/image-not-found-icon.webp';
 
 const AdvertElement = ({ advert, showControlPanel, user, isWatchedServerResponse, size, setIsDeleted }) => {
-    const [imageURL, setImageURL] = useState('');
-    const [imageLoading, setImageLoading] = useState(true);
     const [isWatched, setIsWatched] = useState(false);
     const [mainError, setMainError] = useState();
+
+    const { imageURL, isImageLoading } = useDownloadImage(advert.imagePath);
 
     useEffect(() => {
         setIsWatched(isWatchedServerResponse);
     }, [isWatchedServerResponse]);
-
-    useEffect(() => {
-        downloadImage();
-    }, []);
 
     //hides error 2secs after it appears
     useEffect(() => {
@@ -28,21 +25,6 @@ const AdvertElement = ({ advert, showControlPanel, user, isWatchedServerResponse
             setMainError();
         }, 2000);
     }, [mainError]);
-
-    const downloadImage = async () => {
-        setImageLoading(true);
-        const imagePathRef = ref(storage, `${advert.imagePath}`);
-        try {
-            const url = await getDownloadURL(imagePathRef);
-            if (url) {
-                setImageURL(url);
-                setImageLoading(false);
-            }
-        } catch {
-            setImageLoading(false);
-            setImageURL(imageNotFound);
-        }
-    };
 
     const addToUsersWatchedAdverts = async () => {
         const watchedAdvertsRef = doc(db, 'users', user.uid);
@@ -67,7 +49,7 @@ const AdvertElement = ({ advert, showControlPanel, user, isWatchedServerResponse
 
     return (
         <Link className="advert-li-container" to={`/advert/${advert.id}`}>
-            {imageLoading ? (
+            {isImageLoading ? (
                 <div className="lds-hourglass"></div>
             ) : (
                 <div className="image-container">
