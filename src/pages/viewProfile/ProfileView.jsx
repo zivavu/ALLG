@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import AdvertsSection from '../../components/advertsListSection/AdvertsSection';
+import AdvertsSection from '../../components/advertsList/AdvertsSection';
 
 const ProfileView = () => {
     return (

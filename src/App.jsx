@@ -1,6 +1,7 @@
 import React, { lazy, Suspense, useEffect, useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Outlet, Route, Routes } from 'react-router-dom';
 import SiteHeader from './components/header/SiteHeader.jsx';
+import ProtectedRoute from './components/ProtectedRoute.jsx';
 import { auth } from './config/firebase-config.js';
 import './main.css';
 import { UserContext } from './pages/authentication/UserContext.jsx';
@@ -26,7 +27,9 @@ function App() {
         const unsubscribe = auth.onAuthStateChanged((providedUser) => {
             if (providedUser) {
                 setUser(providedUser);
-            } else setUser({ uid: '', displayName: '' });
+            } else {
+                setUser({ uid: '', displayName: '' });
+            }
         });
         return unsubscribe;
     }, []);
@@ -37,27 +40,20 @@ function App() {
                 <SiteHeader />
                 <Suspense fallback={<div>Loading...</div>}>
                     <Routes>
+                        <Route path="/" element={<HomePage />}></Route>
                         <Route path="/advert/:id" element={<AdvertView />}></Route>
-
-                        <Route
-                            path="/new-advert"
-                            element={
-                                !user || user.uid === '' ? <AuthPage type="auth" /> : <NewAdvertForm />
-                            }></Route>
-
-                        <Route path="/edit-advert/:id" element={<EditAdvertForm />}></Route>
-
+                        <Route path="/re-authenticate" element={<AuthPage type="reAuth" />}></Route>
                         {/* route to view other users profiles */}
                         <Route path="/profile/:otherUserUID" element={<ProfileView />}></Route>
 
-                        {/* route to view active user profile */}
-                        <Route
-                            path="/my-profile"
-                            element={
-                                !user || user.uid === '' ? <AuthPage type="auth" /> : <Profile />
-                            }></Route>
-                        <Route path="/re-authenticate" element={<AuthPage type="reAuth" />}></Route>
-                        <Route path="/" element={<HomePage />}></Route>
+                        {/* route only for users that are logged in  */}
+                        <Route element={<ProtectedRoute user={user} />}>
+                            <Route path="/new-advert" element={<NewAdvertForm />}></Route>
+                            <Route path="/edit-advert/:id" element={<EditAdvertForm />}></Route>
+                            {/* route to view active user profile */}
+                            <Route path="/my-profile" element={<Profile />}></Route>
+                        </Route>
+
                         <Route path="/error/:error" element={<ErrorPage />}></Route>
                         <Route path="*" element={<ErrorPage />}></Route>
                     </Routes>

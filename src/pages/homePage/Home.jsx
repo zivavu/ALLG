@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import AdvertsSection from '../../components/advertsListSection/AdvertsSection.jsx';
+import AdvertsSection from '../../components/advertsList/AdvertsSection.jsx';
 import AdvertsSearchForm from './AdvertsSearchForm.jsx';
 
 const HomePage = () => {

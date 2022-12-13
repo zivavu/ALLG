@@ -4,7 +4,7 @@ import { ref, uploadBytes } from 'firebase/storage';
 import { useFormik } from 'formik';
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import CitySearch from '../../components/advertSearch/CitySearch';
+import CitySearch from '../../components/advertsSearch/CitySearch';
 import '../../components/categoryInput/categories.css';
 import CategoriesFlexbox from '../../components/categoryInput/CategoriesList';
 import FormValidationErrorMessage from '../../components/FormValidationErrorMessage';

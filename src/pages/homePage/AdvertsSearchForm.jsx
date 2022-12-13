@@ -1,5 +1,5 @@
 import { useFormik } from 'formik';
-import SearchSection from '../../components/advertSearch/SearchSection.jsx';
+import SearchSection from '../../components/advertsSearch/SearchSection.jsx';
 import CategoriesSection from '../../components/categoryInput/CategoriesSection.jsx';
 
 function AdvertsSearchForm({ setUserSearchInput }) {

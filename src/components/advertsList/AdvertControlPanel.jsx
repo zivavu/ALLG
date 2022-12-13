@@ -1,8 +1,9 @@
-import { arrayRemove, deleteDoc, doc, updateDoc } from 'firebase/firestore';
 import { deleteObject, ref } from 'firebase/storage';
-import { useState } from 'react';
+import { lazy, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { db, storage } from '../../config/firebase-config';
+
+const { arrayRemove, deleteDoc, doc, updateDoc } = lazy(() => import('firebase/firestore'));
 
 function AdvertControlPanel({ advert, setIsDeleted, user }) {
     const navigate = useNavigate();

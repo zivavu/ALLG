@@ -3,9 +3,9 @@ import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { useFormik } from 'formik';
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import CitySearch from '../../components/advertSearch/CitySearch';
+import CitySearch from '../../components/advertsSearch/CitySearch';
 import '../../components/categoryInput/categories.css';
-import CategoriesFlexbox from '../../components/categoryInput/CategoriesFlexbox';
+import CategoriesFlexbox from '../../components/categoryInput/CategoriesList';
 import FormValidationErrorMessage from '../../components/FormValidationErrorMessage';
 import { db } from '../../config/firebase-config';
 import addAdvertSchema from '../../schemas/addAdvertFormSchema';
@@ -64,8 +64,8 @@ function EditAdvertForm() {
         try {
             const advertRef = doc(db, 'adverts', editedAdvertId);
             getDoc(advertRef).then((doc) => {
-                if (!user.uid || !doc.data().user.uid || user.uid !== doc.data().user.uid) {
-                    navigate('/');
+                if (!user || !user.uid || !doc.data() || user.uid !== doc.data().user.uid) {
+                    navigate('/error/Wygląda na to, że to ogłoszenie nie należy do Ciebie');
                 } else {
                     setAdvertInitValues(doc.data());
                 }

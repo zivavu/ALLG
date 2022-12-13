@@ -1,4 +1,4 @@
-import AdvertsSection from '../../components/advertsListSection/AdvertsSection';
+import AdvertsSection from '../../components/advertsList/AdvertsSection';
 import './Profile.css';
 import ProfileControlPanel from './ProfileControlPanel';
 function Profile() {
