@@ -1,11 +1,11 @@
 import { Outlet } from 'react-router-dom';
 import AuthPage from '../pages/authentication/AuthPage';
 
-const ProtectedRoute = ({ user }) => {
-    if (!user || user.uid === '') {
-        return <AuthPage type="auth" />;
-    } else {
+const ProtectedRoute = ({ isUserAuthed }) => {
+    if (isUserAuthed) {
         return <Outlet />;
+    } else {
+        return <AuthPage type="auth" />;
     }
 };
 export default ProtectedRoute;

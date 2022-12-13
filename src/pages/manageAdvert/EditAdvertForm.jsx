@@ -14,7 +14,7 @@ import { UserContext } from '../authentication/UserContext';
 import './manageAdvert.css';
 
 function EditAdvertForm() {
-    const { user } = useContext(UserContext);
+    const { user, isUserAuthed } = useContext(UserContext);
     const [advertInitValues, setAdvertInitValues] = useState({
         id: '',
         title: '',
@@ -64,7 +64,7 @@ function EditAdvertForm() {
         try {
             const advertRef = doc(db, 'adverts', editedAdvertId);
             getDoc(advertRef).then((doc) => {
-                if (!user || !user.uid || !doc.data() || user.uid !== doc.data().user.uid) {
+                if (!isUserAuthed || !doc.data() || user.uid !== doc.data().user.uid) {
                     navigate('/error/Wygląda na to, że to ogłoszenie nie należy do Ciebie');
                 } else {
                     setAdvertInitValues(doc.data());

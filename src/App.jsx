@@ -21,6 +21,7 @@ const AuthPage = lazy(() => import('./pages/authentication/AuthPage.jsx'));
 
 function App() {
     const [user, setUser] = useState({ uid: '', displayName: '' });
+    const [isUserAuthed, setIsUserAuthed] = useState(false);
 
     //handle user auth persistance
     useEffect(() => {
@@ -34,9 +35,17 @@ function App() {
         return unsubscribe;
     }, []);
 
+    useEffect(() => {
+        if (user.uid && user.uid !== '') {
+            setIsUserAuthed(true);
+        } else {
+            setIsUserAuthed(false);
+        }
+    }, [user]);
+
     return (
         <>
-            <UserContext.Provider value={{ user, setUser }}>
+            <UserContext.Provider value={{ user, setUser, isUserAuthed }}>
                 <SiteHeader />
                 <Suspense fallback={<div>Loading...</div>}>
                     <Routes>
@@ -47,7 +56,7 @@ function App() {
                         <Route path="/profile/:otherUserUID" element={<ProfileView />}></Route>
 
                         {/* route only for users that are logged in  */}
-                        <Route element={<ProtectedRoute user={user} />}>
+                        <Route element={<ProtectedRoute isUserAuthed={isUserAuthed} />}>
                             <Route path="/new-advert" element={<NewAdvertForm />}></Route>
                             <Route path="/edit-advert/:id" element={<EditAdvertForm />}></Route>
                             {/* route to view active user profile */}

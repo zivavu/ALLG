@@ -17,9 +17,12 @@ const ProfileControlPanel = () => {
     //used only as visual representation of real current user email on email change
     const [currentEmail, setCurrentEmail] = useState('');
 
-    const logoutUser = async () => {
+    const logoutUser = () => {
         try {
-            await signOut(auth).then(setUser({ uid: '', displayName: '' }));
+            signOut(auth).then(() => {
+                setUser({ uid: '', displayName: '' });
+                navigate('/');
+            });
         } catch (error) {
             navigate('/error/Wystąpił-problem-przy-wylogowywaniu');
         }
