@@ -1,13 +1,11 @@
 import { arrayRemove, arrayUnion, doc, updateDoc } from 'firebase/firestore';
-import { getDownloadURL, ref } from 'firebase/storage';
 import { useEffect, useState } from 'react';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 import { Link } from 'react-router-dom';
-import { db, storage } from '../../config/firebase-config';
+import { db } from '../../config/firebase-config';
 import useDownloadImage from '../../utils/useDownloadImage';
 import AdvertControlPanel from './AdvertControlPanel';
 import WatchAdvertButton from './WatchAdvertButton';
-import imageNotFound from '/src/assets/image-not-found-icon.webp';
 
 const AdvertElement = ({ advert, showControlPanel, user, isWatchedServerResponse, size, setIsDeleted }) => {
     const [isWatched, setIsWatched] = useState(false);

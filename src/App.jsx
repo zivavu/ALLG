@@ -28,6 +28,7 @@ function App() {
         const unsubscribe = auth.onAuthStateChanged((providedUser) => {
             if (providedUser) {
                 setUser(providedUser);
+                setIsUserAuthed(true);
             } else {
                 setUser({ uid: '', displayName: '' });
             }

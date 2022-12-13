@@ -12,7 +12,6 @@ import './advertsSection.css';
 
 function AdvertsSection({ type, header, size, noAdvertsMessage, userSearchInput }) {
     const [advertsData, setAdvertsData] = useState([]);
-    const [watchedAdverts, setWatchedAdverts] = useState([]);
     const [dynamicHeader, setDynamicHeader] = useState(header);
     const { user, setUser } = useContext(UserContext);
 
@@ -26,6 +25,8 @@ function AdvertsSection({ type, header, size, noAdvertsMessage, userSearchInput 
             setDynamicHeader(`${header} ${advertsData[0].user.displayName}`);
         }
     }, [advertsData]);
+
+    const { watchedAdverts } = getWatchedAdvertsIds();
 
     //used when user is viewing watched adverts on his profile
     useEffect(() => {
@@ -59,10 +60,6 @@ function AdvertsSection({ type, header, size, noAdvertsMessage, userSearchInput 
                 break;
         }
     }, [isDeleted, userSearchInput]);
-
-    useEffect(() => {
-        getWatchedAdvertsIds(setWatchedAdverts, user);
-    }, [user, setUser]);
 
     return (
         <section id="adverts-section">
