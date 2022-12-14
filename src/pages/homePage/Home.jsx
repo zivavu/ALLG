@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import AdvertsList from '../../components/advertsList/AdvertsList.jsx';
 import getAdvertsByUserInput from '../../utils/getAdvertsByUserInput.js';
 import getAllAdverts from '../../utils/getAllAdverts.js';
+import useGetWatchedAdvertsIds from '../../utils/useGetWatchedAdvertsIds.jsx';
 import AdvertsSearchForm from './AdvertsSearchForm.jsx';
 
 const HomePage = () => {
@@ -17,9 +18,11 @@ const HomePage = () => {
     const getAllAdvertsHandler = async () => {
         return await getAllAdverts();
     };
+
     const getAdvertsByUserInputHandler = async () => {
         return await getAdvertsByUserInput(userSearchInput);
     };
+    const { watchedAdverts } = useGetWatchedAdvertsIds();
 
     return (
         <div id="home-page">
@@ -29,19 +32,18 @@ const HomePage = () => {
                     key="advertsByUserInput"
                     getAdvertsHandler={getAdvertsByUserInputHandler}
                     header="To udało się nam znaleźć"
-                    type="advertsByUserInput"
                     noAdvertsMessage="Nie znaleźliśmy takich ogłoszeń"
                     size="half-width"
-                    userSearchInput={userSearchInput}
+                    watchedAdverts={watchedAdverts}
                 />
             ) : (
                 <AdvertsList
                     key="allAdverts"
                     getAdvertsHandler={getAllAdvertsHandler}
                     header="Poszukaj czegoś dla siebie"
-                    type="allAdverts"
                     noAdvertsMessage="Nie znaleźliśmy żadnych ogłoszeń"
                     size="half-width"
+                    watchedAdverts={watchedAdverts}
                 />
             )}
         </div>

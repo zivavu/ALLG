@@ -2,35 +2,21 @@ import { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { UserContext } from '../../pages/authentication/UserContext';
 import getAdvertsByIdArr from '../../utils/getAdvertsByIdArr';
-import getAdvertsByUserInput from '../../utils/getAdvertsByUserInput';
-import getAllAdverts from '../../utils/getAllAdverts';
-import getUsersAdvertsIDs from '../../utils/getUsersAdvertsIDs';
-import useGetWatchedAdvertsIds from '../../utils/useGetWatchedAdvertsIds';
 import AdvertElement from './AdvertElement';
 
 import './advertsSection.css';
 
-function AdvertsList({ getAdvertsHandler, type, header, noAdvertsMessage, size, userSearchInput }) {
+function AdvertsList({ getAdvertsHandler, header, noAdvertsMessage, size, watchedAdverts, type }) {
     const [advertsData, setAdvertsData] = useState([]);
     const [dynamicHeader, setDynamicHeader] = useState(header);
     const { user } = useContext(UserContext);
     //is set to true when any advert got deleted by user
     const [isDeleted, setIsDeleted] = useState(false);
 
-    //used only when viewing other user adverts
-    const { otherUserUID } = useParams();
-    useEffect(() => {
-        if (otherUserUID && advertsData[0]) {
-            setDynamicHeader(`${header} ${advertsData[0].user.displayName}`);
-        }
-    }, [advertsData]);
-
-    const { watchedAdverts } = useGetWatchedAdvertsIds();
-
-    //used when user is viewing watched adverts on his profile
+    //used for getting users watched adverts list
     useEffect(() => {
         (async () => {
-            if (type === 'watchedAdverts') {
+            if (type === 'watchedAdverts' && watchedAdverts[0]) {
                 const data = await getAdvertsByIdArr(watchedAdverts);
                 setAdvertsData(data);
             }
@@ -39,12 +25,20 @@ function AdvertsList({ getAdvertsHandler, type, header, noAdvertsMessage, size, 
 
     //used for every different type of list
     useEffect(() => {
+        if (type === 'watchedAdverts') return;
         (async () => {
-            if (!getAdvertsHandler) return;
             setAdvertsData(await getAdvertsHandler());
             setIsDeleted(false);
         })();
-    }, [isDeleted, userSearchInput]);
+    }, [isDeleted]);
+
+    //used for displaying name of user that is being viewed
+    const { otherUserUID } = useParams();
+    useEffect(() => {
+        if (otherUserUID && advertsData[0]) {
+            setDynamicHeader(`${header} ${advertsData[0].user.displayName}`);
+        }
+    }, [advertsData]);
 
     return (
         <section id="adverts-section">
