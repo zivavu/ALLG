@@ -37,16 +37,16 @@ function App() {
     }, []);
 
     useEffect(() => {
-        if (user.uid && user.uid !== '') {
-            setIsUserAuthed(true);
-        } else {
+        if (!user.uid || user.uid === '') {
             setIsUserAuthed(false);
+        } else {
+            setIsUserAuthed(true);
         }
-    }, [user]);
+    }, [user, setUser]);
 
     return (
         <>
-            <UserContext.Provider value={{ user, setUser, isUserAuthed }}>
+            <UserContext.Provider value={{ user, setUser, isUserAuthed, setIsUserAuthed }}>
                 <SiteHeader />
                 <Suspense fallback={<div>Loading...</div>}>
                     <Routes>

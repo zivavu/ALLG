@@ -10,23 +10,24 @@ import ProfileInfo from './ProfileInfo';
 const ProfileControlPanel = () => {
     const navigate = useNavigate();
 
-    const { user, setUser } = useContext(UserContext);
+    const { user, setUser, setIsUserAuthed } = useContext(UserContext);
     const [emailWasChanged, setEmailWasChanged] = useState(false);
     const [passwordWasChanged, setPasswordWasChanged] = useState(false);
-
-    //used only as visual representation of real current user email on email change
-    const [currentEmail, setCurrentEmail] = useState('');
 
     const logoutUser = () => {
         try {
             signOut(auth).then(() => {
                 setUser({ uid: '', displayName: '' });
+                setIsUserAuthed(false);
                 navigate('/');
             });
         } catch (error) {
             navigate('/error/Wystąpił-problem-przy-wylogowywaniu');
         }
     };
+
+    //used only as visual representation of real current user email on email change
+    const [currentEmail, setCurrentEmail] = useState('');
 
     return (
         <section id="profile-section">

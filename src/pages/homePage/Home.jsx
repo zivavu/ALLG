@@ -29,19 +29,18 @@ const HomePage = () => {
             <AdvertsSearchForm setUserSearchInput={setUserSearchInput} />
             {didUserSearch ? (
                 <AdvertsList
-                    key="advertsByUserInput"
                     getAdvertsHandler={getAdvertsByUserInputHandler}
                     header="To udało się nam znaleźć"
                     noAdvertsMessage="Nie znaleźliśmy takich ogłoszeń"
                     size="half-width"
                     watchedAdverts={watchedAdverts}
+                    userSearchInput={userSearchInput}
                 />
             ) : (
                 <AdvertsList
-                    key="allAdverts"
                     getAdvertsHandler={getAllAdvertsHandler}
                     header="Poszukaj czegoś dla siebie"
-                    noAdvertsMessage="Nie znaleźliśmy żadnych ogłoszeń"
+                    noAdvertsMessage="Poszukaj czegoś dla siebie"
                     size="half-width"
                     watchedAdverts={watchedAdverts}
                 />

@@ -6,7 +6,15 @@ import AdvertElement from './AdvertElement';
 
 import './advertsSection.css';
 
-function AdvertsList({ getAdvertsHandler, header, noAdvertsMessage, size, watchedAdverts, type }) {
+function AdvertsList({
+    getAdvertsHandler,
+    header,
+    noAdvertsMessage,
+    size,
+    watchedAdverts,
+    type,
+    userSearchInput,
+}) {
     const [advertsData, setAdvertsData] = useState([]);
     const [dynamicHeader, setDynamicHeader] = useState(header);
     const { user } = useContext(UserContext);
@@ -30,7 +38,7 @@ function AdvertsList({ getAdvertsHandler, header, noAdvertsMessage, size, watche
             setAdvertsData(await getAdvertsHandler());
             setIsDeleted(false);
         })();
-    }, [isDeleted]);
+    }, [isDeleted, userSearchInput]);
 
     //used for displaying name of user that is being viewed
     const { otherUserUID } = useParams();

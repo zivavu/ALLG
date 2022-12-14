@@ -16,10 +16,6 @@ function Profile() {
         return await getAdvertsByIdArr(IDs);
     };
 
-    const handleGetWatchedAdverts = async () => {
-        return await getAdvertsByIdArr(watchedAdverts);
-    };
-
     return (
         <div id="profile-page-container">
             <ProfileControlPanel />
@@ -31,7 +27,6 @@ function Profile() {
                 watchedAdverts={watchedAdverts}
             />
             <AdvertsList
-                getAdvertsHandler={handleGetWatchedAdverts}
                 size="full-width"
                 header="Obserowane ogłoszenia"
                 noAdvertsMessage="Nie obserwujesz jeszcze żadnych ogłoszeń"
