@@ -12,7 +12,7 @@ import HomePage from './pages/homePage/Home.jsx';
     @import url('https://fonts.googleapis.com/css2?family=Aclonica&family=Secular+One&display=swap');
 </style>;
 
-const Profile = lazy(() => import('./pages/myProfile/Profile.jsx'));
+const Profile = lazy(() => import('./pages/myProfile/ProfileContainer.jsx'));
 const ProfileView = lazy(() => import('./pages/viewProfile/ProfileView.jsx'));
 const AdvertView = lazy(() => import('./pages/advertView/AdvertView.jsx'));
 const EditAdvertForm = lazy(() => import('./pages/manageAdvert/EditAdvertForm.jsx'));

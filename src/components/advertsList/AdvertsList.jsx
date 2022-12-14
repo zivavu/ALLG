@@ -10,16 +10,15 @@ import AdvertElement from './AdvertElement';
 
 import './advertsSection.css';
 
-function AdvertsList({ type, header, noAdvertsMessage, size, userSearchInput }) {
+function AdvertsList({ getAdvertsHandler, type, header, noAdvertsMessage, size, userSearchInput }) {
     const [advertsData, setAdvertsData] = useState([]);
     const [dynamicHeader, setDynamicHeader] = useState(header);
     const { user } = useContext(UserContext);
-
     //is set to true when any advert got deleted by user
     const [isDeleted, setIsDeleted] = useState(false);
 
     //used only when viewing other user adverts
-    const { otherUserUID } = useParams(user);
+    const { otherUserUID } = useParams();
     useEffect(() => {
         if (otherUserUID && advertsData[0]) {
             setDynamicHeader(`${header} ${advertsData[0].user.displayName}`);
@@ -40,28 +39,9 @@ function AdvertsList({ type, header, noAdvertsMessage, size, userSearchInput }) 
 
     //used for every different type of list
     useEffect(() => {
-        let IDs;
         (async () => {
-            switch (type) {
-                case 'allAdverts':
-                    setAdvertsData(await getAllAdverts());
-                    break;
-
-                case 'usersAdverts':
-                    IDs = await getUsersAdvertsIDs(user.uid);
-                    setAdvertsData(await getAdvertsByIdArr(IDs));
-                    break;
-
-                case 'otherUserAdverts':
-                    IDs = await getUsersAdvertsIDs(otherUserUID);
-                    setAdvertsData(await getAdvertsByIdArr(IDs));
-                    break;
-
-                case 'advertsByUserInput':
-                    setAdvertsData(await getAdvertsByUserInput(userSearchInput));
-                    break;
-            }
-
+            if (!getAdvertsHandler) return;
+            setAdvertsData(await getAdvertsHandler());
             setIsDeleted(false);
         })();
     }, [isDeleted, userSearchInput]);
@@ -80,6 +60,7 @@ function AdvertsList({ type, header, noAdvertsMessage, size, userSearchInput }) 
                                   key={advert.id}
                                   setIsDeleted={setIsDeleted}
                                   advert={advert}
+                                  //true if user that is author of the advert is the same user that is logged in
                                   showControlPanel={advert.user.uid === user.uid}
                                   user={user}
                                   //true if advert id was found in firebase user watched adverts doc

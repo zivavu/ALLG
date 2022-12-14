@@ -29,5 +29,8 @@ It has all of the basic online marketplace features such as:
 -   check or delete your adverts
 
 You can register your own account, or log in with example one:
-email: example1@example.com
-password: example123
+
+-email: example1@example.com
+-password: example123
+
+You don't have to register with your real email
