@@ -11,9 +11,9 @@ Technologies used:
 -   ES6
 -   Formik + Yup
 -   Firebase Hosting
--   Firestore Auth
+-   Firebase Auth
+-   Firebase Storage
 -   Firestore Database
--   Firestore Storage
 
 It has all of the basic online marketplace features such as:
 
